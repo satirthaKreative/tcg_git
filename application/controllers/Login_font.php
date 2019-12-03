@@ -42,7 +42,7 @@ class Login_font extends CI_Controller {
 		{
 			if($err_msg['user_try'] = $this->rm->login_check()){
 				$session_data = $err_msg['user_try'][0]['id'];
-				// $err_msg['session_data'] = $session_data;
+				//$err_msg['session_data'] = $session_data;
 				$_SESSION['session_data'] = $session_data;
 				$err_msg['no_error'] = true;
 				$err_msg['estimate_err'] = "Login successfully done ! Redirecting . . .";

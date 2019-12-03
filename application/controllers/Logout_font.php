@@ -10,8 +10,9 @@ class Logout_font extends CI_Controller {
 	public function index()
 	{
 		session_destroy();
-		$data_array_name = array();
-		$this->load->font_page('frontend/layout/index',$data_array_name);
+		// $data_array_name = array();
+		// $this->load->font_page('frontend/layout/index',$data_array_name);
+		redirect("");
 	}
 
 }

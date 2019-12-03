@@ -50,7 +50,7 @@
 
                         <ul class="nav-tab">
                             <li>
-                                <a href="<?= base_url('UserDesk/'); ?>"  class="<?php if($page == 'UserDesk'){ ?>active<?php } ?>">Request</a>
+                                <a href="<?= base_url('MyDesk/'); ?>"  class="<?php if($page == 'MyDesk'){ ?>active<?php } ?>">Request</a>
                             </li>
                             <li class="">
                                 <a href="<?= base_url('ProviderDesk/'); ?>"  class="<?php if($page == 'ProviderDesk'){ ?>active<?php } ?>">Provider</a>

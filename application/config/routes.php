@@ -53,3 +53,6 @@ $route['default_controller'] = 'Login_font';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 /* My custom Font page control */
+
+$route['Home'] = 'MyDesk/index';
+$route['MyDesk'] = 'UserDesk/index';

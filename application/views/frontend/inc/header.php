@@ -25,9 +25,6 @@
 		<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,900|Orbitron:400,700&display=swap" rel="stylesheet">
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-
-
 	</head>
 <body>
 
@@ -46,8 +43,8 @@
 					<nav>
 						<ul>
 						<?php if (isset($_SESSION['session_data'])) { ?>
-							<li><a href="<?= base_url('MyDesk/'); ?>">Home</a></li>
-							<li><a href="<?= base_url('UserDesk/'); ?>">My Desk</a></li>
+							<li><a href="<?= base_url('Home/'); ?>">Home</a></li>
+							<li><a href="<?= base_url('MyDesk/'); ?>">My Desk</a></li>
 						<?php } ?>
 							<li><a href="<?= base_url('Contact/'); ?>">Contact Us</a></li>
 						<?php if (!isset($_SESSION['session_data'])) { ?>
@@ -63,7 +60,6 @@
 									<li><a href="javascript:void(0);">Profile</a></li>
 									<li><a href="<?= base_url('Logout_font') ?>">Logout</a></li>
 								</ul>
-
 							</li>
 						<?php } ?>
 						</ul>
