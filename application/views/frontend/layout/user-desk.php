@@ -1,3 +1,9 @@
+<?php  
+    if(!isset($_SESSION['session_data']))
+    {
+        redirect('');
+    }
+?>
 <?php
     $link = $_SERVER['PHP_SELF'];
     $link_array = explode('/',$link);

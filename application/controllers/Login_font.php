@@ -10,8 +10,15 @@ class Login_font extends CI_Controller {
 
 	public function index()
 	{
-		$array = array();
-		$this->load->font_page('frontend/layout/index',$array);
+		if(isset($_SESSION['session_data']))
+		{
+			redirect('Home');
+		}
+		else
+		{
+			$array = array();
+			$this->load->font_page('frontend/layout/index',$array);
+		}
 	}
 
 	public function add_login(){
@@ -42,8 +49,10 @@ class Login_font extends CI_Controller {
 		{
 			if($err_msg['user_try'] = $this->rm->login_check()){
 				$session_data = $err_msg['user_try'][0]['id'];
+				$session_user = $err_msg['user_try'][0]['user_name'];
 				//$err_msg['session_data'] = $session_data;
 				$_SESSION['session_data'] = $session_data;
+				$_SESSION['session_user'] = $session_user;
 				$err_msg['no_error'] = true;
 				$err_msg['estimate_err'] = "Login successfully done ! Redirecting . . .";
 

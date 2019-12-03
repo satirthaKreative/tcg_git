@@ -1,3 +1,9 @@
+<?php  
+    if(!isset($_SESSION['session_data']))
+    {
+        redirect('');
+    }
+?>
 <section class="banner_section2">
     <img src="<?= base_url('assets/front_assets/images/register_banner.jpg'); ?>">
     

@@ -53,11 +53,11 @@
 						<?php } else { ?>
 							<li class=" dropdown user-pro">
 								<a href="javascript:;">
-									<span><i class="fa fa-user" aria-hidden="true"></i></span>
+									<span><i class="fa fa-user" aria-hidden="true"></i> <?php if(isset($_SESSION['session_user'])){ echo $_SESSION['session_user']; } else { echo "User Profile"; } ?></span>
 								</a>
 
 								<ul class="dropdown_menu">
-									<!-- <li><a href="javascript:void(0);">Link</a></li> -->
+									<!-- <li></li> -->
 									<li><a href="javascript:void(0);">Profile</a></li>
 									<li><a href="<?= base_url('Logout_font') ?>">Logout</a></li>
 								</ul>

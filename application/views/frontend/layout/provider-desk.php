@@ -1,3 +1,9 @@
+<?php  
+    if(!isset($_SESSION['session_data']))
+    {
+        redirect('Login_font');
+    }
+?>
 <?php
     $link = $_SERVER['PHP_SELF'];
     $link_array = explode('/',$link);

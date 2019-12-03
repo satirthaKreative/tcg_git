@@ -1,3 +1,9 @@
+<?php  
+    if(!isset($_SESSION['session_data']))
+    {
+        redirect('');
+    }
+?>
 <section class="inner-page">
     <img class="quote_img" src="<?= base_url('assets/front_assets/images/wrapper_img2.jpg') ?>">
     <div class="wrapper">
