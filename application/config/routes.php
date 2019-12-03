@@ -58,3 +58,4 @@ $route['Home'] = 'MyDesk/index';
 $route['MyDesk'] = 'UserDesk/index';
 $route['MyDesk/Provider'] = 'ProviderDesk/index';
 $route['Vault'] = 'VaultController/index';
+$route['My-Account'] = 'My_Account/index';

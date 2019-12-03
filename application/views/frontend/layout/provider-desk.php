@@ -1,7 +1,7 @@
 <?php  
     if(!isset($_SESSION['session_data']))
     {
-        redirect('Login_font');
+        redirect('');
     }
 ?>
 <?php

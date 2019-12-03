@@ -1,4 +1,15 @@
-
+<?php
+    $link1 = $_SERVER['PHP_SELF'];
+    $link_array1 = explode('/',$link1);
+    // echo "<pre>";
+    $count_data1 = count($link_array1);
+    // echo $count_data;
+    // print_r($link_array);
+    $count_length1 = $count_data1-2;
+    
+    $page1 = $link_array1[$count_length1];
+    // echo $page = end($link_array);
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -43,23 +54,23 @@
 					<nav>
 						<ul>
 						<?php if (isset($_SESSION['session_data'])) { ?>
-							<li><a href="<?= base_url('Home/'); ?>">Home</a></li>
-							<li><a href="<?= base_url('Vault/'); ?>">Vault</a></li>
-							<li><a href="<?= base_url('MyDesk/'); ?>">My Desk</a></li>
+							<li <?php if($page1 == 'Home'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('Home/'); ?>">Home</a></li>
+							<li <?php if($page1 == 'Vault'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('Vault/'); ?>">Vault</a></li>
+							<li <?php if($page1 == 'MyDesk'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('MyDesk/'); ?>">My Desk</a></li>
 						<?php } ?>
-							<li><a href="<?= base_url('Contact/'); ?>">Contact Us</a></li>
+							<li <?php if($page1 == 'Contact'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('Contact/'); ?>">Contact Us</a></li>
 						<?php if (!isset($_SESSION['session_data'])) { ?>
 							<li class="current-menu-item"><a href="<?= base_url('Login_font') ?>">Log in </a></li>
 						<?php } else { ?>
-							<li class=" dropdown user-pro">
+							<li class=" dropdown user-pro <?php if($page1 == 'My-Account'){ ?> current-menu-item <?php } ?>">
 								<a href="javascript:;">
 									<span><i class="fa fa-user" aria-hidden="true"></i> <?php if(isset($_SESSION['session_user'])){ echo $_SESSION['session_user']; } else { echo "User Profile"; } ?></span>
 								</a>
 
 								<ul class="dropdown_menu">
 									<!-- <li></li> -->
-									<li><a href="javascript:void(0);">Profile</a></li>
-									<li><a href="<?= base_url('Logout_font') ?>">Logout</a></li>
+									<li><a href="<?= base_url('My-Account/'); ?>">Profile</a></li>
+									<li><a href="<?= base_url('Logout_font/'); ?>">Logout</a></li>
 								</ul>
 							</li>
 						<?php } ?>
