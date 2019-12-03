@@ -110,7 +110,7 @@
                                 
                             </form>
                             
-                            
+                            <p class="show_res_msg"></p>
                         </div>
 
                     </div>
@@ -135,7 +135,20 @@
             dataType: 'json',
             success: function(event)
             {
-                console.log(event);
+                if(event.no_error == true)
+                {
+                    var msg_on_condition = "Finding Providers! Please wait...";
+                    $(".show_res_msg").addClass('text-success');
+                    $(".text-success").html("<span>"+msg_on_condition+"</span>").fadeIn().delay(3000).fadeOut('slow');
+                    setTimeout(function(){ $(".show_res_msg").removeClass('text-success');window.location.href="<?= base_url('Provider-List/'); ?>" },3000);
+                } 
+                else if(event.no_error == false)
+                {
+                    var msg_on_condition = "Server issue ! Try again ";
+                    $(".show_res_msg").addClass('text-danger');
+                    $(".show_res_msg .text-danger").html("<span>"+msg_on_condition+"</span>").fadeIn().delay(3000).fadeOut('slow');
+                    setTimeout(function(){ $(".show_res_msg").removeClass('text-danger'); window.location.href="<?= base_url('Provider-List/'); ?>"; },3000);
+                } 
             }
         })
     }
@@ -299,6 +312,7 @@
     {
         var user_active_session = '<?= $_SESSION["session_data"] ?>';
         var t = $("#check_active_status").val();
+        var msg_on_condition = "";
         
         if(t == 0)
         {
@@ -317,7 +331,8 @@
             dataType: 'json',
             success: function(event)
             {
-                console.log(event);
+
+               console.log(event);
             }
         })
 

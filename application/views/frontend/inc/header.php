@@ -56,7 +56,7 @@
 						<?php if (isset($_SESSION['session_data'])) { ?>
 							<li <?php if($page1 == 'Home'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('Home/'); ?>">Home</a></li>
 							<li <?php if($page1 == 'Vault'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('Vault/'); ?>">Vault</a></li>
-							<li <?php if($page1 == 'MyDesk'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('MyDesk/'); ?>">My Desk</a></li>
+							<li <?php if($page1 == 'MyDesk' || $page1 == 'Provider-List'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('MyDesk/'); ?>">My Desk</a></li>
 						<?php } ?>
 							<li <?php if($page1 == 'Contact'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('Contact/'); ?>">Contact Us</a></li>
 						<?php if (!isset($_SESSION['session_data'])) { ?>
