@@ -53,7 +53,18 @@
 						<?php if (!isset($_SESSION['session_data'])) { ?>
 							<li class="current-menu-item"><a href="<?= base_url('Login_font') ?>">Log in </a></li>
 						<?php } else { ?>
-							<li class="current-menu-item"><a href="<?= base_url('Logout_font') ?>">Log Out </a></li>
+							<li class=" dropdown user-pro">
+								<a href="javascript:;">
+									<span><i class="fa fa-user" aria-hidden="true"></i></span>
+								</a>
+
+								<ul class="dropdown_menu">
+									<!-- <li><a href="javascript:void(0);">Link</a></li> -->
+									<li><a href="javascript:void(0);">Profile</a></li>
+									<li><a href="<?= base_url('Logout_font') ?>">Logout</a></li>
+								</ul>
+
+							</li>
 						<?php } ?>
 						</ul>
 					</nav>

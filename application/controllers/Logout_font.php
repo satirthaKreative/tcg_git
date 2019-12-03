@@ -9,7 +9,7 @@ class Logout_font extends CI_Controller {
 
 	public function index()
 	{
-		$this->session->unset_userdata('session_id');
+		session_destroy();
 		$data_array_name = array();
 		$this->load->font_page('frontend/layout/index',$data_array_name);
 	}
