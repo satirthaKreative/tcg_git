@@ -1,14 +1,14 @@
 <?php
     $link = $_SERVER['PHP_SELF'];
     $link_array = explode('/',$link);
-    // echo "<pre>";
+    //echo "<pre>";
     $count_data = count($link_array);
-    // echo $count_data;
-    // print_r($link_array);
-    $count_length = $count_data-2;
+    //echo $count_data;
+    //print_r($link_array);
+    $count_length = $count_data-1;
     
     $page = $link_array[$count_length];
-    // echo $page = end($link_array);
+    //echo $page = end($link_array);
 ?>
 <section class="inner-page">
     <img class="quote_img" src="<?= base_url('assets/front_assets/images/wrapper_img2.jpg'); ?>">
@@ -53,7 +53,7 @@
                                 <a href="<?= base_url('MyDesk/'); ?>"  class="<?php if($page == 'MyDesk'){ ?>active<?php } ?>">Request</a>
                             </li>
                             <li class="">
-                                <a href="<?= base_url('ProviderDesk/'); ?>"  class="<?php if($page == 'ProviderDesk'){ ?>active<?php } ?>">Provider</a>
+                                <a href="<?= base_url('MyDesk/Provider'); ?>"  class="<?php if($page == 'Provider'){ ?>active<?php } ?>">Provider</a>
                             </li>
                         </ul>
 

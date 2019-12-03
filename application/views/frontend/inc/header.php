@@ -44,6 +44,7 @@
 						<ul>
 						<?php if (isset($_SESSION['session_data'])) { ?>
 							<li><a href="<?= base_url('Home/'); ?>">Home</a></li>
+							<li><a href="<?= base_url('Vault/'); ?>">Vault</a></li>
 							<li><a href="<?= base_url('MyDesk/'); ?>">My Desk</a></li>
 						<?php } ?>
 							<li><a href="<?= base_url('Contact/'); ?>">Contact Us</a></li>

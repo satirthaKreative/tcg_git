@@ -56,3 +56,5 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['Home'] = 'MyDesk/index';
 $route['MyDesk'] = 'UserDesk/index';
+$route['MyDesk/Provider'] = 'ProviderDesk/index';
+$route['Vault'] = 'VaultController/index';

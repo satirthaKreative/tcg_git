@@ -52,7 +52,7 @@
                                 <a href="<?= base_url('MyDesk/'); ?>"  class="<?php if($page == 'MyDesk'){ ?>active<?php } ?>">Request</a>
                             </li>
                             <li class="">
-                                <a href="<?= base_url('ProviderDesk/'); ?>"  class="<?php if($page == 'ProviderDesk'){ ?>active<?php } ?>">Provider</a>
+                                <a href="<?= base_url('MyDesk/Provider'); ?>"  class="<?php if($page == 'Provider'){ ?>active<?php } ?>">Provider</a>
                             </li>
                         </ul>
 
