@@ -38,6 +38,7 @@ else exit(0);
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>PayUmoney BOLT PHP7 Kit</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <style type="text/css">
 	.main {
@@ -60,7 +61,20 @@ else exit(0);
     <div>
     	<h3>PHP7 BOLT Kit Response</h3>
     </div>
-	<?php echo $_SESSION['session_data']; ?>
+	<!-- <?php $_SESSION['session_data']; ?> -->
+    <!-- Session Value Store -->
+
+    <?php $_SESSION['orderID'] = $txnid; ?>
+    <?php $_SESSION['amount'] = $amount; ?>
+    <?php $_SESSION['productInfo'] = $productInfo; ?>
+    <?php $_SESSION['firstname'] = $firstname; ?>
+    <?php $_SESSION['email'] = $email; ?>
+    <?php $_SESSION['mihpayid'] = $mihpayid; ?>
+    <?php $_SESSION['resphash'] = $resphash; ?>
+    <?php $_SESSION['status'] = $status; ?>
+    <?php $_SESSION['msg'] = $msg; ?>
+
+    <!-- End Session Value Store -->
     <div class="dv">
     <span class="text"><label>Merchant Key:</label></span>
     <span><?php echo $key; ?></span>
@@ -116,6 +130,19 @@ else exit(0);
     <span><?php echo $msg; ?></span>
     </div>
 </div>
+<script>
+    $(function(){
+        $.ajax({
+            url: '<?= base_url("PayUMoney_Controller/success") ?>',
+            type: 'post',
+            dataType: 'json',
+            success:  function(event)
+            {
+                console.log(event);
+            }
+        })
+    })
+</script>
 </body>
 </html>
 	

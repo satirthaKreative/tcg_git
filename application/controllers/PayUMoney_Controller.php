@@ -6,6 +6,7 @@ class PayUMoney_Controller extends CI_Controller {
 	{
 		parent::__construct();
 		//Do your magic here
+		$this->load->model('Voult_solt_time','vst');
 	}
 	public function index()
 	{
@@ -15,6 +16,16 @@ class PayUMoney_Controller extends CI_Controller {
 	public function response()
 	{
 		$this->load->view('frontend/payment/payumoney/response');
+	}
+
+	public function success()
+	{
+		$errmsg['no_error'] = false;
+		if($dataInsert = $this->vst->pay_success())
+		{
+			$errmsg['no_error'] = true;
+		}
+		echo json_encode($errmsg);
 	}
 
 }
