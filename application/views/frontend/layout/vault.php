@@ -75,7 +75,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Lorem lipsum doller</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Choose Your Payemnt Method</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -84,35 +84,34 @@
         <form>
             <div class="payment-method">
                 <label for="card" class="method">
-                    <span class="card-logos">
+                    <span class="card-logos mt15">
                         <img src="<?= base_url('assets/front_assets/'); ?>images/visa_logo.png"/>
                         <img src="<?= base_url('assets/front_assets/'); ?>images/mastercard_logo.png"/>
                     </span>
 
                     <span class="radio-input">
-                        <input id="card" type="radio" name="payment"> Credit card
+                        <input id="card" type="radio" name="payment" value="card" checked="checked"> Credit card
                     </span>
                 </label>
 
                 <label for="paypal" class="method paypal">
-                    <span class="card-logos">
+                    <span class="card-logos mt15">
                         <img src="<?= base_url('assets/front_assets/'); ?>images/paypal_logo.png"/>
                     </span>
                     <div class="radio-input">
-                        <input id="paypal" type="radio" name="payment"> paypal
+                        <input id="paypal" type="radio" name="payment" value="paypal"> paypal
                     </div>
                 </label>
             </div>
 
             <div class="payment">
                 <label >You will purchase</label>
-                <select class="">
-                    <option>Additional Time (One Hour)</option>
-                    <option>Additional Time (Two Hour)</option>
+                <select class="purchase-time">
+                    
                 </select>
                 <p>With your credit card ending in **** **** **** 1245</p>
 
-                <a href="javascript:void(0);">Purchase</a>
+                <a href="javascript:void(0);" onclick="Payment();">Purchase</a>
 
             </div>
 
@@ -124,3 +123,27 @@
     </div>
   </div>
 </div>
+<script>
+    $(function(){
+        $.ajax({
+            url : "<?php echo  base_url('Voult_time_controller/index'); ?>",
+            type: "POST",
+            dataType:  "json",
+            success:  function(event)
+            {
+                console.log(event);
+                var html = '';
+                for(var i = 0; i<event.length; i++)
+                {
+                    html += "<option value = "+event[i].convert_seconds+">"+event[i].time_slot+" "+event[i].time_type+"</option>";
+                }
+                $(".purchase-time").html(html);
+            }
+        })
+    })
+
+    function Payment()
+    {
+        window.location.href="<?= base_url('Payment/'); ?>";
+    }
+</script>
