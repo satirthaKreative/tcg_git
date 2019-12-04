@@ -30,7 +30,7 @@ class Voult_solt_time extends CI_Model {
 			`messageData` => $_SESSION['msg'],
 			`userID` => $_SESSION['session_data']
 		];
-		$insertQuery = $this->db->insert('user_payment details',$insertArr);
+		$insertQuery = $this->db->insert('user_payment_details',$insertArr);
 		if($this->db->affected_rows() > 0)
 		{
 			return true;

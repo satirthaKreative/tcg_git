@@ -21,10 +21,10 @@ class PayUMoney_Controller extends CI_Controller {
 	public function success()
 	{
 		$errmsg['no_error'] = false;
-		if($dataInsert = $this->vst->pay_success())
-		{
-			$errmsg['no_error'] = true;
-		}
+		// if($dataInsert = $this->vst->pay_success())
+		// {
+		// 	$errmsg['no_error'] = true;
+		// }
 		echo json_encode($errmsg);
 	}
 
