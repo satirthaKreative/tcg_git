@@ -12,6 +12,11 @@ class PayUMoney_Controller extends CI_Controller {
 		$this->load->view('frontend/payment/payumoney/index');
 	}
 
+	public function response()
+	{
+		$this->load->view('frontend/payment/payumoney/response');
+	}
+
 }
 
 /* End of file PayUMoney_Controller.php */

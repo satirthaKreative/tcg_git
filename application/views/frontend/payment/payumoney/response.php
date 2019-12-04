@@ -3,7 +3,7 @@ $postdata = $_POST;
 $msg = '';
 if (isset($postdata ['key'])) {
 	$key				=   $postdata['key'];
-	$salt				=   $postdata['salt'];
+	$salt				=   "EdBr4wvptZ";
 	$txnid 				= 	$postdata['txnid'];
     $amount      		= 	$postdata['amount'];
 	$productInfo  		= 	$postdata['productinfo'];
@@ -60,7 +60,7 @@ else exit(0);
     <div>
     	<h3>PHP7 BOLT Kit Response</h3>
     </div>
-	
+	<?php echo $_SESSION['session_data']; ?>
     <div class="dv">
     <span class="text"><label>Merchant Key:</label></span>
     <span><?php echo $key; ?></span>

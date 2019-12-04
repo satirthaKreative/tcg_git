@@ -17,7 +17,7 @@ if(strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') == 0){
 function getCallbackUrl()
 {
 	$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-	return $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . 'response.php';
+	return base_url('Payment/response/');
 }
 
 ?>
@@ -107,7 +107,7 @@ color="e34524" bolt-logo="http://boltiswatching.com/wp-content/uploads/2015/09/B
 <body>
 <div class="main">
 	<div class="header">
-    	<img src="images/payumoney.png" />
+    	<img src="<?= base_url('assets/payumoney/images/payumoney.png'); ?>" />
     	<h3>PHP7 BOLT Kit</h3>
     </div>
 
@@ -157,7 +157,7 @@ color="e34524" bolt-logo="http://boltiswatching.com/wp-content/uploads/2015/09/B
     
     <div class="dv">
     <span class="text"><label>Hash:</label></span>
-    <span><input type="text" id="hash" name="hash" placeholder="Hash" value="" /></span>
+    <span><input type="text" id="hash" name="hash" placeholder="Hash" value="p6S2uGTU49Ns5864u8lleKa8ePBIDcIvTkgfPtHhscc=" /></span>
     </div>
     
     
@@ -167,7 +167,7 @@ color="e34524" bolt-logo="http://boltiswatching.com/wp-content/uploads/2015/09/B
 <script type="text/javascript"><!--
 $('#payment_form').bind('keyup blur', function(){
 	$.ajax({
-          url: 'index.php',
+          url: '<?= base_url('Payment') ?>',
           type: 'post',
           data: JSON.stringify({ 
             key: $('#key').val(),
