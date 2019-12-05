@@ -138,7 +138,7 @@ else exit(0);
             dataType: 'json',
             success:  function(event)
             {
-                console.log(event);
+                window.location.href="<?= base_url('Vault/') ?>"
             }
         })
     })

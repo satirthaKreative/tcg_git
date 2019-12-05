@@ -132,12 +132,12 @@ color="e34524" bolt-logo="http://boltiswatching.com/wp-content/uploads/2015/09/B
     
     <div class="dv">
     <span class="text"><label>Amount:</label></span>
-    <span><input type="text" id="amount" name="amount" placeholder="Amount" value="6.00" /></span>    
+    <span><input type="text" id="amount" name="amount" placeholder="Amount" value="<?= $_SESSION['buy_time_slot_price']; ?>" /></span>    
     </div>
     
     <div class="dv">
     <span class="text"><label>Product Info:</label></span>
-    <span><input type="text" id="pinfo" name="pinfo" placeholder="Product Info" value="P01,P02" /></span>
+    <span><input type="text" id="pinfo" name="pinfo" placeholder="Product Info" value="<?= $_SESSION['buy_time_view']; ?>" /></span>
     </div>
     
     <div class="dv">

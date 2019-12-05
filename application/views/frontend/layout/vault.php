@@ -153,8 +153,8 @@
             success:  function(event)
             {
                console.log(event); 
+               window.location.href="<?= base_url('Payment/'); ?>";
             }
-        })
-        // window.location.href="<?= base_url('Payment/'); ?>";
+        });
     }
 </script>

@@ -52,7 +52,7 @@ class Voult_solt_time extends CI_Model {
 		$selectQuery = $this->db->where($conditional_arr)->get('voult_time_slot');
 		if($selectQuery->num_rows() > 0)
 		{
-			return $selectQuery->result();
+			return $selectQuery->result_array();
 		}
 		else
 		{
