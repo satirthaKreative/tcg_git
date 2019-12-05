@@ -32,6 +32,19 @@ public function total_time_left()
 	{
 		return false;
 	}
+}
+
+
+public function fetch_parcentage_time()
+{
+	$selectTotalTime = $this->db->get('voult_duplicate');
+	$selectData = $selectTotalTime->row();
+	$fetch_time_actual = $selectData->voult_total_time; 
+
+	$selectTotalTime1 = $this->db->get('voult');
+	$selectData1 = $selectTotalTime1->row();
+	$fetch_time_actual1 = $selectData1->voult_total_time; 
+
 }	
 
 }

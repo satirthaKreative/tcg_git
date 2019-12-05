@@ -17,6 +17,7 @@ class Admin_voult_model extends CI_Model {
 			'time_in_second'   => $in_sec,
 			'time_in_minute'   => $in_min,
 		];
+		$insert_voult_time1 = $this->db->insert('voult_duplicate',$data_insert);
 		$insert_voult_time = $this->db->insert('voult',$data_insert);
 		if($this->db->affected_rows())
 		{
@@ -36,6 +37,7 @@ class Admin_voult_model extends CI_Model {
 			'time_in_second'   => $in_sec,
 			'time_in_minute'   => $in_min,
 		];
+		$insert_voult_time1 = $this->db->update('voult_duplicate',$data_insert);
 		$insert_voult_time = $this->db->update('voult',$data_insert);
 		if($this->db->affected_rows())
 		{
