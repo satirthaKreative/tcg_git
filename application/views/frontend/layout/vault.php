@@ -135,7 +135,7 @@
                 var html = '';
                 for(var i = 0; i<event.length; i++)
                 {
-                    html += "<option value = "+event[i].convert_seconds+">"+event[i].time_slot+" "+event[i].time_type+"</option>";
+                    html += "<option value = "+event[i].id+">"+event[i].time_slot+" "+event[i].time_type+" (Price : "+event[i].time_slot_price+" USD)</option>";
                 }
                 $(".purchase-time").html(html);
             }
@@ -144,6 +144,17 @@
 
     function Payment()
     {
-        window.location.href="<?= base_url('Payment/'); ?>";
+        var parchase_time = $('.purchase-time').val();
+        $.ajax({
+            url: "<?php echo base_url('Voult_time_controller/session_create'); ?>",
+            type: "post",
+            data: {parchase_time: parchase_time},
+            dataType: "json",
+            success:  function(event)
+            {
+               console.log(event); 
+            }
+        })
+        // window.location.href="<?= base_url('Payment/'); ?>";
     }
 </script>

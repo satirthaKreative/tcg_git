@@ -7,12 +7,23 @@ class Voult_time_controller extends CI_Controller {
 		parent::__construct();
 		//Do your magic here
 		$this->load->model('voult_solt_time','vsm');
+		
 	}
 
 	public function index()
 	{
 		$result_solt = $this->vsm->fetch_count_data();
 		echo json_encode($result_solt);
+	}
+
+	public function session_create()
+	{
+		$errmsg['no_error'] = false;
+		if($data = $this->vsm->session_create())
+		{
+			$errmsg['no_error'] = true;
+		}
+		echo json_encode($errmsg);
 	}
 
 }
