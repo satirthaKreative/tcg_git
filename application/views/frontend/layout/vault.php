@@ -16,23 +16,33 @@
 
                         <div class="progress-area">
                             <div class="progress">
-                                <div class="progress-bar" style="width:90%"></div>
+                                <div class="progress-bar" style="width:<?= $_SESSION['voult_percentage_show'] ?>%"></div>
                             </div>
 
                             <ul>
                                 <li>
                                     <span>
-                                        0 Hr
+                                        0%
                                     </span>
                                 </li>
                                 <li>
                                     <span>
-                                        1 Hr
+                                        25%
                                     </span>
                                 </li>
                                 <li>
                                     <span>
-                                        2 Hr
+                                        50%
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        75%
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        100%
                                     </span>
                                 </li>
                             </ul>
@@ -42,7 +52,7 @@
 
                     <div class="volte_area">
                         <h4>
-                            The Incentive Vault is <strong>90%</strong> Full
+                            The Incentive Vault is <strong><?= $_SESSION['voult_percentage_show']; ?>%</strong> Full
                         </h4>
                         <h4>
                             Additional Time Price: <strong>$86.00</strong>

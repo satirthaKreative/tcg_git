@@ -45,6 +45,17 @@ public function fetch_parcentage_time()
 	$selectData1 = $selectTotalTime1->row();
 	$fetch_time_actual1 = $selectData1->voult_total_time; 
 
+	if($fetch_time_actual == $fetch_time_actual1)
+	{
+		$data = 100;
+		return $data;
+	}
+	else
+	{
+		$data = ((100*$fetch_time_actual1)/$fetch_time_actual);
+		return $data;
+	}
+
 }	
 
 }
