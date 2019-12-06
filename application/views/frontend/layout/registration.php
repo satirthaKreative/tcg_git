@@ -1,16 +1,11 @@
-<?php  
-    if(!isset($_SESSION['session_data']))
-    {
-        redirect('');
-    }
-?>
+
 <section class="banner_section2">
     <img src="<?= base_url('assets/front_assets/images/register_banner.jpg'); ?>">
     
     <div class="banner_text">
         <div class="container">
             <div class="row">
-                <h2>HERE’S HOW YOU BEAT THE GAME</h2>
+                <h2>Leveling The Playingfield</h2>
             </div>
         </div>
     </div>

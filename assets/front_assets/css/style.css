@@ -1529,19 +1529,17 @@ img.quote_img {
 }
 
 .inner-page.profile-section .sidebar ul a {
-
-  display: block;
-
-  padding: 15px 15px;
-
-  border-bottom: 1px solid #ebebeb;
-
-  font-weight: 500;
-
-  font-size: 15px;
-
+    display: block;
+    padding: 15px 15px;
+    border-bottom: 1px solid #ebebeb;
+    font-weight: 500;
+    font-size: 15px;
 }
-
+.inner-page.profile-section .sidebar ul.appende_tabs a.active {
+  background-color: #f3f3f3;
+  color: #b31605;
+  font-weight: 600;
+}
 .inner-page.profile-section .sidebar ul li:last-child a {
 
   border-bottom: transparent;
@@ -1722,7 +1720,7 @@ img.quote_img {
 
 }
 
-.form-section2 input.form-control {
+.form-section2 input[type="search"] {
 
   display: inline-block;
 
@@ -1749,6 +1747,9 @@ img.quote_img {
 
 
 /*****======== SECTION 3 ========******/
+
+
+
 
 /*****======== VOLTE PAGE ========******/
 
@@ -1869,9 +1870,114 @@ img.quote_img {
 
 
 
+
+
+/*****======== DECK EDITING ========******/
+
+.top-section {
+  margin-bottom: 30px;
+}
+.top-section ul.nav-tab {
+  display: inline-block;
+}
+.top-section .right_sec {
+    float: right;
+}
+.top-section ul.nav-tab li {
+    display: inline-block;
+}
+.top-section ul.nav-tab li a {
+  display: block;
+  padding: 10px 22px;
+  background-color: #f9f9f9;
+  font-size: 15px;
+  border-bottom: 2px solid #dddddd;
+  text-align: center;
+}
+
+.top-section .right_sec a { 
+    display: inline-block;
+}
+.top-section .right_sec .fa {
+  font-size: 22px;
+  margin-left: 4px;
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+
+.top-section ul.nav-tab li a.active {
+  border-bottom-color: #b31605;
+}
+
+.serach_sec {
+    display: inline-block;
+}
+
+.serach_sec form {
+    position: relative;
+}
+.serach_sec form span.search_icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 3px;
+}
+
+.serach_sec form input[type="search"] {
+    border: 1px solid #ddd;
+    padding: 4px 10px;
+    background: #fff;
+    max-width: 100%;
+    width: 100%;
+}
+.serach_sec form span.search_icon .fa {
+    background: transparent;
+    color: #c5c5c5;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 568px) {
+
+  .table-content {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .top-section .right_sec {
+    float: none;
+    width: 100%;
+    margin: 15px 0 0;
+    display: flex;
+  }
+  .right_sec .serach_sec {
+    width: 70%;
+    margin-right: auto;
+  }
+
+}
+
+/*****======== DECK EDITING ========******/
+
+
+
 /*****======== ACCOUNT INFORMATION ========******/
 
+.page-wrapper .tabcontent {
+  display: none;
+  -webkit-animation: fadeEffect 1s;
+  animation: fadeEffect 1s;
+}
 
+/* Fade in tabs */
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
 
 .inner-page.profile-section .pro-section a {
 
@@ -1964,12 +2070,6 @@ img.quote_img {
 /*****======== BILLING INFORMATION ========******/
 
 
-
-.billing-information {
-
-  max-width: 650px;
-
-}
 
 .billing-information .form-group {
 
@@ -2090,8 +2190,6 @@ section.footer {
 
 
 /*---------- My Custom Style -----------*/
-
-
 
 .mt5{margin-top: 5px;}
 .mt15{margin-top: 15px !important;}

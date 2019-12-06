@@ -23,6 +23,7 @@ class VaultController extends CI_Controller {
 			else
 			{
 				$this->load->font_page('frontend/layout/vault',$arr);
+				unset($_SESSION['status']);
 			}
 
 		}
