@@ -90,7 +90,7 @@
           var j_id = 1;
           for(var i = 0; i < event.length; i++){
             
-            html += "<tr><td>"+j_id+"</td><td>"+event[i].platform_name+"</td><td><a href='javascript:;' onclick='my_add("+event[i].id+")' class='btn btn-info'>Edit Platform</a></td></tr>";
+            html += "<tr><td>"+j_id+"</td><td>"+event[i].platform_name+" <a href='javascript:;' onclick='my_remove("+event[i].id+")'><i class='fa fa-trash' style='color:red'></i></a>"+"</td><td><a href='javascript:;' onclick='my_add("+event[i].id+")' class='btn btn-info'><i class='fa fa-edit'></i> Edit Platform</a></td></tr>";
             j_id++;
           }
           $("#view_user_table").html(html);
@@ -161,5 +161,27 @@
           $("#view_user_table").html(html);
         }
       })
+    }
+
+    function my_remove(data)
+    {
+      if(confirm('Are you want to delete this item ?'))
+      {
+        var data_val = data;
+        $.ajax({
+          url: '<?= base_url('Admin_desk_controller/delete_platform/') ?>',
+          type: 'post',
+          data: {data_val: data_val},
+          dataType:  'json',
+          success:  function(event)
+          {
+            console.log(event);
+          }
+        })
+      }
+      else
+      {
+
+      }
     }
   </script>
