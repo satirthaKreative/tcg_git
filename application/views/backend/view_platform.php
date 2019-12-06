@@ -20,7 +20,7 @@
           
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">View Platform</h3> 
+              <h3 class="card-title">View Platform</h3>
               <center class="succ_msg"></center>
             </div>
             <div class="card-body">
@@ -90,7 +90,7 @@
           var j_id = 1;
           for(var i = 0; i < event.length; i++){
             
-            html += "<tr><td>"+j_id+"</td><td>"+event[i].platform_name+" <a href='javascript:;' onclick='my_remove("+event[i].id+")'><i class='fa fa-trash' style='color:red'></i></a>"+"</td><td><a href='javascript:;' onclick='my_add("+event[i].id+")' class='btn btn-info'><i class='fa fa-edit'></i> Edit Platform</a></td></tr>";
+            html += "<tr><td>"+j_id+"</td><td>"+event[i].platform_name+" <a href='javascript:;' onclick='my_remove("+event[i].id+")' style='float: right;'><i class='fa fa-trash' style='color:red'></i></a>"+"</td><td><a href='javascript:;' onclick='my_add("+event[i].id+")' class='btn btn-info'><i class='fa fa-edit'></i> Edit Platform</a></td></tr>";
             j_id++;
           }
           $("#view_user_table").html(html);
@@ -175,7 +175,15 @@
           dataType:  'json',
           success:  function(event)
           {
-            console.log(event);
+            if(event.no_error == true)
+            {
+              $(".succ_msg").html("<b class='text-success'>"+event.main_error+"</b>").fadeIn().delay(3000).fadeOut('slow');
+              setTimeout(function(){ window.location.href='<?= base_url("Admin_desk_controller/view_platform"); ?>' },3000);
+            }
+            else
+            {
+              $(".succ_msg").html("<b class='text-danger'>Action Not Successfully Done</b>").fadeIn().delay(3000).fadeOut('slow');
+            }
           }
         })
       }

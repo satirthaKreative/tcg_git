@@ -219,6 +219,25 @@ class Admin_desk_model extends CI_Model {
 		}
 	}
 
+	// Delete Format details
+
+	public function delete_platform($del_id)
+	{
+		$where_condition = [
+			'id' => $del_id
+		];
+
+		$this->db->where($where_condition)->delete('platform_tbl');
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 }
 
 /* End of file Admin_desk_model.php */

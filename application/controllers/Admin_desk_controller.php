@@ -182,7 +182,8 @@ class Admin_desk_controller extends CI_Controller {
 	public function delete_platform()
 	{
 		$error_msg['no_error'] = false;
-		if($result_set = $this->adm->delete_platform())
+		$del_id = $_POST['data_val'];
+		if($result_set = $this->adm->delete_platform($del_id))
 		{
 			$error_msg['no_error'] = true;
 			$error_msg['main_error'] = "Delete Successfully";
