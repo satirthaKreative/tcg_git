@@ -62,7 +62,7 @@
              <div class="form-group">
                <label for="inputName">Video Advertize</label>
                <input type="file" id="inputName_video" class="form-control" name="video_user_files[]" multiple>
-               <p><small class="text-danger">* Upload multiple videos</small></p>
+               <p><small class="text-danger">* Upload multiple videos <strong>(</strong>limit 2mb max<strong>)</strong></small></p>
              </div>
              <input type="button" value="Save videos" class="btn btn-success float-right" id="submit_video">
              <?= form_close(); ?>

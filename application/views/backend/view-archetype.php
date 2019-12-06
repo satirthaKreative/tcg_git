@@ -30,7 +30,6 @@
                   <th>#</th>
                   <th>Archetype Filter</th>
                   <th>Archetype Name</th>
-                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody id="view_user_table">
@@ -41,7 +40,6 @@
                   <th>#</th>
                   <th>Archetype Filter</th>
                   <th>Archetype Name</th>
-                  <th>Action</th>
                 </tr>
                 </tfoot>
               </table>
@@ -102,7 +100,7 @@
           var j_id = 1;
           for(var i = 0; i < event.length; i++){
             
-            html += "<tr><td>"+j_id+"</td><td>"+event[i].archetype_filter+"</td><td>  "+event[i].archetype_name+"</td><td><a href='javascript:;' onclick='my_add("+event[i].id+")' class='btn btn-info'>Edit Vault Details</a></td></tr>";
+            html += "<tr><td>"+j_id+"</td><td>"+event[i].archetype_filter+"</td><td>  "+event[i].archetype_name+"</td></tr>";
             j_id++;
           }
           $("#view_user_table").html(html);
