@@ -5,7 +5,7 @@
     }
 ?>
 <?php
-    $link = $_SERVER['PHP_SELF'];
+    $link = $_SERVER['REQUEST_URI'];
     $link_array = explode('/',$link);
     // echo "<pre>";
     $count_data = count($link_array);
