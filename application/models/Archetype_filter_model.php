@@ -30,7 +30,7 @@ class Archetype_filter_model extends CI_Model {
 
 	public function view_archetype_filter()
 	{
-		$data_result = $this->db->get('archetype_category');
+		$data_result = $this->db->select('*')->from('archetype_name')->join('archetype_category','archetype_name.a_id = archetype_category.id')->get();
 		if($data_result->num_rows() > 0)
 		{
 			return $data_result->result();

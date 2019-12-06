@@ -24,7 +24,7 @@ class Dashboard_count_model extends CI_Model {
 		$countUsers = $selectUsers->num_rows();
 		// show format
 		$selectFormat = $this->db->get('format_tbl');
-		$countFormat = $selectUsers->num_rows();
+		$countFormat = $selectFormat->num_rows();
 
 		$create_arr = [
 			0 => $countAdv,

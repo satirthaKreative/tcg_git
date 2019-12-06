@@ -29,6 +29,12 @@ class Archetype_filter extends CI_Controller {
 		echo json_encode($error_msg);
 	}
 
+	public function view_archetype()
+	{
+		$arr = array();
+		$this->load->admin_pages('backend/view-archetype',$arr);
+	}
+
 	public function view_archetype_filter()
 	{
 		$error_msg = $this->afm->view_archetype_filter();
