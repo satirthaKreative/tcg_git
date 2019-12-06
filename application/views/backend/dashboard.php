@@ -29,7 +29,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3 id="adv">0</h3>
 
                 <p>Total Advertize</p>
               </div>
@@ -44,9 +44,9 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3 id="users">0<sup style="font-size: 20px">%</sup></h3>
 
-                <p>Bounce Rate</p>
+                <p>Total Users</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -57,14 +57,14 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-warning">
+            <div class="small-box bg-danger">
               <div class="inner">
-                <h3>44</h3>
+                <h3 id="arche">0</h3>
 
-                <p>User Registrations</p>
+                <p>Total Archetype</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="ion ion-pie-graph"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -72,14 +72,14 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-danger">
+            <div class="small-box bg-warning">
               <div class="inner">
-                <h3>65</h3>
+                <h3 id="format">0</h3>
 
-                <p>Unique Visitors</p>
+                <p>Total Format</p>
               </div>
               <div class="icon">
-                <i class="ion ion-pie-graph"></i>
+                <i class="ion ion-person-add"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -101,7 +101,15 @@
       dataType: 'json',
       success: function(event)
       {
-        console.log(event);
+        var count_adv = event[0];
+        var count_archetype = event[1];
+        var count_users = event[2];
+        var count_format = event[3];
+
+        $("#adv").html(count_adv);
+        $("#arche").html(count_archetype);
+        $("#format").html(count_format);
+        $("#users").html(count_users);
       }
     })
    })

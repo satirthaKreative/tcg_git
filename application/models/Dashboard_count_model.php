@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dashboard_count_model extends CI_Model {
 
+	public function index()
+	{
+
+	}
+
 	public function dashboard_count_data()
 	{
 		// show advertise 
@@ -13,7 +18,7 @@ class Dashboard_count_model extends CI_Model {
 		$countArche = $selectArche->num_rows();
 		// show users
 		$where_condition = [
-			'admin_status' = 0
+			'admin_status' => 0
 		];
 		$selectUsers = $this->db->where($where_condition)->get('reg_font');
 		$countUsers = $selectUsers->num_rows();
@@ -27,6 +32,7 @@ class Dashboard_count_model extends CI_Model {
 			2 => $countUsers,
 			3 => $countFormat
 		];
+		return $create_arr;
 	}	
 
 }
