@@ -191,6 +191,20 @@ class Admin_desk_controller extends CI_Controller {
 		echo json_encode($error_msg);
 	}
 
+	// delete format
+
+	public function delete_format()
+	{
+		$error_msg['no_error'] = false;
+		$del_id = $_POST['data_val'];
+		if($result_set = $this->adm->delete_format($del_id))
+		{
+			$error_msg['no_error'] = true;
+			$error_msg['main_error'] = "Delete Successfully";
+		}
+		echo json_encode($error_msg);
+	}
+
 }
 
 /* End of file Admin_desk_controller.php */

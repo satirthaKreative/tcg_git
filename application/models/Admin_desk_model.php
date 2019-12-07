@@ -219,7 +219,7 @@ class Admin_desk_model extends CI_Model {
 		}
 	}
 
-	// Delete Format details
+	// Delete Platform details
 
 	public function delete_platform($del_id)
 	{
@@ -237,6 +237,27 @@ class Admin_desk_model extends CI_Model {
 			return false;
 		}
 	}
+
+	// Delete format details
+
+	public function delete_format($del_id)
+	{
+		$where_condition = [
+			'id' => $del_id
+		];
+
+		$this->db->where($where_condition)->delete('format_tbl');
+		if($this->db->affected_rows() > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+
 
 }
 
