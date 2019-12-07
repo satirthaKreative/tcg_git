@@ -25,6 +25,8 @@
   <link rel="stylesheet" href="<?= base_url(); ?>assets/admin_assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="<?= base_url(); ?>assets/admin_assets/plugins/daterangepicker/daterangepicker.css">
+  <!--  Custom style -->
+  <link rel="stylesheet" href="<?= base_url('assets/admin_assets/dist/css/custom-style.css'); ?>">
   <!-- summernote -->
   <link rel="stylesheet" href="<?= base_url(); ?>assets/admin_assets/plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
