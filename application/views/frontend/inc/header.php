@@ -7,12 +7,12 @@
     // print_r($link_array);
     $count_length1 = $count_data1-2;
     
-    echo $page1 = $link_array1[$count_length1];
+    $page1 = $link_array1[$count_length1];
     // echo $page = end($link_array);
 
     $count_length9 = $count_data1-1;
     
-    echo $page9 = $link_array1[$count_length9];
+    $page9 = $link_array1[$count_length9];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +64,7 @@
 						<?php } ?>
 							<li <?php if($page1 == 'Contact'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('Contact/'); ?>">Contact Us</a></li>
 						<?php if (!isset($_SESSION['session_data'])) { ?>
-							<li <?php if($page9 == 'Login_font'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('Login_font') ?>">Log in </a></li>
+							<li <?php if($page9 == 'Login_font' || $page9 == '/'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('Login_font') ?>">Log in </a></li>
 						<?php } else { ?>
 							<li class=" dropdown user-pro <?php if($page1 == 'My-Account'){ ?> current-menu-item <?php } ?>">
 								<a href="javascript:;">
