@@ -62,4 +62,4 @@ $route['My-Account'] = 'My_Account/index';
 $route['Provider-List'] = 'ProvidersViewController/index';
 $route['Payment'] = 'PayUMoney_Controller/index';
 $route['Payment/response'] = 'PayUMoney_Controller/response';
-$route['Provider-Notification'] = 'UserDesk/provider_notification;'
+$route['Provider-Notification'] = 'UserDesk/provider_notification';

@@ -50,12 +50,12 @@ class UserDesk extends CI_Controller {
 		echo json_encode($errmsg);
 	}
 
-	
+
 
 	public function provider_notification()
 	{
 		$arr = array();
-		$this->load->font_page('frontend/layout/provider-notification',$arr)
+		$this->load->font_page('frontend/layout/provider-notification',$arr);
 	}
 
 
