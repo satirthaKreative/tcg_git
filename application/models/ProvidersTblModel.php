@@ -35,6 +35,29 @@ public function sender_details()
 			'communication' => $communication,
 		];
 
+		// platform name fetch
+		$selectPlatform = $this->db->where('id',$platform)->get('platform_tbl');
+		$fetchPlatform = $selectPlatform->row();
+		$platform_name = $fetchPlatform->platform_name;
+		// format name fetch
+		$selectFormat = $this->db->where('id',$format)->get('format_tbl');
+		$fetchFormat = $selectFormat->row();
+		$format_name = $fetchFormat->format_name;
+		// communication name fetch
+		$selectCommunication = $this->db->where('id',$communication)->get('communication_tbl');
+		$fetchCommunication = $selectCommunication->row();
+		$communication_name = $fetchCommunication->communication_name;
+		// archetype name fetch
+		$selectArchetype = $this->db->where('id',$archetype)->get('archetype_name');
+		$fetchArchetype = $selectArchetype->row();
+		$archetype_name = $fetchArchetype->archetype_name;
+
+		// total type fullname
+			$_SESSION['platform_name'] = $platform_name;
+			$_SESSION['format_name'] = $format_name;
+			$_SESSION['communication_name'] = $communication_name;
+			$_SESSION['archetype_name'] = $archetype_name;
+
 		// checking queries
 		$selectQueryData = $this->db->where($where_second_condition)->get('provider_data_tbl');
 		// condition checking
