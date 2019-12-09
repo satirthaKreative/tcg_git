@@ -53,13 +53,25 @@ public function sender_details()
 		$archetype_name = $fetchArchetype->archetype_name;
 
 		// total type fullname
-			$_SESSION['platform_name'] = $platform_name;
-			$_SESSION['format_name'] = $format_name;
-			$_SESSION['communication_name'] = $communication_name;
-			$_SESSION['archetype_name'] = $archetype_name;
+			// $_SESSION['platform_name'] = $platform_name;
+			// $_SESSION['format_name'] = $format_name;
+			// $_SESSION['communication_name'] = $communication_name;
+			// $_SESSION['archetype_name'] = $archetype_name;
 
 		// checking queries
-		$selectQueryData = $this->db->where($where_second_condition)->get('provider_data_tbl');
+		$selectQueryData = $this->db->select('*')
+						->from('provider_data_tbl a') 
+    					->join('platform_tbl b', 'b.id=a.platform')
+    					->join('format_tbl c', 'c.id=a.format')
+    					->join('communication_tbl d', 'd.id=a.communication')
+    					->join('archetype_name e', 'e.id=a.archetype')
+    					->join('voult_time_slot f', 'f.id=a.timeframe')
+    					->join('reg_font g', 'g.id=a.user_id')
+						->where($where_second_condition)
+						->where('user_id !=',$_SESSION['session_data'])
+						->get();
+		// echo $selectQueryData;
+		// exit;
 		// condition checking
 		if($selectQueryData->num_rows() > 0)
 		{

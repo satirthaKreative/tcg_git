@@ -90,46 +90,8 @@
                                     <th scope="col">Duration</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="check-group">
-                                            <input type="checkbox" id="Johndeo">
-                                            <label for="Johndeo"></label>
-                                        </div>
-                                    </td>
-                                    <td>John Deo</td>
-                                    <td>MTGA</td>
-                                    <td>Standard</td>
-                                    <td>Esper Midrange</td>
-                                    <td>2 Hrs</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="check-group">
-                                            <input type="checkbox" id="Annabell">
-                                            <label for="Annabell"></label>
-                                        </div>
-                                    </td>
-                                    <td>Anna Bell</td>
-                                    <td>Cockatrice</td>
-                                    <td>Modern</td>
-                                    <td>GB Rock</td>
-                                    <td>1 Hrs</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="check-group">
-                                            <input type="checkbox" id="Mickhussy">
-                                            <label for="Mickhussy"></label>
-                                        </div>
-                                    </td>
-                                    <td>Mick Hussy</td>
-                                    <td>Xmage</td>
-                                    <td>Legacy</td>
-                                    <td>Jeskai Control</td>
-                                    <td>30 min</td>
-                                </tr>
+                            <tbody id="provider-details-add">
+
                             </tbody>
                         </table>
                     </div>
@@ -209,6 +171,12 @@
             success: function(event)
             {
                 console.log(event);
+                html = '';
+                for(var i = 0;i < event.length; i++)
+                {
+                    html += '<tr>'+'<tr><td><div class="check-group"><input type="checkbox" id="Johndeo"><label for="Johndeo"></label></div></td><td>'+event[i].user_name+'</td><td>'+event[i].platform_name+'</td><td>'+event[i].format_name+'</td><td>'+event[i].archetype_name+'</td><td>'+event[i].time_slot+'&nbsp;'+event[i].time_type+'</td></tr>'; 
+                }
+                $("#provider-details-add").html(html);
 
             }
 
