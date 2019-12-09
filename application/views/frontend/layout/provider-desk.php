@@ -136,7 +136,7 @@
             dataType: 'json',
             success: function(event)
             {
-                window.location.href = "<?= base_url('Provider-Notification'); ?>";
+                window.location.href = "<?= base_url('MyDesk/Provider-Notification'); ?>";
             }
         })
     }

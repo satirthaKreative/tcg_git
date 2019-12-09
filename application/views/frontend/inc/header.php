@@ -7,7 +7,7 @@
     // print_r($link_array);
     $count_length1 = $count_data1-2;
     
-    echo $page1 = $link_array1[$count_length1];
+    $page1 = $link_array1[$count_length1];
     // echo $page = end($link_array);
 
     $count_length9 = $count_data1-1;
