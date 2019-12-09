@@ -164,7 +164,7 @@
         })
 
     }
-    // function provider
+    // function provider 
     $(function(){
         $.ajax({
             url: '<?= base_url("ProvidersViewController/sender_details/") ?>',
