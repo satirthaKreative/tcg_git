@@ -95,7 +95,9 @@
                             </tbody>
                         </table>
                     </div>
-                    
+                    <div class="text-right btn_sec">
+                        <button type="button">Send</button>
+                    </div>
                 </div>
 
                 <div class="ad-section col-md-2">

@@ -2223,6 +2223,17 @@ section.footer {
     transform: scale(1);
 }
 
+/*-------------button funky-------------*/
+.btn_sec button {
+    width: 120px;
+    margin: 10px auto 20px;
+    padding: 12px 32px;
+    font-size: 15px;
+    background-color: #b31605;
+    color: #ffffff;
+    border: 1px solid #b31605;
+}
+
 
 
 /*---------- My Custom Style -----------*/
