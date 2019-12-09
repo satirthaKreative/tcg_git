@@ -11,7 +11,7 @@
     $count_data = count($link_array);
     // echo $count_data;
     // print_r($link_array);
-    $count_length = $count_data-2;
+    $count_length = $count_data-1;
     
     $page = $link_array[$count_length];
     // echo $page = end($link_array);
@@ -60,7 +60,7 @@
                                 <a href="<?= base_url('MyDesk/'); ?>"  class="<?php if($page == 'MyDesk'){ ?>active<?php } ?>">Request</a>
                             </li>
                             <li class="">
-                                <a href="<?= base_url('Provider-List/'); ?>"  class="<?php if($page == 'Provider-List'){ ?>active<?php } ?>">Provider</a>
+                                <a href="<?= base_url('Provider-List/'); ?>"  class="<?php if($page == 'Provider-Notification'){ ?>active<?php } ?>">Provider</a>
                             </li>
                         </ul>
 

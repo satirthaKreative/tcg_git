@@ -7,7 +7,7 @@
     // print_r($link_array);
     $count_length1 = $count_data1-2;
     
-    $page1 = $link_array1[$count_length1];
+    echo $page1 = $link_array1[$count_length1];
     // echo $page = end($link_array);
 
     $count_length9 = $count_data1-1;
@@ -60,7 +60,7 @@
 						<?php if (isset($_SESSION['session_data'])) { ?>
 							<li <?php if($page1 == 'Home'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('Home/'); ?>">Home</a></li>
 							<li <?php if($page1 == 'Vault'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('Vault/'); ?>">Vault</a></li>
-							<li <?php if($page1 == 'MyDesk' || $page1 == 'Provider-List'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('MyDesk/'); ?>">My Desk</a></li>
+							<li <?php if($page1 == 'MyDesk' || $page1 == 'Provider-List' ){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('MyDesk/'); ?>">My Desk</a></li>
 						<?php } ?>
 							<li <?php if($page1 == 'Contact'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('Contact/'); ?>">Contact Us</a></li>
 						<?php if (!isset($_SESSION['session_data'])) { ?>
