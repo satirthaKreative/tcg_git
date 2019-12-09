@@ -200,4 +200,17 @@
         })
 
     }
+    // function provider
+    $(function(){
+        $.ajax({
+            url: '<?= base_url("ProvidersViewController/sender_details/") ?>',
+            type: 'post',
+            dataType: 'json',
+            success: function(event)
+            {
+                console.log(event);
+            }
+
+        })
+    })
 </script>

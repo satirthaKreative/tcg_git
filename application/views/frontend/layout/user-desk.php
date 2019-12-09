@@ -126,7 +126,7 @@
 </section>
 
 <script>
-
+// sending data
     function mySend(data){
         $.ajax({
             url : '<?= base_url('UserDesk/submit_data/'); ?>'+data,
