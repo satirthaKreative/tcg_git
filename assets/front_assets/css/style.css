@@ -2204,7 +2204,7 @@ section.footer {
   height: 28px;
   background: #fff;
 }
-.table .check-group [type="radio"]:checked + label:after, .table .check-group [type="radio"]:not(:checked) + label:after {
+.table .check-group [type="radio"]:checked + label:after {
     content: '';
     width: 13px;
     height: 13px;
