@@ -64,6 +64,12 @@ class Registration_model extends CI_Model {
 		// checking data 
 		$data_search_count = $data_search->num_rows();
 		if($data_search_count>0){
+			// update condition
+			$updateCondition = [
+				'active_state' => 1
+			];
+			$update_active_state =$this->db->where($where_check)->update('reg_font',$updateCondition);
+			// total result
 			$tot_result = $data_search->result_array();
 			return $tot_result;
 		}else{

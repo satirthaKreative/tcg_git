@@ -172,9 +172,16 @@
             {
                 console.log(event);
                 html = '';
-                for(var i = 0;i < event.length; i++)
+                if(event != null)
                 {
-                    html += '<tr>'+'<tr><td><div class="check-group"><input type="checkbox" id="Johndeo"><label for="Johndeo"></label></div></td><td>'+event[i].user_name+'</td><td>'+event[i].platform_name+'</td><td>'+event[i].format_name+'</td><td>'+event[i].archetype_name+'</td><td>'+event[i].time_slot+'&nbsp;'+event[i].time_type+'</td></tr>'; 
+                    for(var i = 0;i < event.length; i++)
+                    {
+                        html += '<tr><td><div class="check-group"><input type="checkbox" id="Johndeo" ><label for="Johndeo"></label></div></td><td>'+event[i].user_name+'</td><td>'+event[i].platform_name+'</td><td>'+event[i].format_name+'</td><td>'+event[i].archetype_name+'</td><td>'+event[i].time_slot+'&nbsp;'+event[i].time_type+'</td></tr>'; 
+                    }
+                }
+                else
+                {
+                    html += '<tr><td colspan="7"><center class="text-warning"><i class="fa fa-times"></i> No Provider Available</center></td></tr>';
                 }
                 $("#provider-details-add").html(html);
 
@@ -182,4 +189,5 @@
 
         })
     })
+
 </script>

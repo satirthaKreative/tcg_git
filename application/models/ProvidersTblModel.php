@@ -68,6 +68,7 @@ public function sender_details()
     					->join('voult_time_slot f', 'f.id=a.timeframe')
     					->join('reg_font g', 'g.id=a.user_id')
 						->where($where_second_condition)
+						->where('active_state',1)
 						->where('user_id !=',$_SESSION['session_data'])
 						->get();
 		// echo $selectQueryData;
