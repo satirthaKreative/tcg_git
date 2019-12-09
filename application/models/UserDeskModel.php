@@ -80,6 +80,7 @@ class UserDeskModel extends CI_Model {
 		}
 	}
 
+
 }
 
 /* End of file UserDeskModel.php */

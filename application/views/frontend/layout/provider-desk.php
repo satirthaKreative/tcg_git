@@ -136,7 +136,7 @@
             dataType: 'json',
             success: function(event)
             {
-                console.log(event);
+                window.location.href = "<?= base_url('UserDesk/provider_notification'); ?>";
             }
         })
     }
