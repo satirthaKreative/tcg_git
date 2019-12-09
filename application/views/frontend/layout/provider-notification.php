@@ -165,7 +165,7 @@
     // function provider notification
     $(function(){
         $.ajax({
-            url: '<?= base_url("ProvidersViewController/sender_details/") ?>',
+            url: '<?= base_url("ProvidersViewController/provider_notification/") ?>',
             type: 'post',
             dataType: 'json',
             success: function(event)
