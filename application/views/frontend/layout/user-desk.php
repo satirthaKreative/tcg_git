@@ -135,19 +135,15 @@
             dataType: 'json',
             success: function(event)
             {
+                console.log(event);
                 if(event.no_error == true)
                 {
-                    var msg_on_condition = "Finding Providers! Please wait...";
-                    $(".show_res_msg").addClass('text-success');
-                    $(".text-success").html("<span>"+msg_on_condition+"</span>").fadeIn().delay(3000).fadeOut('slow');
+                    $(".show_res_msg").html("<span class='text-success'>"+event.main_error+"</span>").fadeIn().delay(3000).fadeOut('slow');
                     setTimeout(function(){ $(".show_res_msg").removeClass('text-success');window.location.href="<?= base_url('Provider-List/'); ?>" },3000);
                 } 
                 else if(event.no_error == false)
                 {
-                    var msg_on_condition = "Server issue ! Try again ";
-                    $(".show_res_msg").addClass('text-danger');
-                    $(".show_res_msg .text-danger").html("<span>"+msg_on_condition+"</span>").fadeIn().delay(3000).fadeOut('slow');
-                    setTimeout(function(){ $(".show_res_msg").removeClass('text-danger'); window.location.href="<?= base_url('Provider-List/'); ?>"; },3000);
+                    $(".show_res_msg").html("<span class='text-danger'>"+event.main_error+"</span>").fadeIn().delay(3000).fadeOut('slow');
                 } 
             }
         })

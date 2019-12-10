@@ -80,18 +80,34 @@ class UserDeskModel extends CI_Model {
 		}
 	}
 
-	// public function check_time_available()
-	// {
-	// 	$is_check_time = $this->db->where('UserID',$_SESSION['session_data'])->get('user_payment_details');
-	// 	if($is_check_time->num_rows() > 0)
-	// 	{
-	// 		$store_time = $this->db->
-	// 	}
-	// 	else
-	// 	{
-	// 		return false;
-	// 	}
-	// }
+	public function check_time_available($data_u)
+	{
+		$is_check_time = $this->db->where('user_id',$_SESSION['session_data'])->get('timezone_tbl');
+		if($is_check_time->num_rows() > 0)
+		{
+			$is_total_time = $is_check_time->row();
+			$store_time = $is_total_time->total_time;
+			$request_time_id = $_POST['time_frame_select'];
+			// select voult time
+			$select_time = $this->db->where('id',$request_time_id)->get('voult_time_slot');
+			$fetch_time = $select_time->row();
+			$request_time = $fetch_time->convert_seconds;
+
+
+			if($request_time<=$store_time)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 
 }
