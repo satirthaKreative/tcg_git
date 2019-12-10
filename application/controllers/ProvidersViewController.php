@@ -37,10 +37,12 @@ class ProvidersViewController extends CI_Controller {
 	public function notify_request()
 	{
 		$errmsg['no_error'] = false;
+		$errmsg['main_msg'] = "Something went wrong! Try again later";
 		$dataValue = $_POST['radioValue'];
 		if($data = $this->ptm->notify_request($dataValue))
 		{
 			$errmsg['no_error'] = true;
+			$errmsg['main_msg'] = "Successfully request send to the provider";
 		}
 		echo json_encode($errmsg);
 	}

@@ -94,6 +94,7 @@
 
                             </tbody>
                         </table>
+                        <div class="sucmsg"></div>
                     </div>
                     <div class="text-right btn_sec">
                         <button type="button" onclick="send_req_to_btn()">Send</button>
@@ -204,7 +205,7 @@
         else
         {
             $.ajax({
-                url: 'ProvidersViewController/notify_request/',
+                url: '<?= base_url("ProvidersViewController/notify_request/"); ?>',
                 type: 'post',
                 data: {radioValue: radioValue},
                 dataType: 'json',
@@ -212,11 +213,12 @@
                 {
                     if(event.no_error == true)
                     {
+                        $(".sucmsg").html("<span class='text-success'>"+event.main_msg+"</span>").fadeIn().delay(3000).fadeOut('slow');
 
                     }
                     else
                     {
-
+                        $(".sucmsg").html("<span class='text-danger'>"+event.main_msg+"</span>").fadeIn().delay(3000).fadeOut('slow');
                     }
                 }
             })

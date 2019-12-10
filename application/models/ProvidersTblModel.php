@@ -91,6 +91,35 @@ public function provider_notification()
 {
 	
 }
+
+public function notify_request($value)
+{
+	$select_proid = $this->db->where('id',$value)->get('provider_data_tbl');
+	$total_data = $select_proid->row();
+	//  provider id
+	$provider_id = $total_data->user_id;
+	//	requester id
+	$requester_id = $_SESSION['session_data'];
+
+	// insert queries
+	$insertArrayReq = [
+		'provider_id' => $provider_id,
+		'requester_id' => $requester_id,
+		'provider_tbl_id' => $value,
+		'active_date' => date('Y-m-d H:i:sa'),
+		'status' => 1
+	]; 
+
+	$insertQueryReq = $this->db->insert('req_to_pro',$insertArrayReq);
+	if($this->db->affected_rows())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
 	
 
 }
