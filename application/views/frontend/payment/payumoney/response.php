@@ -135,7 +135,7 @@ else exit(0);
         $.ajax({
             url: '<?= base_url("PayUMoney_Controller/success") ?>',
             type: 'post',
-            dataType: 'json',
+            dataType: 'text',
             success:  function(event)
             {
                 window.location.href="<?= base_url('Vault/') ?>"
