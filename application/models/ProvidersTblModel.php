@@ -59,7 +59,7 @@ public function sender_details()
 			// $_SESSION['archetype_name'] = $archetype_name;
 
 		// checking queries
-		$selectQueryData = $this->db->select('*')
+		$selectQueryData = $this->db->select('*, a.id as mainId')
 						->from('provider_data_tbl a') 
     					->join('platform_tbl b', 'b.id=a.platform')
     					->join('format_tbl c', 'c.id=a.format')
@@ -71,6 +71,9 @@ public function sender_details()
 						->where('active_state',1)
 						->where('user_id !=',$_SESSION['session_data'])
 						->get();
+		// $Purchase_req = $this->provider_data_tbl->find();
+		// echo $Purchase_req;
+		// exit();
 		// echo $selectQueryData;
 		// exit;
 		// condition checking

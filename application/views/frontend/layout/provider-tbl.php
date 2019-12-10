@@ -96,7 +96,7 @@
                         </table>
                     </div>
                     <div class="text-right btn_sec">
-                        <button type="button">Send</button>
+                        <button type="button" onclick="send_req_to_btn()">Send</button>
                     </div>
                 </div>
 
@@ -179,7 +179,7 @@
                     for(var i = 0;i < event.length; i++)
                     {
 
-                        html += '<tr><td><div class="check-group"> <input type="radio" id="Johndeo'+i+'" name="radio-group"><label for="Johndeo'+i+'"></label></div></td><td>'+event[i].user_name+'</td><td>'+event[i].platform_name+'</td><td>'+event[i].format_name+'</td><td>'+event[i].archetype_name+'</td><td>'+event[i].time_slot+'&nbsp;'+event[i].time_type+'</td></tr>'; 
+                        html += '<tr><td><div class="check-group"> <input type="radio" id="Johndeo'+i+'" name="radio-group" value="'+event[i].mainId+'"><label for="Johndeo'+i+'"></label></div></td><td>'+event[i].user_name+'</td><td>'+event[i].platform_name+'</td><td>'+event[i].format_name+'</td><td>'+event[i].archetype_name+'</td><td>'+event[i].time_slot+'&nbsp;'+event[i].time_type+'</td></tr>'; 
                     }
                 }
                 else
@@ -192,5 +192,35 @@
 
         })
     })
+
+    // function send to button
+    function send_req_to_btn()
+    {
+        var radioValue = $("input[name='radio-group']:checked").val();
+        if(radioValue == undefined)
+        {
+            
+        }
+        else
+        {
+            $.ajax({
+                url: 'ProvidersViewController/notify_request/',
+                type: 'post',
+                data: {radioValue: radioValue},
+                dataType: 'json',
+                success:  function(event)
+                {
+                    if(event.no_error == true)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+            })
+        }
+    }
 
 </script>

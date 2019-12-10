@@ -32,6 +32,19 @@ class ProvidersViewController extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	// request creation
+
+	public function notify_request()
+	{
+		$errmsg['no_error'] = false;
+		$dataValue = $_POST['radioValue'];
+		if($data = $this->ptm->notify_request($dataValue))
+		{
+			$errmsg['no_error'] = true;
+		}
+		echo json_encode($errmsg);
+	}
+
 }
 
 /* End of file ProvidersViewController.php */
