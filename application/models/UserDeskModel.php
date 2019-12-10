@@ -80,6 +80,19 @@ class UserDeskModel extends CI_Model {
 		}
 	}
 
+	public function check_time_available()
+	{
+		$is_check_time = $this->db->where('UserID',$_SESSION['session_data'])->get('user_payment_details');
+		if($is_check_time->num_rows() > 0)
+		{
+			if()
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 
 }
 

@@ -31,10 +31,17 @@ class UserDesk extends CI_Controller {
 	public function submit_data($data)
 	{
 		$errmsg['no_error'] = false;
-		if($data_insert = $this->udm->submit_data($data))
+		if($data_insert1 = $this->udm->check_time_available())
 		{
-			$errmsg['no_error'] = true;
-			$errmsg['main_error'] = "Successfully Added";
+			if($data_insert = $this->udm->submit_data($data))
+			{
+				$errmsg['no_error'] = true;
+				$errmsg['main_error'] = "Successfully Added";
+			}
+		}
+		else
+		{
+			$errmsg['main_error'] = "Time not available";
 		}
 		echo json_encode($errmsg);
 	}
