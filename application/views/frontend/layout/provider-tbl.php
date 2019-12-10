@@ -200,7 +200,7 @@
         var radioValue = $("input[name='radio-group']:checked").val();
         if(radioValue == undefined)
         {
-            
+            $(".sucmsg").html("<span class='text-danger'><i class='fa fa-times'></i> You Must Choose A Providers</span>").fadeIn().delay(3000).fadeOut('slow');
         }
         else
         {
@@ -213,12 +213,12 @@
                 {
                     if(event.no_error == true)
                     {
-                        $(".sucmsg").html("<span class='text-success'>"+event.main_msg+"</span>").fadeIn().delay(3000).fadeOut('slow');
+                        $(".sucmsg").html("<span class='text-success'><i class='fa fa-check'></i> "+event.main_msg+"</span>").fadeIn().delay(3000).fadeOut('slow');
 
                     }
                     else
                     {
-                        $(".sucmsg").html("<span class='text-danger'>"+event.main_msg+"</span>").fadeIn().delay(3000).fadeOut('slow');
+                        $(".sucmsg").html("<span class='text-danger'><i class='fa fa-times'></i> "+event.main_msg+"</span>").fadeIn().delay(3000).fadeOut('slow');
                     }
                 }
             })
