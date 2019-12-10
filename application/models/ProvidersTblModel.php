@@ -89,6 +89,11 @@ public function sender_details()
 // provider notification tbl
 public function provider_notification()
 {
+	$where_condition = [
+		'b.provider_id' => $_SESSION['session_data'],
+		'b.status' => 1,
+		'b.active_date' => date('Y-m-d') 
+	];
 	$selectQueryData = $this->db->select('*')
 					->from('requester_tbl a')
 					->join('req_to_pro b','b.requester_tbl_id = a.id')
@@ -98,8 +103,17 @@ public function provider_notification()
     				->join('voult_time_slot f', 'f.id=a.timeframe')
     				->join('reg_font g', 'g.id=a.user_id')
     				->join('platform_tbl h', 'h.id=a.platform')
-}
+    				->where($where_condition)
+    				->where('user_id !=',$_SESSION['session_data'])
+    				->get();
 
+   
+    if($selectQueryData->num_rows() > 0)
+	{
+		return $selectQueryData->result();
+	}
+}
+// request nofication
 public function notify_request($value)
 {
 	$select_proid = $this->db->where('id',$value)->get('provider_data_tbl');
@@ -118,7 +132,7 @@ public function notify_request($value)
 		'requester_id' => $requester_id,
 		'provider_tbl_id' => $value,
 		'requester_tbl_id' => $requester_tbl_id,
-		'active_date' => date('Y-m-d H:i:sa'),
+		'active_date' => date('Y-m-d'),
 		'status' => 1
 	]; 
 
