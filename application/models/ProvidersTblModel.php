@@ -86,10 +86,18 @@ public function sender_details()
 
 }
 
-
+// provider notification tbl
 public function provider_notification()
 {
-	
+	$selectQueryData = $this->db->select('*')
+					->from('requester_tbl a')
+					->join('req_to_pro b','b.requester_tbl_id = a.id')
+					->join('format_tbl c', 'c.id=a.format')
+    				->join('communication_tbl d', 'd.id=a.communication')
+    				->join('archetype_name e', 'e.id=a.archetype')
+    				->join('voult_time_slot f', 'f.id=a.timeframe')
+    				->join('reg_font g', 'g.id=a.user_id')
+    				->join('platform_tbl h', 'h.id=a.platform')
 }
 
 public function notify_request($value)
@@ -100,12 +108,16 @@ public function notify_request($value)
 	$provider_id = $total_data->user_id;
 	//	requester id
 	$requester_id = $_SESSION['session_data'];
-
+	// fetch request tbl id
+	$select_request_tbl = $this->db->where('user_id',$requester_id)->order_by('id','desc')->limit(1)->get('requester_tbl');
+	$fetch_request_tbl = $select_request_tbl->row();
+	$requester_tbl_id = $fetch_request_tbl->id;
 	// insert queries
 	$insertArrayReq = [
 		'provider_id' => $provider_id,
 		'requester_id' => $requester_id,
 		'provider_tbl_id' => $value,
+		'requester_tbl_id' => $requester_tbl_id,
 		'active_date' => date('Y-m-d H:i:sa'),
 		'status' => 1
 	]; 

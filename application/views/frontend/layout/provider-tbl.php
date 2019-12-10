@@ -137,6 +137,7 @@
             }
         })
     })
+
     // change activity
     function my_activity($data)
     {
@@ -165,6 +166,7 @@
         })
 
     }
+    
     // function provider 
     $(function(){
         $.ajax({
