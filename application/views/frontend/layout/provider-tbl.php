@@ -29,7 +29,7 @@
 
                         <div class="progress-area">
                             <div class="progress">
-                                <div class="progress-bar" style="width:02%"></div>
+                                <div class="progress-bar" id="progress-bar" style="width:02%"></div>
                             </div>
 
                             <ul>
