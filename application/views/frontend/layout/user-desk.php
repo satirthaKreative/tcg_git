@@ -28,7 +28,7 @@
 
                         <div class="progress-area">
                             <div class="progress">
-                                <div class="progress-bar" style="width:02%"></div>
+                                <div class="progress-bar" id="progress-bar" style="width:02%"></div>
                             </div>
 
                             <ul>
@@ -327,14 +327,29 @@
             dataType: 'json',
             success: function(event)
             {
-
                console.log(event);
             }
         })
 
     }
 
+    // show count time per user
+    function show_count_time_per_user()
+    {
+        $.ajax({
+            url: '<?= base_url('UserDesk/check_user_available_time') ?>',
+            type: 'post',
+            dataType: 'json',
+            success:  function(event)
+            {
+                console.log(event);
+                $("#progress-bar").css("width",event.total_time+"%");
+            }
+        })
+    }
     $(function(){
+        setInterval(function(){ show_count_time_per_user(); },2000);
+    })
 
-    });
+    
 </script>

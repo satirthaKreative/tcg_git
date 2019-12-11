@@ -109,6 +109,39 @@ class UserDeskModel extends CI_Model {
 		}
 	}
 
+	public function check_user_available_time()
+	{
+		//sum time
+		$sum_time = 100;
+		// current user id
+		$current_user_id = $_SESSION['session_data'];
+		$select_time = $this->db->where('user_id',$current_user_id)->get('timezone_tbl');
+		if($select_time->num_rows() > 0)
+		{
+			$fetch_time = $select_time->row();
+			// voult store time for indivisual user
+			$single_voult_time = $fetch_time->total_time;
+			// actual time range limit
+			$actual_range_limit = 5*3600;
+
+			if($single_voult_time >= $actual_range_limit)
+			{
+				$sum_time = 100;
+				return $sum_time;
+			}
+			else
+			{
+				$sum_time = ((100*$single_voult_time)/$actual_range_limit);
+				return $sum_time;
+			}
+		}
+		else
+		{
+			$sum_time = 0;
+			return $sum_time;
+		}
+	}
+
 
 }
 

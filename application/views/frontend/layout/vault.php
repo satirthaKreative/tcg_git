@@ -154,7 +154,7 @@
         })
     })
 
-    
+    // check time value
     function check_time_value()
     {
         var purchase_time = $(".purchase-time").val();
@@ -180,6 +180,7 @@
         })
     }
 
+    // payment
     function Payment()
     {
         var parchase_time = $('.purchase-time').val();

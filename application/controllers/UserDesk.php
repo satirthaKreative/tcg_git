@@ -67,6 +67,15 @@ class UserDesk extends CI_Controller {
 		$this->load->font_page('frontend/layout/provider-notification',$arr);
 	}
 
+	// check current user available time
+
+	public function check_user_available_time()
+	{
+		// send to model
+		$data_send['total_time'] = $this->udm->check_user_available_time();
+		echo json_encode($data_send);
+	}
+
 
 }
 

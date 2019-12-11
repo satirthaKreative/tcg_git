@@ -324,5 +324,22 @@
 
     }
 
+    // show count time per user
+    function show_count_time_per_user()
+    {
+        $.ajax({
+            url: '<?= base_url('UserDesk/check_user_available_time') ?>',
+            type: 'post',
+            dataType: 'json',
+            success:  function(event)
+            {
+                console.log(event);
+                $("#progress-bar").css("width",event.total_time+"%");
+            }
+        })
+    }
+    $(function(){
+        setInterval(function(){ show_count_time_per_user(); },2000);
+    })
     
 </script>
