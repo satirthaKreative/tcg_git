@@ -110,7 +110,7 @@
                                 <button type="button" onclick="my_send_data(<?= $_SESSION["session_data"]; ?>)" class="btn">Send</button>
                                 
                             </form>
-                            
+                            <p class="show_res_msg"></p>
                             
                         </div>
 
@@ -136,7 +136,17 @@
             dataType: 'json',
             success: function(event)
             {
-                window.location.href = "<?= base_url('MyDesk/Provider-Notification'); ?>";
+                console.log(event);
+                if(event.no_error == true)
+                {
+                    $(".show_res_msg").html("<span class='text-success'>"+event.main_error+"</span>").fadeIn().delay(3000).fadeOut('slow');
+                    setTimeout(function(){ $(".show_res_msg").removeClass('text-success');window.location.href = "<?= base_url('MyDesk/Provider-Notification'); ?>"; },3000);
+                } 
+                else if(event.no_error == false)
+                {
+                    $(".show_res_msg").html("<span class='text-danger'>"+event.main_error+"</span>").fadeIn().delay(3000).fadeOut('slow');
+                }
+                
             }
         })
     }

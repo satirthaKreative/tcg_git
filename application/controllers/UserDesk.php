@@ -50,11 +50,27 @@ class UserDesk extends CI_Controller {
 
 	public function submit_data_provider($data)
 	{
+		// $errmsg['no_error'] = false;
+		// if($data_insert = $this->udm->submit_data_provider($data))
+		// {
+		// 	$errmsg['no_error'] = true;
+		// 	$errmsg['main_error'] = "Successfully Added";
+		// }
+
 		$errmsg['no_error'] = false;
-		if($data_insert = $this->udm->submit_data_provider($data))
+		$errmsg['main_error'] = "Server issue ! Try again ";
+		$data_u = $data;
+		if($data_insert1 = $this->udm->check_time_available($data_u))
 		{
-			$errmsg['no_error'] = true;
-			$errmsg['main_error'] = "Successfully Added";
+			if($data_insert = $this->udm->submit_data_provider($data_u))
+			{
+				$errmsg['no_error'] = true;
+				$errmsg['main_error'] = "Finding Requester ! Please wait ...";
+			}
+		}
+		else
+		{
+			$errmsg['main_error'] = "Request time is not available in your account! You need to buy more time";
 		}
 		echo json_encode($errmsg);
 	}
