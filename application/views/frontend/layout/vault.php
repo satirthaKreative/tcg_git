@@ -163,7 +163,7 @@
             url: "<?php echo base_url('Voult_time_controller/prevent_buy_time') ?>",
             type: "post",
             data: {purchase_time: purchase_time},
-            dataType: "text",
+            dataType: "json",
             success:  function(event)
             {
                 console.log(event);
@@ -171,10 +171,10 @@
                 {
                     $("#prevent_btn").attr('onclick','Payment()');
                 }
-                else
+                else if(event.no_error == false)
                 {
                     $(".prevent_btn").html("<i class='text-danger'>You can't buy more than 5 hours total time</i>").fadeIn().delay(3000).fadeOut('slow');
-                    $("#prevent_btn").removeAttr('onclick','Payment()');
+                    $("#prevent_btn").removeAttr('onclick');
                 }
             }
         })

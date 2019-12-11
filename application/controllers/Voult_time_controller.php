@@ -38,7 +38,7 @@ class Voult_time_controller extends CI_Controller {
 	{	
 		$errmsg['no_error'] = false;
 		$time_id = $_POST['purchase_time'];
-		if($this->vsm->prevent_buy_time($time_id))
+		if($data = $this->vsm->prevent_buy_time($time_id))
 		{
 			$errmsg['no_error'] = true;
 		}

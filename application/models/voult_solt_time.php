@@ -123,11 +123,11 @@ class Voult_solt_time extends CI_Model {
 
 		if($tot_time <= $five_hrs_time)
 		{
-			return false;
+			return true;
 		}
 		else
 		{
-			return true;
+			return false;
 		}
 	}	
 
