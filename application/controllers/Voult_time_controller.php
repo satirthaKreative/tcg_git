@@ -33,6 +33,17 @@ class Voult_time_controller extends CI_Controller {
 		}
 		echo json_encode($errmsg);
 	}
+	// prevent buy button in voult
+	public function prevent_buy_time()
+	{	
+		$errmsg['no_error'] = false;
+		$time_id = $_POST['purchase_time'];
+		if($this->vsm->prevent_buy_time($time_id))
+		{
+			$errmsg['no_error'] = true;
+		}
+		echo  json_encode($errmsg);
+	}
 
 }
 

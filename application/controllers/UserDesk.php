@@ -43,7 +43,7 @@ class UserDesk extends CI_Controller {
 		}
 		else
 		{
-			$errmsg['main_error'] = "Request time is not available in your account ! You need to buy more time";
+			$errmsg['main_error'] = "Request time is not available in your account! You need to buy more time";
 		}
 		echo json_encode($errmsg);
 	}

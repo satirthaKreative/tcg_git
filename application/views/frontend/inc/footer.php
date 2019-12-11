@@ -38,6 +38,18 @@
 
 </script> 
 
+<!-- <script>
+    $.ajax({
+        url: "<?= base_url('') ?>",
+        type: "post",
+        dataType: "json",
+        success:  function(event)
+        {
+            
+        }
+    })
+</script> -->
+
 
 <script type="text/javascript">
     $('#datepicker').datepicker({

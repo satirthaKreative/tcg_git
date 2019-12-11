@@ -19,7 +19,7 @@
                                 <div class="progress-bar" style="width:<?= $_SESSION['voult_percentage_show'] ?>%"></div>
                             </div>
 
-                            <ul>
+                            <ul >
                                 <li>
                                     <span>
                                         0%
@@ -116,12 +116,13 @@
 
             <div class="payment">
                 <label >You will purchase</label>
-                <select class="purchase-time">
+                <select class="purchase-time" onchange="check_time_value()">
                     
                 </select>
+                <span class="prevent_btn"></span>
                 <p>With your credit card ending in **** **** **** 1245</p>
 
-                <a href="javascript:void(0);" onclick="Payment();">Purchase</a>
+                <a id="prevent_btn" href="javascript:void(0);" onclick="Payment();">Purchase</a>
 
             </div>
 
@@ -152,6 +153,32 @@
             }
         })
     })
+
+    
+    function check_time_value()
+    {
+        var purchase_time = $(".purchase-time").val();
+        // alert(purchase_time);
+        $.ajax({
+            url: "<?php echo base_url('Voult_time_controller/prevent_buy_time') ?>",
+            type: "post",
+            data: {purchase_time: purchase_time},
+            dataType: "text",
+            success:  function(event)
+            {
+                console.log(event);
+                if(event.no_error == true)
+                {
+                    $("#prevent_btn").attr('onclick','Payment()');
+                }
+                else
+                {
+                    $(".prevent_btn").html("<i class='text-danger'>You can't buy more than 5 hours total time</i>").fadeIn().delay(3000).fadeOut('slow');
+                    $("#prevent_btn").removeAttr('onclick','Payment()');
+                }
+            }
+        })
+    }
 
     function Payment()
     {

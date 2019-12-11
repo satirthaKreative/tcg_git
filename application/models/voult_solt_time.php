@@ -104,6 +104,31 @@ class Voult_solt_time extends CI_Model {
 		{
 			return false;
 		}
+	}
+
+	// prevent buy time or not
+
+	public function prevent_buy_time($time_id)
+	{
+		$voult_solt_time_select = $this->db->where('id',$time_id)->get('voult_time_slot');
+		$voult_solt_time_fetch = $voult_solt_time_select->row();
+		$voult_solt_time = $voult_solt_time_fetch->convert_seconds;
+
+		$is_check_time = $this->db->where('user_id',$_SESSION['session_data'])->get('timezone_tbl');
+		$is_total_time = $is_check_time->row();
+		$store_time = $is_total_time->total_time;
+
+		$five_hrs_time = 5*3600;
+		$tot_time = $store_time+$voult_solt_time;
+
+		if($tot_time <= $five_hrs_time)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}	
 
 }
