@@ -95,7 +95,7 @@ public function provider_notification()
 		'b.status' => 1,
 		'b.active_date' => date('Y-m-d') 
 	];
-	$selectQueryData = $this->db->select('*')
+	$selectQueryData = $this->db->select('*, a.id as mainId')
 					->from('requester_tbl a')
 					->join('req_to_pro b','b.requester_tbl_id = a.id')
 					->join('format_tbl c', 'c.id=a.format')
@@ -148,6 +148,8 @@ public function notify_request($value)
 		return false;
 	}
 }
+// provider and requester accept option
+
 	
 
 }
