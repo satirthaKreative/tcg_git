@@ -2234,6 +2234,26 @@ section.footer {
     border: 1px solid #b31605;
 }
 
+/*---------- Fixed Notification -----------*/
+.notification {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  max-width: 260px;
+  width: 100%;
+  z-index: 999;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.12);
+  border: 1px solid #f1f1f1;
+  max-height: 80px;
+  height: 100%;
+}
+.notification h4 {
+    font-size: 15px;
+}
+/*---------- Notification -----------*/
 
 
 /*---------- My Custom Style -----------*/

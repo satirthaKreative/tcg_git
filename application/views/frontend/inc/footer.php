@@ -1,3 +1,7 @@
+<dv class="notification">
+    <h4>Hi, John Deo</h4>
+
+</dv>
 <section class="footer">
 
     <div class="footer_sec">

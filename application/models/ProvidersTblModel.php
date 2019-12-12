@@ -70,6 +70,7 @@ public function sender_details()
 						->where($where_second_condition)
 						->where('active_state',1)
 						->where('user_id !=',$_SESSION['session_data'])
+						->where('cur_time',date('Y-m-d'))
 						->get();
 		// $Purchase_req = $this->provider_data_tbl->find();
 		// echo $Purchase_req;
@@ -105,6 +106,7 @@ public function provider_notification()
     				->join('platform_tbl h', 'h.id=a.platform')
     				->where($where_condition)
     				->where('user_id !=',$_SESSION['session_data'])
+    				->where('cur_time',date('Y-m-d'))
     				->get();
 
    

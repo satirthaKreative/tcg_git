@@ -46,6 +46,7 @@ class UserDeskModel extends CI_Model {
 			'archetype' => $this->input->post('archetype_select'),
 			'timeframe' => $this->input->post('time_frame_select'),
 			'communication' => $this->input->post('communication_select'),
+			'cur_time' => date('Y-m-d'),
 			'user_id' => $data,
 		];
 		$insertQuery = $this->db->insert('requester_tbl',$insert_array);
@@ -67,6 +68,7 @@ class UserDeskModel extends CI_Model {
 			'archetype' => $this->input->post('archetype_select'),
 			'timeframe' => $this->input->post('time_frame_select'),
 			'communication' => $this->input->post('communication_select'),
+			'cur_time' => date('Y-m-d'),
 			'user_id' => $data,
 		];
 		$insertQuery = $this->db->insert('provider_data_tbl',$insert_array);
