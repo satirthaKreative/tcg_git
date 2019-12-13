@@ -238,6 +238,28 @@ public function check_request_stopwatch()
 	}
 }
 
+public function stop_timer_id()
+{
+
+	$where = '(provider_id="'.$_SESSION['session_data'].'" or requester_id = "'.$_SESSION['session_data'].'")';
+	$checking_available_or_not = $this->db->from('accept_request_tbl')
+										->where($where)
+										->where('chat_on',date('Y-m-d'))
+										->where('status',1)
+										->order_by('id','Desc')
+										->limit(1)
+										->get();
+	if($checking_available_or_not->num_rows() > 0)
+	{
+		$fetch_row = $checking_available_or_not->row();
+		return $fetch_row->id;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 	
 
 }

@@ -89,6 +89,17 @@ class ProvidersViewController extends CI_Controller {
 		echo json_encode($data_time);
 	}
 
+	// checking details
+	public function stop_timer_id()
+	{
+		$data_time['no_error'] = false;
+		if($data_time1 = $this->ptm->stop_timer_id())
+		{
+			$data_time['no_error'] = true;
+		}
+		echo json_encode($data_time);
+	}
+
 }
 
 /* End of file ProvidersViewController.php */

@@ -120,9 +120,8 @@
                         hourNew--;
                         if(hourNew == -1)
                         {
-                            alert('time finish');
-                            stop_watch();
                             clearInterval(timer);
+
                             return "00:00:00";
                         }
                     }
@@ -208,7 +207,16 @@
     function stop_count_btn()
     {
         var data = $("#countdown").text();
-        alert(data);
+        $.ajax({
+            url: '<?= base_url('ProvidersViewController/stop_timer_id/') ?>',
+            type: 'post',
+            dataType: 'json',
+            success: function(event)
+            {
+
+            }
+        })
+        
     }
 </script>
 
