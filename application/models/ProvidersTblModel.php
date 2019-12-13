@@ -194,6 +194,50 @@ public function accept_requester($request_id)
 
 }
 
+// stop watch 
+
+function request_stopwatch()
+{
+	$checking_available_or_not = $this->db->from('accept_request_tbl')
+										->where('requester_id',$_SESSION['session_data'])
+										->where('chat_on',date('Y-m-d'))
+										->where('status',1)
+										->order_by('id','Desc')
+										->limit(1)
+										->get();
+	if($checking_available_or_not->num_rows() > 0)
+	{
+		$fetch_row = $checking_available_or_not->row();
+		return $fetch_row->request_time;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+// checking timer
+
+public function check_request_stopwatch()
+{
+	$checking_available_or_not = $this->db->from('accept_request_tbl')
+										->where('requester_id',$_SESSION['session_data'])
+										->where('chat_on',date('Y-m-d'))
+										->where('status',0)
+										->order_by('id','Desc')
+										->limit(1)
+										->get();
+	if($checking_available_or_not->num_rows() > 0)
+	{
+		$fetch_row = $checking_available_or_not->row();
+		return $fetch_row->request_time;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 	
 
 }

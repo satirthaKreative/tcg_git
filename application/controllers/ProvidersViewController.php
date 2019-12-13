@@ -66,6 +66,29 @@ class ProvidersViewController extends CI_Controller {
 		$val1 = $_POST['val2']; $change_date = gmdate('H:i:s',$val1); echo json_encode($change_date); 
 	}
 
+	// stop watch calculation 
+
+	public function request_stopwatch()
+	{
+		$data_time['no_error'] = false;
+		if($data_time['query_time'] = $this->ptm->request_stopwatch())
+		{
+			$data_time['no_error'] = true;
+		}
+		echo json_encode($data_time);
+	}
+
+	// checking stop watch
+	public function check_request_stopwatch()
+	{
+		$data_time['no_error'] = false;
+		if($data_time1 = $this->ptm->check_request_stopwatch())
+		{
+			$data_time['no_error'] = true;
+		}
+		echo json_encode($data_time);
+	}
+
 }
 
 /* End of file ProvidersViewController.php */

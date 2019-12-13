@@ -213,62 +213,6 @@
         setInterval(function(){ show_count_time_per_user(); },2000);
     })
 
-    // Accept Click Data
 
-    function accept_click(data)
-    {
-        $.ajax({
-            url: '<?= base_url("ProvidersViewController/accept_requester/") ?>',
-            type: 'post',
-            data: {data:  data},
-            dataType:  'json',
-            success: function(event)
-            {
-                console.log(event);
-                var val2 = event.request_time; 
-                // convert to provider ajax
-                $.post('<?= base_url("ProvidersViewController/return_time_format/") ?>',{val2: val2}).done(function(event1){ var val3 = event1; console.log(val3); time_check(val3); });  
-            }
-        })
-    }
-
-    function time_check(val2){
-            var time = val2;
-            parts = time.split(':');
-            hours = parts[0];
-            minutes = parts[1];
-            seconds = parts[2];
-
-            hoursInt = hours.split('"');
-            hourNew = hoursInt[1];
-
-            secondsInt = seconds.split('"');
-            secondsNew = secondsInt[0];
-
-            console.log(secondsNew);
-
-            var timer = setInterval(function(){ 
-                secondsNew--;
-                if(secondsNew == -1)
-                {
-                    secondsNew = 59;
-                    minutes--;
-                    if(minutes == -1)
-                    {
-                        minutes = 59;
-                        hourNew--;
-                        if(hourNew == -1)
-                        {
-                            alert('time finish');
-                            clearInterval(timer);
-                            return "00:00:00";
-                        }
-                    }
-                }
-
-                //$("#countdown").html(add_zero(hourNew)+":"+add_zero(minutes)+":"+add_zero(secondsNew));
-                $("#countdown").html(hourNew+":"+minutes+":"+secondsNew);
-            },1000);
-    }
 
 </script>
