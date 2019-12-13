@@ -1,6 +1,6 @@
 <dv class="notification">
     <h4>Hi, John Deo</h4>
-
+    <span id="countdown"></span>
 </dv>
 <section class="footer">
 

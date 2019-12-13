@@ -104,6 +104,7 @@ public function provider_notification()
     				->join('voult_time_slot f', 'f.id=a.timeframe')
     				->join('reg_font g', 'g.id=a.user_id')
     				->join('platform_tbl h', 'h.id=a.platform')
+    				->where('b.status',1)
     				->where($where_condition)
     				->where('user_id !=',$_SESSION['session_data'])
     				->where('cur_time',date('Y-m-d'))
@@ -148,7 +149,50 @@ public function notify_request($value)
 		return false;
 	}
 }
+
 // provider and requester accept option
+
+public function accept_requester($request_id)
+{
+	$where_condition = [
+		'user_id' => $_SESSION['session_data']
+	];
+
+	$select_provider_time = $this->db->where($where_condition)->order_by('id','DESC')->limit(1)->get('provider_data_tbl');
+	$fetch_provider_time = $select_provider_time->row();
+	$fetch_timeframe_id = $fetch_provider_time->timeframe;
+
+	// actual provided time
+	$select_provider_sec_time = $this->db->where('id',$fetch_timeframe_id)->get('voult_time_slot');
+	$fetch_provider_sec_time = $select_provider_sec_time->row();
+	$provider_actual_time = $fetch_provider_sec_time->convert_seconds;
+
+	// requester details 
+	$select_requester_id = $this->db->where('id',$request_id)->get('requester_tbl');
+	$fetch_requester_id = $select_requester_id->row();
+	$req_user_id = $fetch_requester_id->user_id; 
+
+	// insert array
+	$insert_arr = [
+		'requester_id' => $req_user_id,
+		'provider_id' => $_SESSION['session_data'],
+		'request_time' => $provider_actual_time,
+		'chat_on' => date('Y-m-d'),
+	];
+
+	$insert_request = $this->db->insert('accept_request_tbl',$insert_arr);
+
+	// select request
+	if($this->db->affected_rows())
+	{
+		return $provider_actual_time;
+	}
+	else
+	{
+		return false;
+	}
+
+}
 
 	
 

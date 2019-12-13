@@ -47,6 +47,25 @@ class ProvidersViewController extends CI_Controller {
 		echo json_encode($errmsg);
 	}
 
+	// provider and requester accept option
+
+	public function accept_requester()
+	{
+		$request_id = $_POST['data'];
+		if($accept_data = $this->ptm->accept_requester($request_id))
+		{
+			$errmsg['request_time'] = $accept_data;
+		}
+		echo  json_encode($errmsg);
+	}
+
+	// time convert 
+
+	public function return_time_format()
+	{
+		$val1 = $_POST['val2']; $change_date = gmdate('H:i:s',$val1); echo json_encode($change_date); 
+	}
+
 }
 
 /* End of file ProvidersViewController.php */
