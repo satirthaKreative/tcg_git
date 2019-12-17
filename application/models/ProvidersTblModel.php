@@ -249,7 +249,7 @@ public function stop_timer_id($stopage_time)
 		//print_r($str_time);
 		sscanf($str_time, "%d:%d:%d", $hours, $minutes, $seconds);
 
-		echo $time_seconds = $hours * 3600 + $minutes * 60 + $seconds;
+		$time_seconds = $hours * 3600 + $minutes * 60 + $seconds;
 
 	// end convert
 
@@ -268,6 +268,7 @@ public function stop_timer_id($stopage_time)
 	if($checking_available_or_not->num_rows() > 0)
 	{
 		$fetch_row = $checking_available_or_not->row();
+		$actual_tm = $fetch_row->request_time;
 		$last_id = $fetch_row->id;
 		$p_id = $fetch_row->provider_id;
 		$r_id = $fetch_row->requester_id;
@@ -287,7 +288,7 @@ public function stop_timer_id($stopage_time)
 			$fetch_data_type = $selectUsers->result_array();
 			foreach($fetch_data_type as $fetch_data){
 				$arr_value = [
-					'total_time' => $fetch_data['total_time'] - $time_seconds,
+					'total_time' => $fetch_data['total_time'] - ($actual_tm - $time_seconds),
 				];
 				if($fetch_data['user_id'] == $_SESSION['session_data'])
 				{
