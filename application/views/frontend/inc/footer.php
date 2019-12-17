@@ -153,9 +153,9 @@
                 url: '<?= base_url("ProvidersViewController/check_request_stopwatch/") ?>',
                 type: 'post',
                 dataType: 'json',
-                success: function(event)
+                success: function(event1)
                 {
-                    if(event.no_error == true)
+                    if(event1.no_error == true)
                     {
                         $(".notification").hide();
                     }
@@ -207,17 +207,21 @@
     function stop_count_btn()
     {
         var data = $("#countdown").text();
+        alert(data);
         $.ajax({
-            url: '<?= base_url('ProvidersViewController/stop_timer_id/') ?>',
+            url: '<?= base_url('ProvidersViewController/stop_timer_id/') ?>'+data,
             type: 'post',
             dataType: 'json',
             success: function(event)
             {
-
+                console.log(event);
+                $(".notification").hide();
             }
         })
         
     }
+
+    // setInterval(function(){ ; }, 3000);
 </script>
 
 

@@ -90,10 +90,10 @@ class ProvidersViewController extends CI_Controller {
 	}
 
 	// checking details
-	public function stop_timer_id()
+	public function stop_timer_id($stopage_time)
 	{
 		$data_time['no_error'] = false;
-		if($data_time1 = $this->ptm->stop_timer_id())
+		if($data_time1 = $this->ptm->stop_timer_id($stopage_time))
 		{
 			$data_time['no_error'] = true;
 		}

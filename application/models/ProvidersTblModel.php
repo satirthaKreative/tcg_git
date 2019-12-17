@@ -220,8 +220,9 @@ function request_stopwatch()
 
 public function check_request_stopwatch()
 {
+	$where = '(provider_id="'.$_SESSION['session_data'].'" or requester_id = "'.$_SESSION['session_data'].'")';
 	$checking_available_or_not = $this->db->from('accept_request_tbl')
-										->where('requester_id',$_SESSION['session_data'])
+										->where($where)
 										->where('chat_on',date('Y-m-d'))
 										->where('status',0)
 										->order_by('id','Desc')
@@ -238,10 +239,25 @@ public function check_request_stopwatch()
 	}
 }
 
-public function stop_timer_id()
+public function stop_timer_id($stopage_time)
 {
+	$str_time = $stopage_time;
+
+	// convert
+
+		$str_time = preg_replace("/^([\d]{1,2})\:([\d]{2})$/", "00:$1:$2", $str_time);
+		//print_r($str_time);
+		sscanf($str_time, "%d:%d:%d", $hours, $minutes, $seconds);
+
+		echo $time_seconds = $hours * 3600 + $minutes * 60 + $seconds;
+
+	// end convert
+
+
 
 	$where = '(provider_id="'.$_SESSION['session_data'].'" or requester_id = "'.$_SESSION['session_data'].'")';
+
+
 	$checking_available_or_not = $this->db->from('accept_request_tbl')
 										->where($where)
 										->where('chat_on',date('Y-m-d'))
@@ -252,7 +268,50 @@ public function stop_timer_id()
 	if($checking_available_or_not->num_rows() > 0)
 	{
 		$fetch_row = $checking_available_or_not->row();
-		return $fetch_row->id;
+		$last_id = $fetch_row->id;
+		$p_id = $fetch_row->provider_id;
+		$r_id = $fetch_row->requester_id;
+		if($p_id == $_SESSION['session_data'])
+		{
+			$main_user = $r_id;
+		}
+		else if($r_id == $_SESSION['session_data'])
+		{
+			$main_user = $p_id;
+		}
+ 		//
+		$where1 = '(user_id="'.$fetch_row->provider_id.'" or user_id = "'.$fetch_row->requester_id.'")';
+		$selectUsers = $this->db->where($where1)->get('timezone_tbl');
+		$count_user = $selectUsers->num_rows();
+		
+			$fetch_data_type = $selectUsers->result_array();
+			foreach($fetch_data_type as $fetch_data){
+				$arr_value = [
+					'total_time' => $fetch_data['total_time'] - $time_seconds,
+				];
+				if($fetch_data['user_id'] == $_SESSION['session_data'])
+				{
+					$update_query_user = $this->db->where('user_id',$_SESSION['session_data'])->update('timezone_tbl',$arr_value);
+				}
+				else
+				{
+					$update_query_user = $this->db->where('user_id',$main_user)->update('timezone_tbl',$arr_value);
+				}
+			}
+			
+		//
+		$where_check = [
+			'status'=>0,
+		];
+		$update_checking_available = $this->db->where('id',$last_id)->update('accept_request_tbl',$where_check);
+		if($this->db->affected_rows())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	else
 	{
