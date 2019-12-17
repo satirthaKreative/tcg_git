@@ -3,6 +3,84 @@
     <span id="countdown"></span>
     <button type="button" id="stop_countdown_btn" onclick="stop_count_btn()" class="btn btn-danger btn-sm">stop</button>
 </dv>
+
+<!-- Chatbox Content -->
+
+<div id="frame" class="chatbox">
+    
+    <div class="content">
+        <div class="contact-profile">
+            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="">
+            <p>Harvey Specter</p>
+            
+        </div>
+        <div class="messages">
+            <ul>
+                <li class="sent">
+                    <img src="http://emilcarlsson.se/assets/mikeross.png" alt="">
+                    <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
+                </li>
+                <li class="replies">
+                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="">
+                    <p>When you're backed against the wall, break the god damn thing down.</p>
+                </li>
+                <li class="replies">
+                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="">
+                    <p>Excuses don't win championships.</p>
+                </li>
+                <li class="sent">
+                    <img src="http://emilcarlsson.se/assets/mikeross.png" alt="">
+                    <p>Oh yeah, did Michael Jordan tell you that?</p>
+                </li>
+                <li class="replies">
+                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="">
+                    <p>No, I told him that.</p>
+                </li>
+                <li class="replies">
+                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="">
+                    <p>What are your choices when someone puts a gun to your head?</p>
+                </li>
+                <li class="sent">
+                    <img src="http://emilcarlsson.se/assets/mikeross.png" alt="">
+                    <p>What are you talking about? You do what they say or they shoot you.</p>
+                </li>
+                <li class="replies">
+                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="">
+                    <p>Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
+                </li>
+                <li class="sent">
+                     <div id="formats"></div>
+                     <ol id="recordingsList"></ol>
+                </li>
+            </ul>
+        </div>
+        <div class="message-input">
+            <div class="wrap">
+                <input type="text" placeholder="Write your message...">
+                <div class="ctrl_sec">
+
+                        
+                    <div id="controls">
+                        <button id="recordButton"><i class="fa fa-microphone" aria-hidden="true"></i></button>
+                        <button id="pauseButton">Pause</button>
+                        <button id="stopButton"><i class="fa fa-stop" aria-hidden="true"></i></button>
+                    </div>
+                    <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                    <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of content -->
+
+<a href="javascript:void(0);" class="c_btn">
+    <i class="fa fa-comment-o" aria-hidden="true"></i>
+</a>
+
+<!-- Chatbox Content // -->
 <section class="footer">
 
     <div class="footer_sec">
@@ -18,6 +96,13 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+
+<!-- Chatbox js -->
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+<script src="<?= base_url('assets/front_assets/app.js'); ?>"></script>
+
+
+
 
 <script>
 
@@ -69,6 +154,7 @@
 <!-- Notification hide -->
 <script>
     $(".notification").hide();
+    $(".c_btn").hide();
     // setInterval(function(){  },1000);
 
 
@@ -137,6 +223,7 @@
     function  stop_watch()
     {
         $(".notification").hide();
+        $(".c_btn").hide();
     }
 
     // Accept status
@@ -158,6 +245,7 @@
                     if(event1.no_error == true)
                     {
                         $(".notification").hide();
+                        $(".c_btn").hide();
                     }
                     else
                     {
@@ -191,6 +279,7 @@
                             }
                         });
                         $(".notification").show();
+                        $(".c_btn").show();
 
                     }
                     else if(event.no_error == false)
@@ -216,12 +305,77 @@
             {
                 console.log(event);
                 $(".notification").hide();
+                $(".c_btn").hide();
             }
         })
         
     }
 
     // setInterval(function(){ ; }, 3000);
+</script>
+
+
+
+
+
+
+
+<!--Chatbox jquery -->
+
+<script type="text/javascript">
+    
+    function newMessage() {
+        message = $(".message-input input").val();
+        
+        if($.trim(message) == '') {
+            return false;
+        }
+        $('<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+        $('.message-input input').val(null);
+        $('.contact.active .preview').html('<span>You: </span>' + message);
+        $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+    };
+
+    $('.submit').click(function() {
+      newMessage();
+    });
+
+    $(window).on('keydown', function(e) {
+      if (e.which == 13) {
+        newMessage();
+        return false;
+      }
+    });
+    //# sourceURL=pen.js
+
+
+
+</script>
+
+<script type="text/javascript">
+    $(function(){
+       $(".c_btn").click(function(e) {
+                $("#frame").slideToggle("slow");
+                return false
+            });
+    });
+
+</script>
+
+
+
+<script>
+    function checkChatBox()
+    {
+        if($(".c_btn").is(":visible"))
+        {
+
+        }
+        else
+        {
+            
+        }
+    }
 </script>
 
 

@@ -290,6 +290,20 @@ public function stop_timer_id($stopage_time)
 				$arr_value = [
 					'total_time' => $fetch_data['total_time'] - ($actual_tm - $time_seconds),
 				];
+
+				$add_voult_time = 2*($actual_tm - $time_seconds);
+				$insertVoult = $this->db->get('voult');
+				$fetchVoult = $insertVoult->row();
+
+				$in_hours = $add_voult_time/3600;
+				$in_mins = $add_voult_time/60;
+
+				$update_data_in_voult = [
+					'voult_total_time' => $fetchVoult->voult_total_time + $in_hours,
+					'time_in_second' => $fetchVoult->time_in_second + $add_voult_time,
+					'time_in_minute' => $fetchVoult->time_in_minute + $in_mins,
+				];
+				$updateQueryVoult = $this->db->update('voult',$update_data_in_voult);
 				if($fetch_data['user_id'] == $_SESSION['session_data'])
 				{
 					$update_query_user = $this->db->where('user_id',$_SESSION['session_data'])->update('timezone_tbl',$arr_value);

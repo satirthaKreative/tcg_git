@@ -2146,7 +2146,222 @@ img.quote_img {
 
 
 
+/*------------- ChatBox -------------*/
 
+a.c_btn {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 9;
+    background: #fff;
+    padding: 10px;
+    font-size: 26px;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0 0 14px rgba(0, 0, 0, .2);
+    -webkit-box-shadow: 0 0 14px rgba(0, 0, 0, .2);
+    background: #b31605;
+    color: #fff;
+}
+
+
+
+#frame {
+    position: fixed;
+    bottom: 20px;
+    right: 80px;
+    width: 350px;
+    background-color: #ecf1f1;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px 10px 10px 10px;
+    display: none;
+}
+
+#frame .contact-profile {
+    background-color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.05);
+}
+#frame .contact-profile img {
+    max-width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    height: 50px;
+    object-fit: cover;
+    display: inline-block;
+    border: 3px solid #727a9c;
+}
+#frame .contact-profile p {
+  display: inline-block;
+  color: #000000;
+  font-size: 17px;
+}
+
+
+#frame .content .messages {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 350px;
+    min-height: auto;
+    margin-bottom: 65px;
+}
+.messages::-webkit-scrollbar {
+  width: 5px;
+}
+.messages::-webkit-scrollbar {
+  background-color: #fff;
+}
+.messages::-webkit-scrollbar-thumb {
+    background-color: rgba(179, 22, 5, 0.16);
+    outline: #7383bf solid 1px;
+}
+.messages::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    box-shadow: inset 0 0 6px rgb(238, 240, 249);
+}
+.messages::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+
+#frame .content .messages ul li {
+    display: inline-block;
+    clear: both;
+    float: left;
+    margin: 15px 15px 5px 15px;
+    width: calc(100% - 25px);
+    font-size: 0.9em;
+}
+#frame .content .messages ul li {
+    display: inline-block;
+    clear: both;
+    float: left;
+    margin: 15px 15px 5px 15px;
+    width: calc(100% - 25px);
+    font-size: 0.9em;
+}
+
+#frame .content .messages ul li img {
+    width: 22px;
+    border-radius: 50%;
+    float: left;
+}
+#frame .content .messages ul li.replies img {
+    float: right;
+    margin: 6px 0 0 8px;
+}
+#frame .content .messages ul li.sent img {
+    margin: 6px 8px 0 0;
+}
+#frame .content .messages ul li p {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 205px;
+    line-height: 130%;
+}
+#frame .content .messages ul li.replies p {
+  background: #ffffff;
+  float: right;
+}
+#frame .content .messages ul li.sent p {
+    background: #7383bf;
+    color: #ffffff;
+}
+
+
+
+#frame .content .message-input {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 99;
+    background-color: #ffffff;
+    padding: 10px;
+    border-top: 1px solid #dbe4e4;
+    border-radius: 0 0 10px 10px;
+}
+#frame .content .message-input::after {
+    content: "\f0dd";
+    font-family: FontAwesome;
+    position: absolute;
+    right: -6px;
+    bottom: -2px;
+    transform: rotate(-90deg);
+    color: #ffffff;
+    font-size: 28px;
+}
+
+#frame .content .message-input .wrap {
+    position: relative;
+}
+#frame .content .message-input .wrap input[type="text"] {
+    width: 100%;
+    border: transparent;
+    height: 45px;
+    padding: 10px 12px;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    padding-right: 94px;
+}
+#frame .content .message-input .wrap .ctrl_sec {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+#frame .content .message-input .wrap .ctrl_sec #controls {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#frame .content .message-input .wrap .ctrl_sec button.submit {
+    border: transparent;
+    background-color: transparent;
+    color: #b31605;
+    padding: 9px;
+    width: 50px;
+    border-radius: 50px;
+    float: right;
+    font-size: 17px;
+}
+#frame .content .message-input .wrap .ctrl_sec button.submit .fa.fa-paper-plane {
+    margin-top: 5px;
+}
+#frame .content .message-input .wrap .ctrl_sec .attachment {
+    display: none;
+}
+
+#frame .content .message-input .wrap #controls button#recordButton {
+  padding: 8px 8px;
+  border: transparent;
+  background: transparent;
+  font-size: 19px;
+  color: #9ea0a9;
+  display: inline-block;
+  vertical-align: middle;
+}
+#frame .content .message-input .wrap #controls button#stopButton {
+    padding: 8px 0px;
+    border: transparent;
+    background: transparent;
+    font-size: 15px;
+    vertical-align: middle;
+    display: inline-block;
+    color: #9ea0a9;
+}
+
+#frame .content .message-input .wrap #controls button#pauseButton {
+    display: none;
+}
+#frame .content .message-input .wrap .ctrl_sec button:focus {
+    outline: none;
+}
+
+/*---------------- End Of Chat -----------------*/
 
 
 
@@ -2237,7 +2452,7 @@ section.footer {
 /*---------- Fixed Notification -----------*/
 .notification {
   position: fixed;
-  right: 20px;
+  left: 20px;
   bottom: 20px;
   max-width: 260px;
   width: 100%;
