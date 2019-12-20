@@ -28,6 +28,7 @@ class Login_font extends CI_Controller {
 		$user_pass = $this->input->post('user_pass');
 		$err_msg['user_email'] = $user_email;
 		$err_msg['user_pass'] = $user_pass;
+		
 		// checking the validation
 		if($user_email == '')
 		{

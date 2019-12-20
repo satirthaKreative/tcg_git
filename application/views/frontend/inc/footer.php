@@ -1,5 +1,5 @@
 <dv class="notification">
-    <h4>Hi, John Deo</h4>
+    <!-- <h4>Hi, John Deo</h4> -->
     <span id="countdown"></span>
     <button type="button" id="stop_countdown_btn" onclick="stop_count_btn()" class="btn btn-danger btn-sm">stop</button>
 </dv>
@@ -15,8 +15,8 @@
             
         </div>
         <div class="messages">
-            <ul>
-                <li class="sent">
+            <ul class="msg-sent">
+                <!-- <li class="sent">
                     <img src="http://emilcarlsson.se/assets/mikeross.png" alt="">
                     <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
                 </li>
@@ -47,7 +47,7 @@
                 <li class="replies">
                     <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="">
                     <p>Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
-                </li>
+                </li> -->
                 <li class="sent">
                      <div id="formats"></div>
                      <ol id="recordingsList"></ol>
@@ -56,7 +56,7 @@
         </div>
         <div class="message-input">
             <div class="wrap">
-                <input type="text" placeholder="Write your message...">
+                <input type="text" placeholder="Write your message..." id="chating_box_id">
                 <div class="ctrl_sec">
 
                         
@@ -65,7 +65,7 @@
                         <button id="pauseButton">Pause</button>
                         <button id="stopButton"><i class="fa fa-stop" aria-hidden="true"></i></button>
                     </div>
-                    <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                    <button class="submit" onclick="submit_msg_chat()"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                     <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
 
                 </div>
@@ -169,7 +169,7 @@
             dataType:  'json',
             success: function(event)
             {
-                console.log(event);
+                //console.log(event);
                 var val2 = event.request_time; 
                 
                 // convert to provider ajax
@@ -180,6 +180,8 @@
 
     function time_check(val2){
             $(".notification").show();
+            $(".c_btn").show();
+            $("#frame").show();
             var time = val2;
             parts = time.split(':');
             hours = parts[0];
@@ -192,7 +194,7 @@
             secondsInt = seconds.split('"');
             secondsNew = secondsInt[0];
 
-            console.log(secondsNew);
+            //console.log(secondsNew);
 
             var timer = setInterval(function(){ 
                 secondsNew--;
@@ -224,11 +226,12 @@
     {
         $(".notification").hide();
         $(".c_btn").hide();
+        $("#frame").hide();
     }
 
     // Accept status
     $(function(){
-        setInterval(function(){ request_stopwatch(); },1000);
+        setInterval(function(){ request_stopwatch();checkChatBox(); },4000);
     })
 
     // $(function(){ request_stopwatch(); })
@@ -246,6 +249,7 @@
                     {
                         $(".notification").hide();
                         $(".c_btn").hide();
+                        $("#frame").hide();
                     }
                     else
                     {
@@ -262,12 +266,12 @@
                 dataType: 'json',
                 success: function(event)
                 {
-                    console.log(event);
+                    //console.log(event);
                     if(event.no_error == true)
                     {
                     
                         var val6 = event.query_time; 
-                        console.log(val6);
+                        //console.log(val6);
                         $.ajax({
                             url: '<?= base_url("ProvidersViewController/return_time_format/") ?>',
                             type: 'post',
@@ -280,6 +284,8 @@
                         });
                         $(".notification").show();
                         $(".c_btn").show();
+                        $("#frame").show();
+
 
                     }
                     else if(event.no_error == false)
@@ -303,9 +309,10 @@
             dataType: 'json',
             success: function(event)
             {
-                console.log(event);
+                //console.log(event);
                 $(".notification").hide();
                 $(".c_btn").hide();
+                $("#frame").hide();
             }
         })
         
@@ -369,14 +376,82 @@
     {
         if($(".c_btn").is(":visible"))
         {
-
+            $.ajax({
+                url: '<?= base_url("ChatController/chatcheck/") ?>',
+                type: 'post',
+                dataType: 'json',
+                success:  function(event)
+                {
+                    var sess_id = '<?= $_SESSION["session_data"] ?>';
+                    console.log(event);
+                    console.log(sess_id);
+                   if(event.length == 0)
+                   {
+                    $('.msg-sent').html("<li class='sent'><img src='http://emilcarlsson.se/assets/mikeross.png' alt=''><p>Start Conversation</p></li>");
+                   }
+                   else
+                   {
+                    var html = '';
+                    for(i = 0; i < event.length; i++)
+                    {
+                        var select_one = "";
+                        if(sess_id == event[i].s_id)
+                        {
+                            select_one = "sent";
+                        }
+                        else
+                        {
+                            select_one = "replies";
+                        }
+                        html += '<li class="'+select_one+'"><img src="http://emilcarlsson.se/assets/mikeross.png" alt=""><p>'+event[i].msg+'</p></li>';
+                    }
+                    html +='<li class="sent"><div id="formats"></div><ol id="recordingsList"></ol></li>';
+                    $('.msg-sent').html(html);
+                   }
+                }
+            })
         }
         else
         {
-            
+
         }
     }
 </script>
+
+
+<!-- insert chating box id -->
+<script>
+    function submit_msg_chat(){
+        var chat_data = $("#chating_box_id").val();
+        console.log(chat_data);
+        $.ajax({
+            url: '<?= base_url("ChatController/insert_chat_data/") ?>'+chat_data,
+            type: 'post',
+            dataType: 'json',
+            success: function(event)
+            {
+                
+            }
+        })
+    }
+    // if(tt != ''){
+    //     function audio_insert(tt)
+    //     {
+    //         alert(tt);
+    //         $.ajax({
+    //             url: '<?= base_url("ChatController/audio_insert/"); ?>'+tt,
+    //             type: 'post',
+    //             dataType: 'json',
+    //             success: function(event)
+    //             {
+    //                 console.log(event);
+    //             }
+    //         })
+    //     }
+    // }
+</script>
+
+
 
 
 </html>

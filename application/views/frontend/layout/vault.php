@@ -19,7 +19,7 @@
                                 <div class="progress-bar" style="width:<?= $_SESSION['voult_percentage_show'] ?>%"></div>
                             </div>
 
-                            <ul >
+                            <ul class="percentage">
                                 <li>
                                     <span>
                                         0%

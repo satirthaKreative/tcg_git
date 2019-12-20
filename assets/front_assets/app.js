@@ -1,4 +1,5 @@
 //webkitURL is deprecated but nevertheless
+var tt ="";
 URL = window.URL || window.webkitURL;
 
 var gumStream; 						//stream from getUserMedia()
@@ -51,25 +52,25 @@ function startRecording() {
 
 		*/
 		audioContext = new AudioContext();
-
+		console.log("Recording..");
 		//update the format 
-		document.getElementById("formats").innerHTML="Format: 1 channel pcm @ "+audioContext.sampleRate/1000+"kHz"
+		document.getElementById("formats").innerHTML="Format: 1 channel pcm @ "+audioContext.sampleRate/1000+"kHz";
 
 		/*  assign to gumStream for later use  */
 		gumStream = stream;
 		
 		/* use the stream */
 		input = audioContext.createMediaStreamSource(stream);
-
+		console.log("Recording1..");
 		/* 
 			Create the Recorder object and configure to record mono sound (1 channel)
 			Recording 2 channels  will double the file size
 		*/
 		rec = new Recorder(input,{numChannels:1})
-
+		console.log("Recording2..");
 		//start the recording process
 		rec.record()
-
+		console.log("Recording3..");
 		console.log("Recording started");
 
 	}).catch(function(err) {
@@ -164,4 +165,8 @@ function createDownloadLink(blob) {
 
 	//add the li element to the ol
 	recordingsList.appendChild(li);
+	tt = recordingsList.appendChild(li);
+	//  coding details
+	console.log(tt);
+	
 }
