@@ -53,13 +53,15 @@ $route['default_controller'] = 'Login_font';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 /* My custom Font page control */
+
 $route['Registration'] = 'Registration/index';
-$route['Home'] = 'MyDesk/index';
-$route['MyDesk'] = 'UserDesk/index';
-$route['MyDesk/Provider'] = 'ProviderDesk/index';
+$route['MyDesk'] = 'MyDesk/index';
+$route['Home'] = 'UserDesk/index';
+$route['Home/Provider'] = 'ProviderDesk/index';
 $route['Vault'] = 'VaultController/index';
 $route['My-Account'] = 'My_Account/index';
 $route['Provider-List'] = 'ProvidersViewController/index';
 $route['Payment'] = 'PayUMoney_Controller/index';
 $route['Payment/response'] = 'PayUMoney_Controller/response';
-$route['MyDesk/Provider-Notification'] = 'UserDesk/provider_notification';
+$route['Home/Provider-Notification'] = 'UserDesk/provider_notification';
+$route['Deck-Editor'] = 'Deck_Controller/index';

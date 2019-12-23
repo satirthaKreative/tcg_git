@@ -1,5 +1,6 @@
-<dv class="notification">
-    <!-- <h4>Hi, John Deo</h4> -->
+<?php if(isset($_SESSION['session_data'])){ echo "<script> var y_state = ''; </script>"; }else{ echo "<script> var y_state = 1; </script>"; } ?>
+<dv class="notification" style="display:none">
+    <!--<h4>Hi, John Deo</h4>-->
     <span id="countdown"></span>
     <button type="button" id="stop_countdown_btn" onclick="stop_count_btn()" class="btn btn-danger btn-sm">stop</button>
 </dv>
@@ -76,7 +77,7 @@
 </div>
 <!-- end of content -->
 
-<a href="javascript:void(0);" class="c_btn">
+<a href="javascript:void(0);" class="c_btn" style="display:none;">
     <i class="fa fa-comment-o" aria-hidden="true"></i>
 </a>
 
@@ -106,6 +107,7 @@
 
 <script>
 
+if(y_state != 1){
     jQuery(document).ready(function() {	
         jQuery('#navigation nav').slimNav_sk78();
         // add-class-on-scroll
@@ -126,22 +128,6 @@
         $(".tg_header").removeClass("wh_bg");
     }
 
-</script> 
-
-<!-- <script>
-    $.ajax({
-        url: "<?= base_url('') ?>",
-        type: "post",
-        dataType: "json",
-        success:  function(event)
-        {
-            
-        }
-    })
-</script> -->
-
-
-<script type="text/javascript">
     $('#datepicker').datepicker({
         weekStart: 1,
         daysOfWeekHighlighted: "6,0",
@@ -149,12 +135,8 @@
         todayHighlight: true,
     });
     $('#datepicker').datepicker("setDate", new Date());
-</script>
 
-<!-- Notification hide -->
-<script>
-    $(".notification").hide();
-    $(".c_btn").hide();
+   
     // setInterval(function(){  },1000);
 
 
@@ -169,7 +151,7 @@
             dataType:  'json',
             success: function(event)
             {
-                //console.log(event);
+                console.log(event);
                 var val2 = event.request_time; 
                 
                 // convert to provider ajax
@@ -181,7 +163,6 @@
     function time_check(val2){
             $(".notification").show();
             $(".c_btn").show();
-            $("#frame").show();
             var time = val2;
             parts = time.split(':');
             hours = parts[0];
@@ -194,7 +175,7 @@
             secondsInt = seconds.split('"');
             secondsNew = secondsInt[0];
 
-            //console.log(secondsNew);
+            console.log(secondsNew);
 
             var timer = setInterval(function(){ 
                 secondsNew--;
@@ -226,12 +207,11 @@
     {
         $(".notification").hide();
         $(".c_btn").hide();
-        $("#frame").hide();
     }
 
     // Accept status
     $(function(){
-        setInterval(function(){ request_stopwatch();checkChatBox(); },4000);
+        setInterval(function(){ request_stopwatch();checkChatBox(); },1000);
     })
 
     // $(function(){ request_stopwatch(); })
@@ -249,7 +229,6 @@
                     {
                         $(".notification").hide();
                         $(".c_btn").hide();
-                        $("#frame").hide();
                     }
                     else
                     {
@@ -266,12 +245,12 @@
                 dataType: 'json',
                 success: function(event)
                 {
-                    //console.log(event);
+                    console.log(event);
                     if(event.no_error == true)
                     {
                     
                         var val6 = event.query_time; 
-                        //console.log(val6);
+                        console.log(val6);
                         $.ajax({
                             url: '<?= base_url("ProvidersViewController/return_time_format/") ?>',
                             type: 'post',
@@ -284,7 +263,6 @@
                         });
                         $(".notification").show();
                         $(".c_btn").show();
-                        $("#frame").show();
 
 
                     }
@@ -309,28 +287,15 @@
             dataType: 'json',
             success: function(event)
             {
-                //console.log(event);
+                console.log(event);
                 $(".notification").hide();
                 $(".c_btn").hide();
-                $("#frame").hide();
             }
         })
         
     }
 
-    // setInterval(function(){ ; }, 3000);
-</script>
 
-
-
-
-
-
-
-<!--Chatbox jquery -->
-
-<script type="text/javascript">
-    
     function newMessage() {
         message = $(".message-input input").val();
         
@@ -357,9 +322,6 @@
 
 
 
-</script>
-
-<script type="text/javascript">
     $(function(){
        $(".c_btn").click(function(e) {
                 $("#frame").slideToggle("slow");
@@ -367,11 +329,6 @@
             });
     });
 
-</script>
-
-
-
-<script>
     function checkChatBox()
     {
         if($(".c_btn").is(":visible"))
@@ -416,11 +373,8 @@
 
         }
     }
-</script>
 
 
-<!-- insert chating box id -->
-<script>
     function submit_msg_chat(){
         var chat_data = $("#chating_box_id").val();
         console.log(chat_data);
@@ -434,24 +388,12 @@
             }
         })
     }
-    // if(tt != ''){
-    //     function audio_insert(tt)
-    //     {
-    //         alert(tt);
-    //         $.ajax({
-    //             url: '<?= base_url("ChatController/audio_insert/"); ?>'+tt,
-    //             type: 'post',
-    //             dataType: 'json',
-    //             success: function(event)
-    //             {
-    //                 console.log(event);
-    //             }
-    //         })
-    //     }
-    // }
+    
+}else{
+    $(".notification").hide();
+    $(".c_btn").hide();
+}
 </script>
-
-
 
 
 </html>

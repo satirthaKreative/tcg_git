@@ -57,7 +57,7 @@
 
                         <ul class="nav-tab">
                             <li>
-                                <a href="<?= base_url('MyDesk/'); ?>"  class="<?php if($page == 'MyDesk'){ ?>active<?php } ?>">Request</a>
+                                <a href="<?= base_url('Home/'); ?>"  class="<?php if($page == 'Home'){ ?>active<?php } ?>">Request</a>
                             </li>
                             <li class="">
                                 <a href="<?= base_url('Provider-List/'); ?>"  class="<?php if($page == 'Provider-Notification'){ ?>active<?php } ?>">Provider</a>

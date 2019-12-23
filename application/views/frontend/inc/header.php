@@ -33,7 +33,6 @@
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
 
 		
-		<!-- <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'> -->
 		<!-- Fonts -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		
@@ -41,6 +40,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,900|Orbitron:400,700&display=swap" rel="stylesheet">
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		
 	</head>
 <body>
 
@@ -48,7 +48,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-6 col-lg-3 col-md-3 logo-sec">
-				<a href="javascript:void(0);" class="logo">
+				<a href="<?= base_url(''); ?>" class="logo">
 					<img class="logo_xl" src="<?= base_url('assets/front_assets/images/logo_tx.png'); ?>">
 					<img class="d-none" src="<?= base_url('assets/front_assets/images/logo.png'); ?>">
 				</a>
@@ -61,7 +61,8 @@
 						<?php if (isset($_SESSION['session_data'])) { ?>
 							<li <?php if($page1 == 'Home'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('Home/'); ?>">Home</a></li>
 							<li <?php if($page1 == 'Vault'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('Vault/'); ?>">Vault</a></li>
-							<li <?php if($page1 == 'MyDesk' || $page1 == 'Provider-List' ){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('MyDesk/'); ?>">My Desk</a></li>
+							<li <?php if($page1 == 'MyDesk' || $page1 == 'Provider-List'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('MyDesk/'); ?>">My Desk</a></li>
+							<li <?php if($page1 == 'Deck-Editor'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('Deck-Editor/'); ?>">Deck Editor</a></li>
 						<?php } ?>
 							<li <?php if($page1 == 'Contact'){ ?> class="current-menu-item" <?php } ?>><a href="<?= base_url('Contact/'); ?>">Contact Us</a></li>
 						<?php if (!isset($_SESSION['session_data'])) { ?>

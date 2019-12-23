@@ -16,31 +16,36 @@
 <section class="register-sec">
     <div class="container">
         <div class="row">
-            <div class="col-lg-5 ">
-                <h3>Create an account</h3>
-                <?= form_open('Registration/add_reg',['id'=>'reg_form']); ?>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="user_name" placeholder="User name">
+            <div class="registration-content">
+                <div class="col-lg-5 left-sec">
+                    <div class="price-sec">
+                        <h4>$9.99/Month</h4>
                     </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" name="user_email" placeholder="Email address">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" name="user_pass" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" name="user_c_pass" placeholder="Confirm password">
-                    </div>
-                    <button type="button" class="btn btn-primary" id="sign_up" name="sign_up" onclick="reg_function();">Sign Up</button>
-                <?= form_close(); ?>
-                <center class="sucmsg mt5" style="display: none;" ></center>
-            </div>
-        
-            <div class="col-lg-7">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/FD-g0Vc64mQ" allowfullscreen></iframe>
+                    <h3>Create an account</h3>
+                    <?= form_open('Registration/add_reg',['id'=>'reg_form']); ?>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="user_name" placeholder="User name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" name="user_email" placeholder="Email address">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="user_pass" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="user_c_pass" placeholder="Confirm password">
+                        </div>
+                        <button type="button" class="btn btn-primary" id="sign_up" name="sign_up" onclick="reg_function();">Sign Up</button>
+                    <?= form_close(); ?>
+                    <center class="sucmsg mt5" style="display: none;" ></center>
                 </div>
             
+                <div class="col-lg-7 left-sec">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/FD-g0Vc64mQ" allowfullscreen></iframe>
+                    </div>
+                
+                </div>
             </div>
 
             

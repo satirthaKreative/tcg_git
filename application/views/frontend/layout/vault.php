@@ -85,7 +85,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Choose Your Payemnt Method</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Choose Your Payment Method</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -120,7 +120,7 @@
                     
                 </select>
                 <span class="prevent_btn"></span>
-                <p>With your credit card ending in **** **** **** 1245</p>
+                <!--<p>With your credit card ending in **** **** **** 1245</p>-->
 
                 <a id="prevent_btn" href="javascript:void(0);" onclick="Payment();">Purchase</a>
 
@@ -145,6 +145,7 @@
             {
                 console.log(event);
                 var html = '';
+                    html += "<option value=''>Select Timeframe</option>";
                 for(var i = 0; i<event.length; i++)
                 {
                     html += "<option value = "+event[i].id+">"+event[i].time_slot+" "+event[i].time_type+" (Price : "+event[i].time_slot_price+" USD)</option>";

@@ -6,7 +6,7 @@ class Voult_time_controller extends CI_Controller {
 	{
 		parent::__construct();
 		//Do your magic here
-		$this->load->model('voult_solt_time','vsm');
+		$this->load->model('Voult_solt_time','vsm');
 		
 	}
 

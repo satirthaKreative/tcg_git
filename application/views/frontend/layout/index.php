@@ -46,7 +46,7 @@
                 if(event.no_error == true){
                     $(".sucmsg").html("<b style='color:green'><i class='fa fa-check'></i> "+event.estimate_err+"</b>").fadeIn().delay(3000).fadeOut('slow');
                     $('#reg_form').find('input').val('');
-                    setTimeout( function(){ window.location.href='<?= base_url('MyDesk/'); ?>' } , 3000);
+                    setTimeout( function(){ window.location.href='<?= base_url('Home/'); ?>' } , 3000);
                 }else if(event.no_error == false){
                     $(".sucmsg").html("<b style='color:red'><i class='fa fa-times'></i> "+event.estimate_err+"</b>").fadeIn().delay(3000).fadeOut('slow');
                 }

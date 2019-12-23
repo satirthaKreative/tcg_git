@@ -40,19 +40,22 @@ class Contact extends CI_Controller {
         }
         else
         {
-        	$from = $user_email;
-        	$to = 'sinfo.support@tcg.com';
+        	$from = 'info@ecollegestreet.in';
+        	//  $user_email
+        	$to = 'satirtha63@gmail.com'; 
+            // 	sinfo.support@tcg.com
         	$subject = 'Enquiry Form';
-        	$message = $user_msg;
+        	$message = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>TCG Mail Enquiry</title></head><body><b>Name: '.$user_name.'</b><br/><i>Email: '.$to.'</i><br/><i>Query: '.$user_msg.'</i></body></html>';
 
         	$this->email->from($from);
         	$this->email->to($to);
         	$this->email->subject($subject);
         	$this->email->message($message);
+        	$this->email->set_mailtype('html');
 
         	if ($this->email->send()) {
         		$err_msg['no_error'] = true;
-        	    $err_msg['main_error'] = 'Your Email has successfully been sent.';
+        	    $err_msg['main_error'] = 'Your email has successfully been sent.';
         	} else {
         	    $err_msg['main_error'] = 'Server Not Responding ! Try Again';
         	}

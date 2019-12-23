@@ -76,22 +76,6 @@
         
       </div>
     </div>
-    <!-- Delete Model -->
-    <div class="modal fade dlt_message" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          
-          <div class="modal-body">
-           <div class="successfull-msg">
-               <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"></circle><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"></path></svg>
-               
-               <h4>Message deleted successfully</h4>
-               </div>
-          </div>
-          
-        </div>
-      </div>
-    </div>
   <script>
     $(function(){
       var data='';
@@ -106,7 +90,7 @@
           var j_id = 1;
           for(var i = 0; i < event.length; i++){
             
-            html += "<tr><td>"+j_id+"</td><td>"+event[i].format_name+"<a href='javascript:;' onclick='my_remove("+event[i].id+")' style='float: right;'><i class='fa fa-trash' style='color:red'></i></a></td><td><a href='javascript:;' onclick='my_add("+event[i].id+")' class='btn btn-info'>Edit Format</a></td></tr>";
+            html += "<tr><td>"+j_id+"</td><td>"+event[i].format_name+"</td><td><a href='javascript:;' onclick='my_add("+event[i].id+")' class='btn btn-info'>Edit Format</a></td></tr>";
             j_id++;
           }
           $("#view_user_table").html(html);
@@ -177,65 +161,5 @@
           $("#view_user_table").html(html);
         }
       })
-    }
-
-    function my_remove(data)
-
-    {
-
-      if(confirm('Are you want to delete this item ?'))
-
-      {
-
-        var data_val = data;
-
-        $.ajax({
-
-          url: '<?= base_url('Admin_desk_controller/delete_format/') ?>',
-
-          type: 'post',
-
-          data: {data_val: data_val},
-
-          dataType:  'json',
-
-          success:  function(event)
-
-          {
-
-            if(event.no_error == true)
-
-            {
-
-              $("#delete_modal").modal('show');
-
-              // $(".succ_msg").html("<b class='text-success'>"+event.main_error+"</b>").fadeIn().delay(3000).fadeOut('slow');
-
-              setTimeout(function(){ $("#delete_modal").modal('hide');window.location.href='<?= base_url("Admin_desk_controller/view_format"); ?>' },3000);
-
-            }
-
-            else
-
-            {
-
-              $(".succ_msg").html("<b class='text-danger'>Action Not Successfully Done</b>").fadeIn().delay(3000).fadeOut('slow');
-
-            }
-
-          }
-
-        })
-
-      }
-
-      else
-
-      {
-
-
-
-      }
-
     }
   </script>

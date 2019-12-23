@@ -24,9 +24,9 @@
                         <li>
                             <a href="javascrript:void(0);" class="tablinks" onclick="openCity(event, 'account-info')">Account Information</a>
                         </li>
-                        <!-- <li>
+                        <li>
                             <a href="javascrript:void(0);" class="tablinks" onclick="openCity(event, 'billing-info')">Billing Information</a>
-                        </li> -->
+                        </li>
                         <li>
                             <a href="<?= base_url('Logout_font') ?>" >Sign Out</a>
                         </li>
@@ -212,22 +212,32 @@
                                     <div class="progress-bar" style="width:<?= $_SESSION['voult_percentage_show'] ?>%"></div>
                                 </div>
 
-                                <ul>
-                                    <li>
-                                        <span>
-                                            0 Hr
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span>
-                                            1 Hr
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span>
-                                            2 Hr
-                                        </span>
-                                    </li>
+                                <ul class="percentage">
+                                <li>
+                                    <span>
+                                        0%
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        25%
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        50%
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        75%
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        100%
+                                    </span>
+                                </li>
                                 </ul>
 
                             </div>
@@ -347,6 +357,60 @@
 </section>
 
 
+<!-- Modal -->
+<div class="modal fade" id="volte-purchase" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Choose Your Payment Method</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+            <div class="payment-method">
+                <label for="card" class="method">
+                    <span class="card-logos mt15">
+                        <img src="<?= base_url('assets/front_assets/'); ?>images/visa_logo.png"/>
+                        <img src="<?= base_url('assets/front_assets/'); ?>images/mastercard_logo.png"/>
+                    </span>
+
+                    <span class="radio-input">
+                        <input id="card" type="radio" name="payment" value="card" checked="checked"> Credit card
+                    </span>
+                </label>
+
+                <label for="paypal" class="method paypal">
+                    <span class="card-logos mt15">
+                        <img src="<?= base_url('assets/front_assets/'); ?>images/paypal_logo.png"/>
+                    </span>
+                    <div class="radio-input">
+                        <input id="paypal" type="radio" name="payment" value="paypal"> paypal
+                    </div>
+                </label>
+            </div>
+
+            <div class="payment">
+                <label >You will purchase</label>
+                <select class="purchase-time" onchange="check_time_value()">
+                    
+                </select>
+                <span class="prevent_btn"></span>
+                <!--<p>With your credit card ending in **** **** **** 1245</p>-->
+
+                <a id="prevent_btn" href="javascript:void(0);" onclick="Payment();">Purchase</a>
+
+            </div>
+
+        </form>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
                        
@@ -458,6 +522,7 @@
             {
                 console.log(event);
                 var html = '';
+                    html += "<option value=''>Select Timeframe</option>";
                 for(var i = 0; i<event.length; i++)
                 {
                     html += "<option value = "+event[i].id+">"+event[i].time_slot+" "+event[i].time_type+" (Price : "+event[i].time_slot_price+" USD)</option>";
