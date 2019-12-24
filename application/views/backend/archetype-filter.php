@@ -40,7 +40,13 @@
             <?= form_open('Dashboard/update_admin_details', ['id'=>'voult_time_slot']); ?>
             <div class="form-group" id="voult_price_solt_view">
               <div class="row">
-                <div class="col-sm-10">
+                <div class="col-sm-5">
+                  <label for="choose_filter_data">Choose Format </label>
+                  <select  class="form-control choose_format_data" name="format_name1[]" value="" placeholder="Archetype Format Name" required="required">
+                    
+                  </select>
+                </div>
+                <div class="col-sm-5">
                   <label for="tot_voult_time0">Filter Name </label>
                   <input type="text" id="tot_voult_time0" class="form-control" name="filter_name[]" value="" placeholder="Archetype Filter Name">
                 </div>
@@ -110,6 +116,7 @@
 
 <script>
   $(function(){
+    // filter
     var data = '';
     $.ajax({
       url: '<?= base_url('Archetype_filter/view_archetype_filter'); ?>',
@@ -128,13 +135,35 @@
           $(".choose_filter_data").html(html);
       }
     })
+    // format
+    var data_format = '';
+    $.ajax({
+      url: '<?= base_url('Archetype_filter/view_archetype_format'); ?>',
+      type: 'post',
+      data: data_format,
+      dataType: 'json',
+      success:  function(event)
+      {
+        console.log(event);
+          var html = '';
+              html += '<option value="">Choose Format</option>';
+          for(var i = 0 ; i < event.length ; i++)
+          {
+              html += '<option value="'+event[i].id+'">'+event[i].format_name+'</option>'; 
+          }
+          $(".choose_format_data").html(html);
+      }
+    })
   })
+
+
 
   function add_more(data)
   {
     var data = data+1;
 
-    $("#voult_price_solt_view").append('<div class="row" id="ad_quick'+data+'"><div class="col-sm-10"><label for="tot_voult_time0">Filter Name </label><input type="text" id="tot_voult_time0" class="form-control" name="filter_name[]" value="" placeholder="Archetype Filter Name"></div><div class="col-sm-1"><a href="javascript:;" name="add_more" class="btn btn-success add_more_btn" onclick="add_more(1)"><i class="fa fa-plus"></i></a></div><div class="col-sm-1"><a href="javascript:;" name="add_more" class="btn btn-danger add_more_btn" onclick="remove_more('+data+')"><i class="fa fa-times"></i></a></div></div>');
+    $("#voult_price_solt_view").append('<div class="row" id="ad_quick'+data+'"><div class="col-sm-5"><label for="choose_filter_data">Choose Filter </label><select  class="form-control choose_format_data" name="format_name1[]" value="" placeholder="Archetype Filter Name" required="required"></select></div><div class="col-sm-5"><label for="tot_voult_time0">Filter Name </label><input type="text" id="tot_voult_time0" class="form-control" name="filter_name[]" value="" placeholder="Archetype Filter Name"></div><div class="col-sm-1"><a href="javascript:;" name="add_more" class="btn btn-success add_more_btn" onclick="add_more(1)"><i class="fa fa-plus"></i></a></div><div class="col-sm-1"><a href="javascript:;" name="add_more" class="btn btn-danger add_more_btn" onclick="remove_more('+data+')"><i class="fa fa-times"></i></a></div></div>');
+    show_double1();
     
   }
 
@@ -221,6 +250,26 @@
         {
           $(".succ_msg2").html("<b style='color:red;'> <i class ='fa fa-times'></i>"+event.main_error+"</b>").fadeIn().delay(3000).fadeOut('slow');
         }
+      }
+    })
+  }
+
+  function show_double1()
+  {
+    $.ajax({
+      url: '<?= base_url('Archetype_filter/view_archetype_format'); ?>',
+      type: 'post',
+      dataType: 'json',
+      success:  function(event)
+      {
+        console.log(event);
+          var html = '';
+              html += '<option value="">Choose Format</option>';
+          for(var i = 0 ; i < event.length ; i++)
+          {
+              html += '<option value="'+event[i].id+'">'+event[i].format_name+'</option>'; 
+          }
+          $(".choose_format_data").html(html);
       }
     })
   }

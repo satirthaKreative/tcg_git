@@ -206,7 +206,7 @@
 
             
 
-            html += "<tr><td>"+j_id+"</td><td>"+event[i].time_slot+" "+event[i].time_type+"</td><td> $ "+event[i].time_slot_price+"</td><td><a href='javascript:;' onclick='my_add("+event[i].id+")' class='btn btn-info'>Edit Vault Details</a></td></tr>";
+            html += "<tr><td>"+j_id+"</td><td>"+event[i].time_slot+" "+event[i].time_type+"</td><td> $ "+event[i].time_slot_price+"</td><td><a href='javascript:;' onclick='my_add("+event[i].id+")' class='btn btn-info'>Edit Vault Details</a> <a href='javascript:;' onclick='my_delete("+event[i].id+")' class='btn btn-danger'><i class='fa fa-trash'></i></a></td></tr>";
 
             j_id++;
 
@@ -368,4 +368,32 @@
 
     }
 
+
+    function my_delete(del_id)
+    {
+      if(confirm('Are u sure to delete time slot data'))
+      {
+        $.ajax({
+          url: '<?= base_url("Voult_Controller/my_delete/"); ?>',
+          type: 'post',
+          data: {del_id:del_id},
+          dataType: 'json',
+          success: function(event)
+          {
+            if(event.no_error == true)
+            {
+              $(".success_msg").html("<b class='text-success'> <i class='fa fa-check'></i> "+event.main_error+"</b>").fadeIn().delay(3000).fadeOut('slow');
+              setTimeout(function(){refresh_tbl();}, 3000);
+            }
+            else if(event.no_error == false)
+            {
+              $(".success_msg").html("<b class='text-danger'> <i class='fa fa-times'></i> Something went wrong! data don't updated</b>").fadeIn().delay(3000).fadeOut('slow');
+            }
+          }
+        })
+      }
+      else{
+        
+      }
+    }
   </script>

@@ -122,6 +122,22 @@ class Voult_Controller extends CI_Controller {
 
 	}
 
+	// voult time slot delete
+
+	public function my_delete()
+	{
+		$err_msg['no_error'] = false;
+		if($data_delete = $this->avm->my_delete($del_id))
+		{
+			$err_msg['no_error'] = true;
+			$err_msg['main_error'] = "Successfully Delete The Time Slot";
+		}
+		echo json_encode($err_msg);
+	}
+
+
+
+
 }
 
 /* End of file Voult_Controller.php */

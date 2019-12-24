@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'https://www.ecollegestreet.in/tcgtester/';
+$config['base_url'] = 'http://localhost/satirtha_ht/tcgtester/';
 
 /*
 |--------------------------------------------------------------------------

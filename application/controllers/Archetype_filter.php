@@ -56,6 +56,12 @@ class Archetype_filter extends CI_Controller {
 		echo json_encode($error_msg);
 	}
 
+	public function view_archetype_format()
+	{
+		$result = $this->afm->view_archetype_format();
+		echo json_encode($result);
+	}
+
 }
 
 /* End of file Archetype_filter.php */

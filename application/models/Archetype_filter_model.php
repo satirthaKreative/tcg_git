@@ -14,6 +14,7 @@ class Archetype_filter_model extends CI_Model {
 		foreach($_POST['filter_name'] as $archetype_filter => $key)
 		{
 			$data_insert[] = array(
+				'f_id' => $_POST['format_name1'][$archetype_filter],
 				'archetype_filter' => $_POST['filter_name'][$archetype_filter],
 			);
 		}
@@ -55,6 +56,19 @@ class Archetype_filter_model extends CI_Model {
 		if($this->db->affected_rows() > 0)
 		{
 			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public function view_archetype_format()
+	{
+		$selectQuery = $this->db->get('format_tbl');
+		if($selectQuery->num_rows() > 0)
+		{
+			return $selectQuery->result();
 		}
 		else
 		{
