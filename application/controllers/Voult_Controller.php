@@ -127,6 +127,7 @@ class Voult_Controller extends CI_Controller {
 	public function my_delete()
 	{
 		$err_msg['no_error'] = false;
+		$del_id = $_POST['del_id'];
 		if($data_delete = $this->avm->my_delete($del_id))
 		{
 			$err_msg['no_error'] = true;

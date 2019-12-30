@@ -164,7 +164,7 @@ class Admin_voult_model extends CI_Model {
 
 	public function my_delete($del_id)
 	{
-		$this->db->where('id',$del_id)->get('voult_time_slot');
+		$this->db->where('id',$del_id)->delete('voult_time_slot');
 		if($this->db->affected_rows())
 		{
 			return true;

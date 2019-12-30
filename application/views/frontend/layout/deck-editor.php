@@ -10,10 +10,10 @@
 
                         <ul class="nav-tab">
                             <li>
-                                <a href="javascript:void" class="">Request</a>
+                                <a href="javascript:void" class="">Build</a>
                             </li>
                             <li class="">
-                                <a href="https://www.ecollegestreet.in/tcgtester/ProviderDesk/" class="">Provider</a>
+                                <a href="javascript:;" class="">Upload</a>
                             </li>
                         </ul>
 

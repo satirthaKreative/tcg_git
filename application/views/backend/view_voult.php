@@ -354,7 +354,7 @@
 
             
 
-            html += "<tr><td>"+j_id+"</td><td>"+event[i].time_slot+" "+event[i].time_type+"</td><td> $ "+event[i].time_slot_price+"</td><td><a href='javascript:;' onclick='my_add("+event[i].id+")' class='btn btn-info'>Edit Vault Details</a></td></tr>";
+            html += "<tr><td>"+j_id+"</td><td>"+event[i].time_slot+" "+event[i].time_type+"</td><td> $ "+event[i].time_slot_price+"</td><td><a href='javascript:;' onclick='my_add("+event[i].id+")' class='btn btn-info'>Edit Vault Details</a> <a href='javascript:;' onclick='my_delete("+event[i].id+")' class='btn btn-danger'><i class='fa fa-trash'></i></a></td></tr>";
 
             j_id++;
 
