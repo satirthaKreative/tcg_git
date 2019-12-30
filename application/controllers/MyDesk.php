@@ -52,6 +52,13 @@ class MyDesk extends CI_Controller {
 		echo  json_encode($data_view);
 	}
 
+	public function my_format_change()
+	{
+		$data_id = $_POST['data_id'];
+		$data = $this->mdm->my_format_change($data_id);
+		echo json_encode($data);
+	}
+
 }
 
 /* End of file MyDesk.php */

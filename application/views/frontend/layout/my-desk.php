@@ -20,7 +20,7 @@
                             </select>
                         </div>
                         <div class="form-group" >
-                            <select class="form-control" id="format_select">
+                            <select class="form-control" id="format_select" onchange="format_change()">
 
                             </select>
                         </div>
@@ -89,6 +89,35 @@
             }
         });
     });
+
+    // check format wish date
+    function format_change()
+    {
+        var data_id = $("#format_select").val();
+        $.ajax({
+            url: '<?= base_url("MyDesk/my_format_change") ?>',
+            data: {data_id: data_id},
+            type: 'post',
+            dataType: 'json',
+            success: function(event)
+            {
+                console.log(event);
+                var html = '';
+                if(event == false){
+                    html += 'No Details Available';
+                }
+                else
+                {
+                    for(var i=0;i<event.length;i++)
+                    {
+                        html += '<div class="form-check"><input class="form-check-input" type="checkbox" value="" id="defaultCheck1"><label class="form-check-label" for="defaultCheck1">'+event[i].archetype_filter+'<br><strong>( '+event[i].archetype_name+' )</strong></label></div>';
+                    }
+                }
+
+                $("#check-join").html(html);
+            }
+        })
+    }
 
     // show checkbox details
     $(function(){

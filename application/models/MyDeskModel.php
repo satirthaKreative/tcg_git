@@ -63,6 +63,36 @@ class MyDeskModel extends CI_Model {
 		}
 	}
 
+	// Desk Model
+
+	public function my_format_change($data_id)
+	{
+		if($data_id != ''){
+			$result_set = $this->db->select('*')
+     				->from('archetype_category as t1')
+     				->join('archetype_name as t2', 't1.id = t2.a_id', 'INNER')
+     				->where('t1.f_id',$data_id)
+     				->get();
+		}
+		else
+		{
+			$result_set = $this->db->select('*')
+     				->from('archetype_category as t1')
+     				->join('archetype_name as t2', 't1.id = t2.a_id', 'INNER')
+     				->get();
+
+		}
+
+		if($result_set->num_rows() > 0 )
+		{
+			return $result_set->result();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 }
 
 /* End of file MyDeskModel.php */
