@@ -41,7 +41,7 @@
             <div class="form-group" id="voult_price_solt_view">
               <div class="row">
                 <div class="col-sm-5">
-                  <label for="choose_filter_data">Choose Format </label>
+                  <label for="choose_format_data">Choose Format </label>
                   <select  class="form-control choose_format_data" name="format_name1[]" value="" placeholder="Archetype Format Name" required="required">
                     
                   </select>
@@ -117,11 +117,9 @@
 <script>
   $(function(){
     // filter
-    var data = '';
     $.ajax({
       url: '<?= base_url('Archetype_filter/view_archetype_filter'); ?>',
       type: 'post',
-      data: data,
       dataType: 'json',
       success:  function(event)
       {
@@ -134,13 +132,11 @@
           }
           $(".choose_filter_data").html(html);
       }
-    })
+    });
     // format
-    var data_format = '';
     $.ajax({
       url: '<?= base_url('Archetype_filter/view_archetype_format'); ?>',
       type: 'post',
-      data: data_format,
       dataType: 'json',
       success:  function(event)
       {

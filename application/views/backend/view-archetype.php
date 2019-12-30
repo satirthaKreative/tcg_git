@@ -90,7 +90,7 @@
     $(function(){
       var data='';
       $.ajax({
-        url: '<?= base_url('Archetype_filter/view_archetype_filter'); ?>',
+        url: '<?= base_url('Archetype_filter/view_archetype_filter55'); ?>',
         type: 'post',
         data: data,
         dataType: 'json',
