@@ -59,6 +59,13 @@ class MyDesk extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function modelDetailsShow()
+	{
+		$data_id = $_POST['data_v'];
+		$data = $this->mdm->modelDetailsShow($data_id);
+		echo  json_encode($data);
+	}
+
 }
 
 /* End of file MyDesk.php */

@@ -28,6 +28,7 @@
                 <thead>
                 <tr>
                   <th>#</th>
+                  <th>Format Name</th>
                   <th>Archetype Filter</th>
                   <th>Archetype Name</th>
                 </tr>
@@ -38,6 +39,7 @@
                 <tfoot>
                 <tr>
                   <th>#</th>
+                  <th>Format Name</th>
                   <th>Archetype Filter</th>
                   <th>Archetype Name</th>
                 </tr>
@@ -100,7 +102,7 @@
           var j_id = 1;
           for(var i = 0; i < event.length; i++){
             
-            html += "<tr><td>"+j_id+"</td><td>"+event[i].archetype_filter+"</td><td>"+event[i].archetype_name+"</td></tr>";
+            html += "<tr><td>"+j_id+"</td><td>"+event[i].format_name+"</td><td>"+event[i].archetype_filter+"</td><td>"+event[i].archetype_name+"</td></tr>";
             j_id++;
           }
           $("#view_user_table").html(html);

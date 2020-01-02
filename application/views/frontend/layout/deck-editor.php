@@ -36,6 +36,19 @@
                             </a>
                         </div>
 
+                        <div class="search_reasults">
+                            <ul class="s_result">
+                                <li>
+                                    <span>Geist of Saint Traft</span> 
+                                     <div class="count_sec">
+                                        <span>2</span> 
+                                        <a href="#"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                        <a href="#"><i class="fa fa-share" aria-hidden="true"></i></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
                     </div>
 
 
@@ -105,3 +118,23 @@
     </div>
             
 </section>
+
+<script>
+    $(function(){
+        $.ajax({
+            url: '<?= base_url("Deck_Controller/deck_editor") ?>',
+            type: 'post',
+            dataType: 'json',
+            success: function(event)
+            {
+                console.log(event);
+                var html = '';
+                for(var i=0;i<event.length;i++)
+                {
+                    html += '<li><span> <b> Archetype : </b>'+event[i].archetype_name+'</span> <span> <b> Format : </b>'+event[i].format_name+'</span>  <div class="count_sec"><span>2</span> <a href="#"><i class="fa fa-download" aria-hidden="true"></i></a><a href="#"><i class="fa fa-share" aria-hidden="true"></i></a> </div></li>';
+                }
+                $(".s_result").html(html);
+            }
+        })
+    })
+</script>

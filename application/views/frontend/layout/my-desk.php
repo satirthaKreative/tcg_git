@@ -44,7 +44,24 @@
             </div>
         </div>
     </div>
-            
+     
+    <!-- ZModel -->
+     <div class="modal" id="myModelDetails" tabindex="-1" role="dialog">
+       <div class="modal-dialog" role="document">
+         <div class="modal-content">
+           <div class="modal-header">
+             <h5 class="modal-title">Modal title</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+             </button>
+           </div>
+           <div class="modal-body">
+             <p>Modal body text goes here.</p>
+           </div>
+         </div>
+       </div>
+     </div>
+     <!-- /Zmodel -->       
 </section>
 
 <script>
@@ -83,7 +100,7 @@
                 var html = '';
                 for(var i=0;i<event.length;i++)
                 {
-                    html += '<div class="form-check"><input class="form-check-input" type="checkbox" value="" id="defaultCheck1"><label class="form-check-label" for="defaultCheck1">'+event[i].archetype_filter+'<br><strong>( '+event[i].archetype_name+' )</strong></label></div>';
+                    html += '<div class="form-check"><input class="form-check-input  d'+event[i].id+'" type="checkbox" onclick="my_on_check('+event[i].id+')" value="" id="defaultCheck1"><label class="form-check-label" for="defaultCheck1">'+event[i].archetype_filter+'<br><strong>( '+event[i].archetype_name+' )</strong></label></div>';
                 }
                 $("#check-join").html(html);
             }
@@ -110,7 +127,7 @@
                 {
                     for(var i=0;i<event.length;i++)
                     {
-                        html += '<div class="form-check"><input class="form-check-input" type="checkbox" value="" id="defaultCheck1"><label class="form-check-label" for="defaultCheck1">'+event[i].archetype_filter+'<br><strong>( '+event[i].archetype_name+' )</strong></label></div>';
+                        html += '<div class="form-check"><input class="form-check-input d'+event[i].id+'" type="checkbox" value="" onclick="my_on_check('+event[i].id+')" id="defaultCheck1"><label class="form-check-label" for="defaultCheck1">'+event[i].archetype_filter+'<br><strong>( '+event[i].archetype_name+' )</strong></label></div>';
                     }
                 }
 
@@ -139,4 +156,29 @@
             }
         });
     })
+
+    function my_on_check(data)
+    {
+        var data_v = data;
+        $.ajax({
+            url: '<?= base_url("MyDesk/modelDetailsShow") ?>',
+            type: 'post',
+            data: {data_v: data_v},
+            dataType: 'json',
+            success: function(event)
+            {
+                console.log(event);
+                $(".modal-title").html(event[0].archetype_name);
+                $(".modal-body").find('p').html(event[0].a_details);
+                $("#myModelDetails").modal('show');
+            }
+        }) 
+    }
+
+    $("#myModelDetails").on("hidden.bs.modal", function () {
+        // put your default event here
+        $('.checkbox-content').find('input[type=checkbox]').prop("checked", false);;
+    });
+
+    
 </script>

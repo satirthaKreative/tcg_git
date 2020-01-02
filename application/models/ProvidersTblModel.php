@@ -267,6 +267,14 @@ public function stop_timer_id($stopage_time)
 										->order_by('id','Desc')
 										->limit(1)
 										->get();
+	$select_deck = $checking_available_or_not->row();
+	$tot_time_deck = $select_deck->request_time;
+	$use_time = $tot_time_deck - $time_seconds;
+	$insert_arr_deck = [
+		'a_id' => $select_deck->id,
+		'time_use' => $use_time,
+	];	
+	$insert_deck = $this->db->insert('deck_editor_tbl',$insert_arr_deck);
 	if($checking_available_or_not->num_rows() > 0)
 	{
 		$fetch_row = $checking_available_or_not->row();

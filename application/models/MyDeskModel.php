@@ -93,6 +93,21 @@ class MyDeskModel extends CI_Model {
 		}
 	}
 
+	// modal show data
+
+	function modelDetailsShow($data_id)
+	{
+		$resultSet = $this->db->where('id',$data_id)->get('archetype_name');
+		if($resultSet->num_rows() > 0)
+		{
+			return $resultSet->result();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 }
 
 /* End of file MyDeskModel.php */
