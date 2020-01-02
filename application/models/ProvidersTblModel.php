@@ -32,8 +32,10 @@ public function sender_details()
 			'platform' => $platform,
 			'format' => $format,
 			'archetype' => $archetype,
-			'communication' => $communication,
+			'communication' => $communication
 		];
+
+		// print_r($where_second_condition);
 
 		// platform name fetch
 		$selectPlatform = $this->db->where('id',$platform)->get('platform_tbl');
@@ -68,16 +70,18 @@ public function sender_details()
     					->join('voult_time_slot f', 'f.id=a.timeframe')
     					->join('reg_font g', 'g.id=a.user_id')
 						->where($where_second_condition)
-						->where('active_state',1)
-						->where('user_id !=',$_SESSION['session_data'])
+						->where('g.active_state',1)
+						->where('a.user_id !=',$_SESSION['session_data'])
 						->where('cur_time',date('Y-m-d'))
 						->get();
+
 		// $Purchase_req = $this->provider_data_tbl->find();
 		// echo $Purchase_req;
 		// exit();
 		// echo $selectQueryData;
 		// exit;
 		// condition checking
+
 		if($selectQueryData->num_rows() > 0)
 		{
 			return $selectQueryData->result();

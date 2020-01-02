@@ -19,6 +19,17 @@ class Deck_Controller extends CI_Controller {
 		$result_set = $this->dem->deck_editor();
 		echo json_encode($result_set);
 	}
+
+	public function search_data($search_data)
+	{
+		$result_set1 = $this->dem->search_data($search_data);
+		echo json_encode($result_set1);
+	}
+
+	public function search_data_q($data_value){
+		$result_set = $this->dem->search_data_q($data_value);
+		echo json_encode($result_set);
+	}
 	
 }	
 /* End of file Deck_Controller.php */
