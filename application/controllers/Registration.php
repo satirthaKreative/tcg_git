@@ -107,6 +107,22 @@ class Registration extends CI_Controller {
 		}
 	}
 
+	// checking email for recovery password
+	function check_email_address(){
+		$data = $_POST['data_mail'];
+		
+		$error['no_error'] = false;
+		$error['err_msg'] = "This email address is not registered yet";
+		if(!filter_var($data,FILTER_VALIDATE_EMAIL)){
+			$error['no_error'] = false;
+			$error['err_msg'] = "Please enter a valid email address";
+		}else if($result = $this->rm->check_email_address($data)){
+			$error['no_error'] = true;
+			$error['err_msg'] = "";
+		}
+		echo json_encode($error);
+	}
+
 }
 
 /* End of file Registration.php */

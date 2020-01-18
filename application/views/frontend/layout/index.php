@@ -74,11 +74,20 @@
             <form action="">
                 
                 <div class="form-group">
-                    <input type="email" class="form-control"  placeholder="Enter Email">
+                    <input type="email" class="form-control check_email_class" id="recover_email"  placeholder="Enter Email">
+                </div>
+
+                <div class="form-group password_new" style="display: none;">
+                    <input type="password" class="form-control" id="password_new"  placeholder="Enter New Password">
+                </div>
+
+                <div class="form-group password_c_new" style="display: none;">
+                    <input type="password" class="form-control" id="password_c_new"  placeholder="Re-enter Confirm Password">
                 </div>
 
                 <div class="button-group text-right">
-                    <button type="button" class="btn">Submit</button>
+                    <button type="button" class="btn" id="change_data_pass" onclick="submit_email();">Submit</button>
+                    <p class="succ-msg-check-mail"></p>
                 </div>
             </form>
         </div>
@@ -104,6 +113,34 @@
                 }else if(event.no_error == false){
                     $(".sucmsg").html("<b style='color:red'><i class='fa fa-times'></i> "+event.estimate_err+"</b>").fadeIn().delay(3000).fadeOut('slow');
                 }
+            }
+        })
+    }
+
+    function submit_email()
+    {
+        var data_mail = $('#recover_email').val();
+        $.ajax({
+            url: '<?= base_url("Registration/check_email_address/") ?>',
+            type: 'post',
+            data: {data_mail: data_mail},
+            dataType: 'json',
+            success:  function(event){
+                if(event.no_error == true){
+                    $(".check_email_class").css('border','1px solid #41d410');
+                    $(".password_c_new").show();
+                    $(".password_new").show();
+                    $("#change_data_pass").attr('onclick','confirm_change_password()');
+                }else if(event.no_error == false){
+                    $(".change_data_pass").attr('onclick','submit_email()');
+                    $(".password_c_new").hide();
+                    $(".password_new").hide();
+                    $(".succ-msg-check-mail").css('float','left');
+                    $(".succ-msg-check-mail").html("<b class='text-danger'><i class='fa fa-times'></i> "+event.err_msg+"</b>").fadeIn().delay(5000).fadeOut('slow');
+
+                }
+            }, error: function(event){
+
             }
         })
     }

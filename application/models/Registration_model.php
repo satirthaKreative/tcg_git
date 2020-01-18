@@ -129,7 +129,15 @@ class Registration_model extends CI_Model {
 		}
 	}
 
-	
+	// checking data ragistration model
+	 public function check_email_address($data){
+	 	$select_reg_tbl = $this->db->where('user_email',$data)->get('reg_font');
+	 	if($select_reg_tbl->num_rows() > 0){
+	 		return true;
+	 	}else{
+	 		return false;
+	 	}
+	 }
 
 }
 
