@@ -185,16 +185,34 @@
     function Payment()
     {
         var parchase_time = $('.purchase-time').val();
-        $.ajax({
-            url: "<?php echo base_url('Voult_time_controller/session_create'); ?>",
-            type: "post",
-            data: {parchase_time: parchase_time},
-            dataType: "json",
-            success:  function(event)
-            {
-               console.log(event); 
-               window.location.href="<?= base_url('Payment/'); ?>";
-            }
-        });
+        var del = $('input[name="payment"]:checked').val();
+
+        // ajax calling
+        if(del == 'card'){
+            $.ajax({
+                url: "<?php echo base_url('Voult_time_controller/session_create'); ?>",
+                type: "post",
+                data: {parchase_time: parchase_time},
+                dataType: "json",
+                success:  function(event)
+                {
+                   console.log(event); 
+                   window.location.href="<?= base_url('Payment/'); ?>";
+                }
+            });
+        }
+        else if(del == 'paypal'){
+            $.ajax({
+                url: "<?php echo base_url('Voult_time_controller/session_create_paypal'); ?>",
+                type: "post",
+                data: {parchase_time: parchase_time},
+                dataType: "json",
+                success:  function(event)
+                {
+                   console.log(event); 
+                   window.location.href="<?= base_url('PaypalPay/'); ?>";
+                }
+            });
+        }
     }
 </script>

@@ -33,6 +33,13 @@ class MyDesk extends CI_Controller {
 		echo  json_encode($result_set);
 	}
 
+	public function my_archetype_view_new($data_id)
+	{
+		//$data_view['share'] = 'data';
+		$data_view = $this->mav->my_archetype_view_new($data_id);
+		echo  json_encode($data_view);
+	}
+
 	public function my_archetype_view()
 	{
 		//$data_view['share'] = 'data';

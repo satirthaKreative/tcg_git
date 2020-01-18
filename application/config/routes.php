@@ -61,7 +61,13 @@ $route['Home/Provider'] = 'ProviderDesk/index';
 $route['Vault'] = 'VaultController/index';
 $route['My-Account'] = 'My_Account/index';
 $route['Provider-List'] = 'ProvidersViewController/index';
+// pay auth
 $route['Payment'] = 'PayUMoney_Controller/index';
 $route['Payment/response'] = 'PayUMoney_Controller/response';
+// pay auth
+$route['PaypalPay'] = 'PayUMoney_Controller/paypalindex';
+$route['Payment/response'] = 'PayUMoney_Controller/response';
+// pay paypal
 $route['Home/Provider-Notification'] = 'UserDesk/provider_notification';
 $route['Deck-Editor'] = 'Deck_Controller/index';
+$route['Archetype_admin_controller/(:num)'] = 'Archetype_admin_controller/index/$1';

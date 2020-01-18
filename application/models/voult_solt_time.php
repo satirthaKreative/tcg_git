@@ -33,11 +33,9 @@ class Voult_solt_time extends CI_Model {
 			'userID' => $_SESSION['session_data']
 		];
 
-		if($_SESSION['productInfo'] != '')
+		if($_SESSION['buy_time_view'] != '')
 		{
-			$data_Value = explode(" ",$_SESSION['productInfo']);
-			// print_r($data_Value);
-			// exit();
+			$data_Value = explode(" ",$_SESSION['buy_time_view']);
 			if($data_Value[1]=="min")
 			{
 				$time_in_sec = $data_Value[0]*60;
@@ -90,6 +88,23 @@ class Voult_solt_time extends CI_Model {
 	}
 
 	public function session_create()
+	{
+		$data_id = $_POST['parchase_time'];
+		$conditional_arr = [
+			'id' => $data_id,
+		];
+		$selectQuery = $this->db->where($conditional_arr)->get('voult_time_slot');
+		if($selectQuery->num_rows() > 0)
+		{
+			return $selectQuery->result_array();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public function session_create_paypal()
 	{
 		$data_id = $_POST['parchase_time'];
 		$conditional_arr = [

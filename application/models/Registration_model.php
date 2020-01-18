@@ -9,7 +9,30 @@ class Registration_model extends CI_Model {
 		parent::__construct();
 		$this->load->model('Registration_model','rm');
 	}
+	// checking registration config
 
+	public function check_registration()
+	{
+		// data fetch
+		$user_name = $this->input->post('user_name');
+		$user_email = $this->input->post('user_email');
+		$user_pass = $this->input->post('user_pass');
+		$user_c_pass = $this->input->post('user_c_pass');
+		// where condiition
+		$where_condition = [
+			'user_email' => $user_email,
+		];
+
+		$search_data = $this->db->where($where_condition)->get('reg_font');
+
+		if($search_data->num_rows() > 0){
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	// add reg
 	public function add_reg(){
 		// data fetch
 		$user_name = $this->input->post('user_name');
@@ -76,6 +99,37 @@ class Registration_model extends CI_Model {
 			return false;
 		}
 	}
+
+	public function all_details($data){
+		$result = $this->db->where('id',$data)->where('paymentGateway','Card')->get('reg_font');
+		return $result->result();
+	}
+
+	public function all_paypal_details($data){
+		$result = $this->db->where('id',$data)->where('paymentGateway','Paypal')->get('reg_font');
+		return $result->result();
+	}
+
+
+	public function edit_all_data($data){
+		$arr_err = [
+			'user_name'=>$this->input->post('full_name'),
+			'user_email'=>$this->input->post('card_email'),
+			'cNumber'=>$this->input->post('credit_card_number'),
+			'cexpireDateM'=>$this->input->post('card_exp_month'),
+			'cexpireDateY'=>$this->input->post('card_exp_year'),
+			'cusAddress'=>$this->input->post('billing_address_view'),
+			'cardType'=>$this->input->post('creditt_card_view')
+		];
+		$data_return = $this->db->where('id',$data)->update('reg_font',$arr_err);
+		if($this->db->affected_rows()){
+			return ture;
+		}else{
+			return false;
+		}
+	}
+
+	
 
 }
 

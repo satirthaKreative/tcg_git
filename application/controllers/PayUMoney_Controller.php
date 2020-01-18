@@ -10,12 +10,17 @@ class PayUMoney_Controller extends CI_Controller {
 	}
 	public function index()
 	{
-		$this->load->view('frontend/payment/payumoney/index');
+		$this->load->view('frontend/payment/authorizePay/authorize');
 	}
 
 	public function response()
 	{
-		$this->load->view('frontend/payment/payumoney/response');
+		$this->load->view('frontend/payment/authorizePay/authorize');
+	}
+
+	public function paypalindex()
+	{
+		redirect('paypal/samples/Payments_pro');
 	}
 
 	public function success()

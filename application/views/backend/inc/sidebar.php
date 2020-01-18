@@ -79,7 +79,7 @@
         <!-- vault part -->
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-adjust"></i>
+            <i class="nav-icon fas fa-clock"></i>
             <p>
               Vault Editor
               <i class="fas fa-angle-left right"></i>
@@ -159,6 +159,16 @@
               </a>
             </li>
           </ul>
+        </li>
+        <!-- Denial Archtype Editor -->
+        <li class="nav-item has-treeview">
+          <a href="<?= base_url('Archetype_admin_controller/'); ?>" class="nav-link">
+            <i class="nav-icon fa fa-eye"></i>
+            <p>
+              Denial Archetype View
+              <!-- <i class="right fas fa-angle-left"></i> -->
+            </p>
+          </a>
         </li>
         <!-- admin profile part -->
         <li class="nav-item has-treeview">

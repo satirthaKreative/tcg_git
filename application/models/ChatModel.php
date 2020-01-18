@@ -67,6 +67,41 @@ public function insertChat($msg_data)
 	}
 }
 
+public function insert_chat_video()
+{
+	$where = '(requester_id="'.$_SESSION['session_data'].'" or provider_id = "'.$_SESSION['session_data'].'")';
+	$select_actual_user = $this->db->where($where)->order_by('id','DESC')->limit(1)->get('accept_request_tbl');
+	$fetch_actual_user = $select_actual_user->row();
+	$requester = $fetch_actual_user->requester_id;
+	$provider = $fetch_actual_user->provider_id;
+	if($requester == $_SESSION['session_data'])
+	{
+		$save_id = $provider;
+	}
+	else if($provider == $_SESSION['session_data'])
+	{
+		$save_id = $requester;
+	}
+
+	$insert_condition = [
+		's_id' => $_SESSION['session_data'],
+		'r_id' => $save_id,
+		'archetype_id' => 0,
+		'msg' => json_encode($_POST['js3']),
+		'msg_on' => date('Y-m-d'),
+
+	];
+	$insertQuery = $this->db->insert('chat_bot_tbl',$insert_condition);
+	if($this->db->affected_rows())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 public function audio_insert($audio_data)
 {
 	$insert_condition = [

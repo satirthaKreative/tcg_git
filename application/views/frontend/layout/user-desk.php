@@ -87,13 +87,13 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <select class="form-control" name="format_select" id="format_select">
+                                    <select class="form-control" name="format_select" id="format_select" onchange="formatChange()">
                                         
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <select class="form-control" name="archetype_select" id="archetype_select">
-                                        
+                                        <option value="">Archetype Name</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -191,10 +191,11 @@
     })
 
     // show archetype select
-    $(function(){
+    function formatChange(){
         var data = '';
+        var format_id = $("#format_select").val();
         $.ajax({
-            url: '<?= base_url('MyDesk/my_archetype_view'); ?>',
+            url: '<?= base_url('MyDesk/my_archetype_view_new/'); ?>'+format_id,
             data: data,
             type: 'post',
             dataType: 'json',
@@ -209,7 +210,7 @@
                 $("#archetype_select").html(html);
             }
         })
-    })
+    }
 
     // show time slot
     $(function(){

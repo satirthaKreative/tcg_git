@@ -31,7 +31,6 @@ class VaultController extends CI_Controller {
 		{
 			$this->load->font_page('frontend/layout/vault',$arr);
 		}
-		
 	}
 
 }

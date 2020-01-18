@@ -27,6 +27,17 @@ class ChatController extends CI_Controller {
 		}
 		echo json_encode($errmsg);
 	}
+	// video chat
+	public function insert_chat_video()
+	{
+		$errmsg['no_error'] = false;
+		if($data = $this->cm->insert_chat_video())
+		{
+			$errmsg['no_error'] = true;
+		}
+		echo json_encode($errmsg);
+	}
+
 	public function audio_insert($data)
 	{
 		$errmsg['no_error'] = false;
@@ -52,6 +63,7 @@ class ChatController extends CI_Controller {
 		}
 		echo json_encode($errmsg);
 	}
+
 
 }
 

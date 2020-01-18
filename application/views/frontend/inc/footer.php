@@ -1,8 +1,10 @@
 <?php if(isset($_SESSION['session_data'])){ echo "<script> var y_state = ''; </script>"; }else{ echo "<script> var y_state = 1; </script>"; } ?>
 <dv class="notification" style="display:none">
+    <img class="clock" src="https://www.ecollegestreet.in/tcgtester/assets/front_assets/images/clock-icon.png">
     <!--<h4>Hi, John Deo</h4>-->
     <span id="countdown"></span>
     <button type="button" id="stop_countdown_btn" onclick="stop_count_btn()" class="btn btn-danger btn-sm">stop</button>
+
 </dv>
 
 <!-- Chatbox Content -->
@@ -89,27 +91,62 @@
     </div>
 
 </section>
-	
+    
 </body>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+
+<script src="<?= base_url('assets/front_assets/js/BsMultiSelect.js'); ?>"></script>
+
 <script src="<?= base_url('assets/front_assets/js/jquery.slimNav_sk78.min.js'); ?>"></script>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 
+
 <!-- Chatbox js -->
 <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
-<script src="<?= base_url('assets/front_assets/app.js'); ?>"></script>
+<script src="<?= base_url('assets/front_assets/js/app.js'); ?>"></script>
 
 
+<!-- BsMultiSelect -->
+
+<script type="text/javascript">
+    //<![CDATA[
+
+
+    //]]>
+
+    
+</script>
 
 
 <script>
+    
+    $(function(){
+        // $("#platform_select").val();
+        // $("#platform_select").trigger("chosen:updated");
 
-if(y_state != 1){
-    jQuery(document).ready(function() {	
         jQuery('#navigation nav').slimNav_sk78();
+    })
+
+
+    // $(".form-control ").attr("placeholder", "Type a Location").val("").focus().blur();
+
+    // $(document).ready(function() {
+    //   $('.form-control [type=search]').attr("placeholder", "Your Name"); 
+
+    // });
+
+</script>
+
+<script>
+
+
+    jQuery(document).ready(function() { 
         // add-class-on-scroll
         jQuery('#nav-icon0').click(function(){
                 jQuery(this).toggleClass('open');
@@ -137,6 +174,9 @@ if(y_state != 1){
     $('#datepicker').datepicker("setDate", new Date());
 
    
+   
+if(y_state != 1){
+
     // setInterval(function(){  },1000);
 
 

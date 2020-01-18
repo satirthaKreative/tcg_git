@@ -292,53 +292,133 @@
 
                     <!-- Billing Information -->
                     <div id="billing-info" class="billing-information tabcontent">
-                        <form action="">
-                            <div class="form-group col-sm-6">
-                                <label>Full Name:</label>
-                                <input type="text" class="form-control" placeholder="John Deo">
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label>Billing Address:</label>
-                                <input type="text" class="form-control" placeholder="100 Main St New York , NY 55555">
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label>Credit Card:</label>
-                                <select class="form-control">
-                                    <option>Masetr card</option>
-                                    <option>set 2</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label>Credit Card Number:</label>
-                                <input type="text" class="form-control" placeholder="">
-                            </div>
 
-                            <div class="form-group col-sm-3">
-                                <label>Expiration Date:</label>
 
-                                <div class="input-group date" data-date-format="dd.mm.yyyy">
-                                    <input  type="text" class="form-control" data-date-format="dd/mm/yyyy" id="datepicker">
-                                    
-                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+
+                        
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link credit_class" onclick="credit_card_show();" href="javascript:void(0);">Credit Card</a>
+                            </li>
+                           <li class="nav-item">
+                                <a class="nav-link paypal_class" onclick="paypal_show();" href="javascript:void(0);">Paypal</a>
+                            </li>
+                        </ul>
+
+
+                        <p class="succ-form-data"></p>
+
+
+                        <div class="tab-pane" id="credit_card_tab">
+                            <form action="" id="edit_card_profile_form">
+                                <div class="form-group col-sm-6">
+                                    <label>Full Name:</label>
+                                    <input type="text" name="full_name" class="form-control" placeholder="John Deo" id="fullname_view">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>Billing Address:</label>
+                                    <input type="text" class="form-control" name="billing_address" placeholder="100 Main St New York , NY 55555" id="billing_address_view">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>Credit Card:</label>
+                                    <select class="form-control" id="credit_card_view" name="creditt_card_view">
+                                        <option value="">Choose a card type</option>
+                                        <option value="Visa">Visa Card</option>
+                                        <option value="Master">Master Card</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>Credit Card Number:</label>
+                                    <input type="text" id="credit_card_number" class="form-control" placeholder="" name="credit_card_number">
                                 </div>
 
+                                <div class="form-group col-sm-6">
+                                    <label>Expiration Date:</label>
 
-                            </div>
+                                    <div class="form-row cr_date">
+                                                <div class="input-group date col-6">
+                                                    <input type="text" id="exp_month_card" name="card_exp_month" class="form-control" placeholder="MM" required="">
 
-                            <div class="form-group col-sm-3">
-                                <label>CVV:</label>
-                                <input type="text" class="form-control" placeholder="">
-                            </div>
+                                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                </div>
+                                                 <div class="input-group date col-6">
+                                                   <input type="text" id="exp_year_card" name="card_exp_year" class="form-control" placeholder="YYYY" required="">
 
-                            <div class="form-group col-sm-6">
-                                <label>Email:</label>
-                                <input type="email" class="form-control" placeholder="">
-                            </div>
-                            
-                            <div class="btn-section">
-                                <button type="submit" class="btn btn-primary">Edit</button>  
-                            </div>
-                        </form>
+                                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+
+
+                                    </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label>Email:</label>
+                                    <input type="email" name="card_email" class="form-control" id="card_email" placeholder="">
+                                </div>
+                                
+                                <div class="btn-section">
+                                    <button type="button" class="btn btn-primary" onclick="edit_card_profile()">Edit</button>  
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- CREDIT CARD // -->
+
+
+                        <!-- PAYPAL -->
+                        <div class="tab-pane" id="paypal_tab">
+                            <form action="" id="edit_card_profile_form1">
+                                <div class="form-group col-sm-6">
+                                    <label>Full Name:</label>
+                                    <input type="text" name="full_name" class="form-control" placeholder="John Deo" id="fullname_view1">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>Billing Address:</label>
+                                    <input type="text" class="form-control" name="billing_address" placeholder="100 Main St New York , NY 55555" id="billing_address_view1">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>Credit Card:</label>
+                                    <select class="form-control" id="credit_card_view1" name="creditt_card_view1">
+                                        <option value="">Choose a card type</option>
+                                        <option value="Visa">Visa Card</option>
+                                        <option value="Master">Master Card</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label>Credit Card Number:</label>
+                                    <input type="text" id="credit_card_number1" class="form-control" placeholder="" name="credit_card_number">
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label>Expiration Date:</label>
+
+                                    <div class="form-row cr_date">
+                                                <div class="input-group date col-6">
+                                                    <input type="text" id="exp_month_card" name="card_exp_month1" class="form-control" placeholder="MM" required="">
+
+                                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                </div>
+                                                 <div class="input-group date col-6">
+                                                   <input type="text" id="exp_year_card" name="card_exp_year1" class="form-control" placeholder="YYYY" required="">
+
+                                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+
+
+                                    </div>
+
+                                <div class="form-group col-sm-6">
+                                    <label>Email:</label>
+                                    <input type="email" name="card_email1" class="form-control" id="card_email" placeholder="">
+                                </div>
+                                
+                                <div class="btn-section">
+                                    <button type="button" class="btn btn-primary" onclick="edit_paypal_profile()">Edit</button>  
+                                </div>
+                            </form>
+                        </div>
+                        <!-- PAYPAL // -->
                     </div>
 
                 </div>
@@ -411,7 +491,9 @@
     </div>
   </div>
 </div>
-
+<script>
+    
+</script>
 <script type="text/javascript">
                        
 
@@ -435,10 +517,37 @@
  
 
 </script>
+<script>
+    function credit_card_show()
+    {
+        $('#paypal_tab').css('display','none');
+        $('#credit_card_tab').css('display','block');
+        $('.credit_class').addClass('active');
+        $('.paypal_class').removeClass('active');
+        jio_card_choose = 0;
+        call_card_data(<?= $_SESSION['session_data']; ?>);
+        // alert(jio_card_choose);
+    }
 
+    function paypal_show()
+    {
+        $('#paypal_tab').css('display','block');
+        $('#credit_card_tab').css('display','none');
+        $('.paypal_class').addClass('active');
+        $('.credit_class').removeClass('active');
+        jio_card_choose = 1;
+        call_paypal_data(<?= $_SESSION['session_data']; ?>);
+        // alert(jio_card_choose);
+    }
+</script>
  <script>
      // activity details
      $(function(){
+        $('#paypal_tab').css('display','none');
+        $('#credit_card_tab').css('display','block');
+        $('.credit_class').addClass('active');
+        var jio_card_choose = 0;
+
          var user_active_session = '<?= $_SESSION["session_data"] ?>';
          var data_new1 = '';
          // console.log(user_active_session);
@@ -463,6 +572,9 @@
                  }
              }
          })
+         // call card data
+            call_card_data(user_active_session);
+            
      })
 
      function my_activity($data)
@@ -621,4 +733,123 @@
             }
         })
     })
+</script>
+
+
+<script>
+    function call_card_data(data)
+    {
+        $.ajax({
+            url: '<?= base_url("Registration/all_details/"); ?>'+data,
+            type: 'post',
+            dataType: 'json',
+            success: function(resp){
+                $("#fullname_view").val(resp[0].user_name);
+                $("#card_email").val(resp[0].user_email);
+                $("#credit_card_number").val(resp[0].cNumber);
+                $("#exp_month_card").val(resp[0].cexpireDateM);
+                $("#exp_year_card").val(resp[0].cexpireDateY);
+                $("#billing_address_view").val(resp[0].cusAddress);
+                var html = '';
+                if(resp[0].cardType == 'Master' || resp[0].cardType == 'master')
+                {
+                    html += '<option value="Master" selected>Master Card</option><option value="Visa">Visa Card</option>';
+                }
+                else if(resp[0].cardType == 'Visa' || resp[0].cardType == 'Visa')
+                {
+                    html += '<option value="Master">Master Card</option><option value="Visa" selected>Visa Card</option>';
+                }
+                else
+                {
+                    html += '<option value="Master">Master Card</option><option value="Visa">Visa Card</option>'; 
+                }
+                $("#credit_card_view").html(html);
+            },
+            error: function(resp){
+                var html = '';
+                html += '<option value="Master">Master Card</option><option value="Visa">Visa Card</option>'; 
+                $("#credit_card_view").html(html);
+            }
+        });
+    }
+
+    function call_paypal_data(data)
+    {
+        $.ajax({
+            url: '<?= base_url("Registration/all_paypal_details/"); ?>'+data,
+            type: 'post',
+            dataType: 'json',
+            success: function(resp){
+                $("#fullname_view1").val(resp[0].user_name);
+                $("#card_email1").val(resp[0].user_email);
+                $("#credit_card_number1").val(resp[0].cNumber);
+                $("#exp_month_card1").val(resp[0].cexpireDateM);
+                $("#exp_year_card1").val(resp[0].cexpireDateY);
+                $("#billing_address_view1").val(resp[0].cusAddress);
+                var html = '';
+                if(resp[0].cardType == 'Master' || resp[0].cardType == 'master')
+                {
+                    html += '<option value="Master" selected>Master Card</option><option value="Visa">Visa Card</option>';
+                }
+                else if(resp[0].cardType == 'Visa' || resp[0].cardType == 'Visa')
+                {
+                    html += '<option value="Master">Master Card</option><option value="Visa" selected>Visa Card</option>';
+                }
+                else
+                {
+                    html += '<option value="Master">Master Card</option><option value="Visa">Visa Card</option>'; 
+                }
+                $("#credit_card_view1").html(html);
+            },
+            error: function(resp){
+                var html = '';
+                html += '<option value="Master">Master Card</option><option value="Visa">Visa Card</option>'; 
+                $("#credit_card_view1").html(html);
+            }
+        });
+    }
+    // edit function
+    function edit_card_profile()
+    {
+        var sess_data_form = "<?= $_SESSION['session_data']; ?>";
+        alert(sess_data_form);
+        $.ajax({
+            url: '<?= base_url("Registration/edit_all_data/") ?>'+sess_data_form,
+            type: 'post',
+            data: $("#edit_card_profile_form").serialize(),
+            dataType: 'json',
+            success:  function(event){
+                if(event.no_error == true){
+                    $(".succ-form-data").html("<b class='text-success'>"+event.no_error+"</b>").fadeIn().delay(3000).fadeOut('slow');
+                }else if(event.no_error == false){
+                    $(".succ-form-data").html("<b class='text-danger'>"+event.no_error+"</b>").fadeIn().delay(3000).fadeOut('slow');
+                }
+            },
+            error: function(event){
+
+            }
+        })
+    }
+    // edit paypal  profile section
+    function edit_paypal_profile()
+    {
+        var sess_data_form = "<?= $_SESSION['session_data']; ?>";
+        alert(sess_data_form);
+        $.ajax({
+            url: '<?= base_url("Registration/edit_all_data/") ?>'+sess_data_form,
+            type: 'post',
+            data: $("#edit_card_profile_form1").serialize(),
+            dataType: 'json',
+            success:  function(event){
+                if(event.no_error == true){
+                    $(".succ-form-data").html("<b class='text-success'>"+event.no_error+"</b>").fadeIn().delay(3000).fadeOut('slow');
+                }else if(event.no_error == false){
+                    $(".succ-form-data").html("<b class='text-danger'>"+event.no_error+"</b>").fadeIn().delay(3000).fadeOut('slow');
+                }
+            },
+            error: function(event){
+
+            }
+        })
+    }
 </script>

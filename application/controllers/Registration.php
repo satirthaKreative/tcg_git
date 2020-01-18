@@ -21,6 +21,11 @@ class Registration extends CI_Controller {
 		$user_email = $this->input->post('user_email');
 		$user_pass = $this->input->post('user_pass');
 		$user_c_pass = $this->input->post('user_c_pass');
+
+		// session data set
+		$_SESSION['user_name'] = $user_name;
+		$_SESSION['user_email'] = $user_email;
+		$_SESSION['upass'] = $user_pass;
 		// email preg pattern
 		//$regex = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/';
 		// checking the validation
@@ -53,14 +58,53 @@ class Registration extends CI_Controller {
 			$err_msg['estimate_err'] = "Both password doesn't matched";
 		}
 		else{
-			if($reg_input = $this->rm->add_reg()){
+			if($reg_input = $this->rm->check_registration()){
 				$err_msg['no_error'] = true;
-				$err_msg['estimate_err'] = "Registration successfully done !";
 			}else{
 				$err_msg['estimate_err'] = "This e-mail already registered";
 			}
 		}
 		echo json_encode($err_msg);
+	}
+
+	public function unset_session_reg()
+	{
+		session_destroy();
+		return true;
+	}
+
+	// payment session check
+	public function check_session_gateway(){
+		$data_user = $_SESSION['user_name']; 
+		$data_mail = $_SESSION['user_email']; 
+		$data_pass = $_SESSION['upass'];
+
+		$arr_ses = [
+			$data_user,$data_mail,$data_pass
+		];
+
+		echo  json_encode($arr_ses);
+	}
+
+	public function all_details($data)
+	{
+		$data = $this->rm->all_details($data);
+		echo json_encode($data);
+	}
+
+	public function all_paypal_details($data)
+	{
+		$data = $this->rm->all_paypal_details($data);
+		echo json_encode($data);
+	}
+
+	public function edit_all_data($data){
+		$data_edit = $this->rm->edit_all_data($data);
+		if($data_edit){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 }
