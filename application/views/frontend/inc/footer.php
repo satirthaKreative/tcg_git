@@ -83,6 +83,14 @@
     <i class="fa fa-comment-o" aria-hidden="true"></i>
 </a>
 
+<!-- Provider Notice -->
+
+<a href="javascript:void(0);" class="provider_notice">
+    <span>20</span>
+    <i class="fa fa-comment-o" aria-hidden="true"></i>
+</a>
+
+
 <!-- Chatbox Content // -->
 <section class="footer">
 

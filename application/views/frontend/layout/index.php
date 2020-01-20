@@ -128,21 +128,49 @@
             success:  function(event){
                 if(event.no_error == true){
                     $(".check_email_class").css('border','1px solid #41d410');
+                    $(".check_email_class").attr('readonly','readonly');
                     $(".password_c_new").show();
                     $(".password_new").show();
                     $("#change_data_pass").attr('onclick','confirm_change_password()');
+                    
                 }else if(event.no_error == false){
                     $(".change_data_pass").attr('onclick','submit_email()');
                     $(".password_c_new").hide();
                     $(".password_new").hide();
                     $(".succ-msg-check-mail").css('float','left');
                     $(".succ-msg-check-mail").html("<b class='text-danger'><i class='fa fa-times'></i> "+event.err_msg+"</b>").fadeIn().delay(5000).fadeOut('slow');
-
                 }
             }, error: function(event){
 
             }
         })
+    }
+
+    function confirm_change_password()
+    {
+        var data_n_pass = $("#password_new").val();
+        var data_nc_pass = $("#password_c_new").val();
+        var recover_email = $("#recover_email").val();
+
+        $.ajax({
+            url: '<?= base_url("Registration/forgot_pass_recover/") ?>',
+            type: 'post',
+            data: {data_nc_pass:  data_nc_pass,data_n_pass:  data_n_pass,recover_email: recover_email},
+            dataType: 'json',
+            success:  function(event){
+                if(event.no_error == true){
+                    $(".succ-msg-check-mail").css('float','left');
+                    $(".succ-msg-check-mail").html("<b class='text-success'><i class='fa fa-check'></i> "+event.err_msg+"</b>").fadeIn().delay(5000).fadeOut('slow');
+                    setTimeout(function(){ window.location.href='<?= base_url(""); ?>'; },3000);
+                }else if(event.no_error == false){
+                    $(".succ-msg-check-mail").css('float','left');
+                    $(".succ-msg-check-mail").html("<b class='text-danger'><i class='fa fa-times'></i> "+event.err_msg+"</b>").fadeIn().delay(5000).fadeOut('slow');
+                }
+            }, error: function(event){
+
+            }
+        })
+
     }
 </script>
 

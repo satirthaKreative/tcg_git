@@ -31,8 +31,8 @@
                     </div> -->  
 
                     <h5>In this Section, select all decks you are willing to provide testing for. You can select multiple platforms simultaneously.  With free platforms or the use of a rental service, you can select all archetypes.</h5>
-
-                     
+                    <!-- form -->
+                    <form action="" id="provider-my-desk">
 
                     <div class="filter form-row">
                         
@@ -46,7 +46,7 @@
 
                             </select> -->
 
-                            <select class="form-control platform_select_demo" multiple="multiple" id="platform_select" onchange="platform_change()">
+                            <select class="form-control platform_select_demo" name="platform_check_data[]" multiple="multiple" id="platform_select" onchange="platform_change()">
                                 <!-- <option value="">Choose A Platform</option>
                                 <option value="1">MTGA</option>
                                 <option value="2">MTGO</option>
@@ -89,6 +89,10 @@
 
 
                     </div>
+                    <button type="button" name="submit_data" class="mt15 text-white" onclick="submit_provider_details()">Submit</button>
+                    <span class="suc-msg-add"></span>
+                    </form> 
+                    <!-- /form-->
 
                 </div>
 
@@ -322,7 +326,7 @@
 
                     {
 
-                        html += '<div class="form-check"><input class="form-check-input d'+event[i].id+'" type="checkbox" value="" onclick="my_on_check('+event[i].id+')" id="defaultCheck1"><label class="form-check-label" for="defaultCheck1">'+event[i].archetype_filter+' - <span>'+event[i].archetype_name+' </span></label></div>';
+                        html += '<div class="form-check"><input class="form-check-input d'+event[i].id+'" type="checkbox" name="archetype_check_name[]" value="'+event[i].id+'" onclick="my_on_check('+event[i].id+')" id="defaultCheck1"><label class="form-check-label" for="defaultCheck1">'+event[i].archetype_filter+' - <span>'+event[i].archetype_name+' </span></label></div>';
 
                     }
 
@@ -363,6 +367,7 @@
             success: function(event)
 
             {
+                //alert($(".d"+data).val());
                 $(".modal-title:first").html(event[0].archetype_name);
                 // $(".modal-body:first").html(event[0].a_details);
                 var full_data_str = event[0].a_details;
@@ -391,20 +396,53 @@
 
 
 
-    $("#myModelDetails").on("hidden.bs.modal", function () {
+    // $("#myModelDetails").on("hidden.bs.modal", function () {
 
-        // put your default event here
+    //     // put your default event here
 
-        $('.checkbox-content').find('input[type=checkbox]').prop("checked", false);;
+    //     $('.checkbox-content').find('input[type=checkbox]').prop("checked", false);;
 
-    });
+    // });
 
-    // show platform select
+    //show platform select
 
    
 
     function platform_change(){
-        alert($("#platform_select").val());
+        // alert($("#platform_select").val());
+    }
+
+
+    function submit_provider_details(){
+       
+        var platform_check = $("#platform_select").val();
+        var format_check = $("#format_select").val();
+        //alert(platform_check);
+
+        var checked = []
+        $("input[name='archetype_check_name[]']:checked").each(function ()
+        {
+            checked.push(parseInt($(this).val()));
+        });
+
+        $.ajax({
+            url: '<?= base_url("MyDesk/insertProviderDetails/") ?>',
+            type: 'post',
+            data: {platform_check:  platform_check, checked: checked,format_check: format_check },
+            dataType: 'json',
+            success:  function(event)
+            {
+                if(event.no_error == true)
+                {
+                    $(".suc-msg-add").html("<b class='text-success'><i class='fa fa-check'></i> "+event.err_msg+"</b>").fadeIn().delay(3000).fadeOut('slow');
+                }
+                else if(event.no_error == false)
+                {
+                    $(".suc-msg-add").html("<b class='text-danger'><i class='fa fa-times'></i> No data added</b>").fadeIn().delay(3000).fadeOut('slow');
+                }
+            }
+        })
+        // alert(checked);
     }
     
 
@@ -426,5 +464,8 @@
         display: inline-block;
         width: 50%;
         margin-bottom: 6px;
+    }
+    .mt15{
+        margin: 15px;
     }
 </style>

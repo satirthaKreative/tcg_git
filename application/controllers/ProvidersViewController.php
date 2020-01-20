@@ -26,6 +26,14 @@ class ProvidersViewController extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	// fetch all providers user
+
+	public function providers_total_details()
+	{
+		$data = $this->ptm->providers_total_details();
+		echo  json_encode($data);
+	}
+
 	// fetch notification 
 
 	public function provider_notification()

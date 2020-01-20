@@ -123,6 +123,42 @@ class Registration extends CI_Controller {
 		echo json_encode($error);
 	}
 
+	// forgot pass with validate
+
+	public function forgot_pass_recover(){
+		$password = $_POST['data_n_pass'];
+		$cpassword = $_POST['data_nc_pass'];
+		$rmail = $_POST['recover_email'];
+
+		$error['no_error'] = false;
+		if($password == '')
+		{
+			$error['no_error'] = false;
+			$error['err_msg'] = "Please enter a password";
+		}
+		else if(strlen($password)<6)
+		{
+			$error['no_error'] = false;
+			$error['err_msg'] = "Please enter minimum 6 digit password";
+		}
+		else if($cpassword == '')
+		{
+			$error['no_error'] = false;
+			$error['err_msg'] = "Re-enter confirm password";
+		}
+		else if($password != $cpassword)
+		{
+			$error['no_error'] = false;
+			$error['err_msg'] = "Both the password doesn't matched";
+		}
+		else if($result = $this->rm->forgot_pass_recover($password,$rmail))
+		{
+			$error['no_error'] = true;
+			$error['err_msg'] = "Password successfully changed";
+		}
+		echo json_encode($error);
+	}
+
 }
 
 /* End of file Registration.php */

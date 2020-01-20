@@ -9,6 +9,34 @@ public function __construct()
 	//Do your magic here
 }
 
+// show all senders
+
+public function providers_total_details()
+{
+	#session user id
+	$session_data= $_SESSION['session_data'];
+
+	#all providers
+	$selectQueryData = $this->db->select('*, a.id as mainId')
+				->from('provider_data_tbl a') 
+    			->join('platform_tbl b', 'b.id=a.platform')
+    			->join('format_tbl c', 'c.id=a.format')
+    			->join('archetype_name e', 'e.id=a.archetype')
+    			->join('reg_font g', 'g.id=a.user_id')
+				->where('g.active_state',1)
+				->where('a.user_id !=',$_SESSION['session_data'])
+						// ->where('cur_time',date('Y-m-d'))
+				->get();
+
+	if($selectQueryData->num_rows() > 0)
+	{
+		return $selectQueryData->result();
+	}
+
+}
+
+// end show all senders
+
 public function sender_details()
 {
 	$session_data = $_SESSION['session_data'];
@@ -32,7 +60,7 @@ public function sender_details()
 			'platform' => $platform,
 			'format' => $format,
 			'archetype' => $archetype,
-			'communication' => $communication
+			// 'communication' => $communication
 		];
 
 		// print_r($where_second_condition);
@@ -46,9 +74,9 @@ public function sender_details()
 		$fetchFormat = $selectFormat->row();
 		$format_name = $fetchFormat->format_name;
 		// communication name fetch
-		$selectCommunication = $this->db->where('id',$communication)->get('communication_tbl');
-		$fetchCommunication = $selectCommunication->row();
-		$communication_name = $fetchCommunication->communication_name;
+		// $selectCommunication = $this->db->where('id',$communication)->get('communication_tbl');
+		// $fetchCommunication = $selectCommunication->row();
+		// $communication_name = $fetchCommunication->communication_name;
 		// archetype name fetch
 		$selectArchetype = $this->db->where('id',$archetype)->get('archetype_name');
 		$fetchArchetype = $selectArchetype->row();
@@ -65,14 +93,14 @@ public function sender_details()
 						->from('provider_data_tbl a') 
     					->join('platform_tbl b', 'b.id=a.platform')
     					->join('format_tbl c', 'c.id=a.format')
-    					->join('communication_tbl d', 'd.id=a.communication')
+    					// ->join('communication_tbl d', 'd.id=a.communication')
     					->join('archetype_name e', 'e.id=a.archetype')
-    					->join('voult_time_slot f', 'f.id=a.timeframe')
+    					// ->join('voult_time_slot f', 'f.id=a.timeframe')
     					->join('reg_font g', 'g.id=a.user_id')
 						->where($where_second_condition)
 						->where('g.active_state',1)
 						->where('a.user_id !=',$_SESSION['session_data'])
-						->where('cur_time',date('Y-m-d'))
+						// ->where('cur_time',date('Y-m-d'))
 						->get();
 
 		// $Purchase_req = $this->provider_data_tbl->find();
@@ -111,7 +139,7 @@ public function provider_notification()
     				->where('b.status',1)
     				->where($where_condition)
     				->where('user_id !=',$_SESSION['session_data'])
-    				->where('cur_time',date('Y-m-d'))
+    				// ->where('cur_time',date('Y-m-d'))
     				->get();
 
    

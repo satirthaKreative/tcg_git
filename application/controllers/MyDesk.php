@@ -73,6 +73,21 @@ class MyDesk extends CI_Controller {
 		echo  json_encode($data);
 	}
 
+	// insert provider details
+	public function insertProviderDetails()
+	{
+		$error['no_error'] = false;
+		$data = $_POST['platform_check'];
+		$data2 = $_POST['checked'];
+		$data3 = $_POST['format_check'];
+		if($data_view = $this->mdm->insertProviderDetails($data,$data2,$data3))
+		{
+			$error['no_error'] = true;
+			$error['err_msg'] = "Successfully Added ";
+		}
+		echo json_encode($error);
+	}
+
 }
 
 /* End of file MyDesk.php */

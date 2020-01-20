@@ -139,6 +139,25 @@ class Registration_model extends CI_Model {
 	 	}
 	 }
 
+	 // forgot password
+
+	 public function forgot_pass_recover($pass,$mail)
+	 {
+	 	$update_arr = [
+	 		'user_pass' =>$pass,
+	 		'enc_pass' =>md5($pass), 
+	 	];
+	 	$update_pass = $this->db->where('user_email',$mail)->update('reg_font',$update_arr);
+	 	if($this->db->affected_rows())
+	 	{
+	 		return true;
+	 	}
+	 	else
+	 	{
+	 		return false;
+	 	}
+	 }
+
 }
 
 /* End of file Registration_model.php */

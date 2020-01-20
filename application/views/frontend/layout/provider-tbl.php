@@ -87,7 +87,7 @@
                                     <th scope="col">Platform</th>
                                     <th scope="col">Format</th>
                                     <th scope="col">Archetype</th>
-                                    <th scope="col">Duration</th>
+                                    <!-- <th scope="col">Duration</th> -->
                                 </tr>
                             </thead>
                             <tbody id="provider-details-add">

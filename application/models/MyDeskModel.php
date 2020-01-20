@@ -95,12 +95,56 @@ class MyDeskModel extends CI_Model {
 
 	// modal show data
 
-	function modelDetailsShow($data_id)
+	public function modelDetailsShow($data_id)
 	{
 		$resultSet = $this->db->where('id',$data_id)->get('archetype_name');
 		if($resultSet->num_rows() > 0)
 		{
 			return $resultSet->result();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	// insert data
+
+	public function insertProviderDetails($data,$data2,$data3)
+	{
+		
+		
+		foreach($data as $platform_data){
+			foreach($data2 as $archetype_data){
+				$where_arr = [
+					'platform' => $platform_data,
+					'format' => $data3, 
+					'archetype' => $archetype_data,
+					'cur_time' => date('Y-m-d'),
+					'user_id' => $_SESSION['session_data'],
+				];
+
+				$check_exit_or_not = [
+					'platform' => $platform_data,
+					'format' => $data3, 
+					'archetype' => $archetype_data,
+					'user_id' => $_SESSION['session_data'],
+				];
+				$check_query = $this->db->where($check_exit_or_not)->get('provider_data_tbl');
+				if($check_query->num_rows() > 0)
+				{
+
+				}
+				else
+				{
+					$resultSet = $this->db->insert('provider_data_tbl',$where_arr);
+				}
+			}
+		}
+
+		if($this->db->affected_rows())
+		{
+			return true;
 		}
 		else
 		{
