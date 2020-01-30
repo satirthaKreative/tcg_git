@@ -152,6 +152,37 @@ class MyDeskModel extends CI_Model {
 		}
 	}
 
+	# check available time
+
+	public function checking_time_available($data_u)
+	{
+		$is_check_time = $this->db->where('user_id',$_SESSION['session_data'])->get('timezone_tbl');
+		if($is_check_time->num_rows() > 0)
+		{
+			$is_total_time = $is_check_time->row();
+			$store_time = $is_total_time->total_time;
+			$request_time_id = $data_u;
+			// select voult time
+			$select_time = $this->db->where('id',$request_time_id)->get('voult_time_slot');
+			$fetch_time = $select_time->row();
+			$request_time = $fetch_time->convert_seconds;
+
+
+			if($request_time<=$store_time)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 }
 
 /* End of file MyDeskModel.php */

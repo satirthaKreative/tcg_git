@@ -16,6 +16,15 @@
     $page = $link_array[$count_length];
     //echo $page = end($link_array);
 ?>
+<style>
+    .form-content {
+    padding: 0px !important;
+    border: none !important;
+    border-radius: 0px !important;
+    margin-top: 0px !important;
+    margin-left: 0px !important;
+}
+</style>
 <section class="inner-page">
     <img class="quote_img" src="<?= base_url('assets/front_assets/images/wrapper_img2.jpg'); ?>">
     <div class="wrapper">
@@ -45,6 +54,21 @@
                                 <li>
                                     <span>
                                         2 Hr
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        3 Hr
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        4 Hr
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        5 Hr
                                     </span>
                                 </li>
                             </ul>
@@ -92,12 +116,26 @@
 
                                 </tbody>
                             </table>
-                            <div class="sucmsg"></div>
+                            
                         </div>
+
+                        <!-- Add Select time -->
+                        <div class="form-content">
+                            <div class="form-group">
+                                <select class="form-control" name="time_frame_select" id="time_frame_select" onchange="checking_time_available();">
+                                
+                                </select>
+                            </div>
+                        </div>
+                        <!-- End Add Select Time -->
                         <div class="text-right btn_sec">
-                            <button type="button" onclick="send_req_to_btn()">Send</button>
+                            <button type="button" class="data_view_btn" onclick="send_req_to_btn()">Send</button>
                         </div>
-    
+                        <!-- <p class="show_res_msg text-right">
+                            
+                        </p> -->
+                        <p class="sucmsg  text-right"></p>
+                    
                     <!-- /providers tbl -->
                     
                     <!-- <div class="col-md-10">
@@ -149,6 +187,28 @@
             
 </section>
 <script>
+
+    function checking_time_available()
+    {
+        //  time frame select data
+        var time_avail_data = $("#time_frame_select").val();
+        //  alert(time_avail_data);
+        $.ajax({
+            url: "<?= base_url('MyDesk/checking_time_available/') ?>"+time_avail_data,
+            type: 'post',
+            dataType: 'json',
+            success: function(event){
+                if(event.no_error == true){
+                    $(".data_view_btn").attr('onclick','send_req_to_btn()');
+                }else if(event.no_error == false){
+                    $(".sucmsg").html("<span class='text-danger'><b><i class='fa fa-times'></i> "+event.err_msg+"</b></span>").fadeIn().delay(3000).fadeOut('slow');
+                    $(".data_view_btn").removeAttr('onclick');
+                }
+            }, error: function(event){
+
+            }
+        })
+    }
     // activity details
     $(function(){
         var user_active_session = '<?= $_SESSION["session_data"] ?>';
@@ -161,8 +221,8 @@
             dataType: 'json',
             success:  function(event)
             {
-                console.log(event);
-                console.log(event[0].active_state);
+                // console.log(event);
+                // console.log(event[0].active_state);
                 if(event[0].active_state == 1)
                 {
                     $("#check_active_status").attr("checked","checked");
@@ -221,7 +281,7 @@
                     for(var i = 0;i < event.length; i++)
                     {
 
-                        html += '<tr><td><div class="check-group"> <input type="radio" id="Johndeo'+i+'" name="radio-group" value="'+event[i].mainId+'"><label for="Johndeo'+i+'"></label></div></td><td>'+event[i].user_name+'</td><td>'+event[i].platform_name+'</td><td>'+event[i].format_name+'</td><td>'+event[i].archetype_name+'</td></tr>'; 
+                        html += '<tr><td><div class="check-group"> <input type="radio" id="Johndeo'+i+'" name="radio-group" value="'+event[i].mainId+'"><label for="Johndeo'+i+'"></label></div></td><td>'+event[i].user_name+'<input type="hidden" class="user_name'+event[i].mainId+'" name="user_name'+event[i].mainId+'" value="'+event[i].user_name+'"/></td><td>'+event[i].platform_name+'<input type="hidden" class="platform_name'+event[i].mainId+'" name="platform_name'+event[i].mainId+'" value="'+event[i].platId+'"/></td><td>'+event[i].format_name+'<input type="hidden" class="format_name'+event[i].mainId+'" name="format_name'+event[i].mainId+'" value="'+event[i].formatId+'"/></td><td>'+event[i].archetype_name+'<input type="hidden" class="archetype_name'+event[i].mainId+'" name="archetype_name'+event[i].mainId+'" value="'+event[i].archeId+'"/></td></tr>'; 
                     }
                 }
                 else
@@ -232,26 +292,58 @@
 
             }
 
-        })
+        });
+
+        // time frame
+
+        var data_time_frame = '';
+        $.ajax({
+            url: '<?= base_url('MyDesk/data_time_frame') ?>',
+            data: data_time_frame,
+            type: 'post',
+            dataType: 'json',
+            success:  function(event)
+            {
+                 // console.log(event);
+                var html = '';
+                    html +='<option value="">Time Frame</option>';
+                    for(var i=0;i<event.length;i++)
+                    {
+                        html += '<option value='+event[i].id+'>'+event[i].time_slot+' '+event[i].time_type+'</option>';
+                    }
+                    $("#time_frame_select").html(html);
+            }
+        });
     })
 
     // function send to button
     function send_req_to_btn()
     {
+        
         var radioValue = $("input[name='radio-group']:checked").val();
+        alert(radioValue);
         if(radioValue == undefined)
         {
             $(".sucmsg").html("<span class='text-danger'><i class='fa fa-times'></i> You Must Choose A Providers</span>").fadeIn().delay(3000).fadeOut('slow');
         }
         else
         {
+            var platform_data = $('.platform_name'+radioValue).val();
+            var format_data = $(".format_name"+radioValue).val();
+            var arche_type = $(".archetype_name"+radioValue).val();
+            alert(platform_data);
+            // alert(arche_type);
+            var time_frame_select = $("#time_frame_select").val();
+
+
             $.ajax({
-                url: '<?= base_url("ProvidersViewController/notify_request/"); ?>',
-                type: 'post',
-                data: {radioValue: radioValue},
+                url: '<?= base_url("ProvidersViewController/notify_creation/"); ?>'+radioValue,
+                type: 'POST',
+                data: {platform_data: platform_data, format_data: format_data, arche_type: arche_type, time_frame_select:  time_frame_select},
                 dataType: 'json',
                 success:  function(event)
                 {
+                    console.log(event);
                     if(event.no_error == true)
                     {
                         $(".sucmsg").html("<span class='text-success'><i class='fa fa-check'></i> "+event.main_msg+"</span>").fadeIn().delay(3000).fadeOut('slow');

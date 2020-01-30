@@ -17,13 +17,13 @@ public function providers_total_details()
 	$session_data= $_SESSION['session_data'];
 
 	#all providers
-	$selectQueryData = $this->db->select('*, a.id as mainId')
+	$selectQueryData = $this->db->select('*, a.id as mainId, b.id as platId, c.id as formatId, e.id as archeId')
 				->from('provider_data_tbl a') 
     			->join('platform_tbl b', 'b.id=a.platform')
     			->join('format_tbl c', 'c.id=a.format')
     			->join('archetype_name e', 'e.id=a.archetype')
     			->join('reg_font g', 'g.id=a.user_id')
-				->where('g.active_state',1)
+				// ->where('g.active_state',1)
 				->where('a.user_id !=',$_SESSION['session_data'])
 						// ->where('cur_time',date('Y-m-d'))
 				->get();
@@ -131,9 +131,9 @@ public function provider_notification()
 					->from('requester_tbl a')
 					->join('req_to_pro b','b.requester_tbl_id = a.id')
 					->join('format_tbl c', 'c.id=a.format')
-    				->join('communication_tbl d', 'd.id=a.communication')
+    				// ->join('communication_tbl d', 'd.id=a.communication')
     				->join('archetype_name e', 'e.id=a.archetype')
-    				->join('voult_time_slot f', 'f.id=a.timeframe')
+    				// ->join('voult_time_slot f', 'f.id=a.timeframe')
     				->join('reg_font g', 'g.id=a.user_id')
     				->join('platform_tbl h', 'h.id=a.platform')
     				->where('b.status',1)
@@ -148,6 +148,7 @@ public function provider_notification()
 		return $selectQueryData->result();
 	}
 }
+
 // request nofication
 public function notify_request($value)
 {
@@ -160,7 +161,14 @@ public function notify_request($value)
 	// fetch request tbl id
 	$select_request_tbl = $this->db->where('user_id',$requester_id)->order_by('id','desc')->limit(1)->get('requester_tbl');
 	$fetch_request_tbl = $select_request_tbl->row();
+
+	// if($select_request_tbl->num_rows() > 0){
+	// 	$data_check = 
+	// }else{
+	// 	echo "No";
+	// }
 	$requester_tbl_id = $fetch_request_tbl->id;
+	// echo "hi".$requester_tbl_id;
 	// insert queries
 	$insertArrayReq = [
 		'provider_id' => $provider_id,
@@ -182,6 +190,54 @@ public function notify_request($value)
 	}
 }
 
+// provider new type request
+public function notify_creation($value, $time_frame_select, $platform_data, $format_data, $arche_type)
+{
+
+	$insert_array = [
+		'platform' => $platform_data,
+		'format' => $format_data,
+		'archetype' => $arche_type,
+		'timeframe' => $time_frame_select,
+		'communication' => 0,
+		'cur_time' => date('Y-m-d'),
+		'user_id' => $_SESSION['session_data'],
+	];
+	$insertQuery = $this->db->insert('requester_tbl',$insert_array);
+
+	$select_proid = $this->db->where('id',$value)->get('provider_data_tbl');
+	$total_data = $select_proid->row();
+	//  provider id
+	$provider_id = $total_data->user_id;
+	//	requester id
+	$requester_id = $_SESSION['session_data'];
+	// fetch request tbl id
+	$select_request_tbl = $this->db->where('user_id',$requester_id)->order_by('id','desc')->limit(1)->get('requester_tbl');
+	$fetch_request_tbl = $select_request_tbl->row();
+
+
+	$requester_tbl_id = $fetch_request_tbl->id;
+	
+	$insertArrayReq = [
+		'provider_id' => $provider_id,
+		'requester_id' => $requester_id,
+		'provider_tbl_id' => $value,
+		'requester_tbl_id' => $requester_tbl_id,
+		'active_date' => date('Y-m-d'),
+		'status' => 1
+	]; 
+
+	$insertQueryReq = $this->db->insert('req_to_pro',$insertArrayReq);
+	if($this->db->affected_rows())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+} 
+
 // provider and requester accept option
 
 public function accept_requester($request_id)
@@ -192,18 +248,20 @@ public function accept_requester($request_id)
 
 	$select_provider_time = $this->db->where($where_condition)->order_by('id','DESC')->limit(1)->get('provider_data_tbl');
 	$fetch_provider_time = $select_provider_time->row();
-	$fetch_timeframe_id = $fetch_provider_time->timeframe;
+	
 
-	// actual provided time
-	$select_provider_sec_time = $this->db->where('id',$fetch_timeframe_id)->get('voult_time_slot');
-	$fetch_provider_sec_time = $select_provider_sec_time->row();
-	$provider_actual_time = $fetch_provider_sec_time->convert_seconds;
+	
 
 	// requester details 
 	$select_requester_id = $this->db->where('id',$request_id)->get('requester_tbl');
 	$fetch_requester_id = $select_requester_id->row();
 	$req_user_id = $fetch_requester_id->user_id; 
+	$fetch_timeframe_id = $fetch_requester_id->timeframe;
 
+	// actual provided time
+	$select_provider_sec_time = $this->db->where('id',$fetch_timeframe_id)->get('voult_time_slot');
+	$fetch_provider_sec_time = $select_provider_sec_time->row();
+	$provider_actual_time = $fetch_provider_sec_time->convert_seconds;
 	// insert array
 	$insert_arr = [
 		'requester_id' => $req_user_id,
@@ -211,6 +269,21 @@ public function accept_requester($request_id)
 		'request_time' => $provider_actual_time,
 		'chat_on' => date('Y-m-d'),
 	];
+
+	$update_arr = [
+		'status' => 0
+	];
+
+	$update_where_arr = [
+		'provider_id' => $_SESSION['session_data'],
+		'requester_id' => $req_user_id,
+	];
+
+	$select_up_row = $this->db->where($update_where_arr)->order_by('id','DESC')->limit(1)->get('req_to_pro');
+	$fetch_up_row = $select_up_row->row();
+	$last_up_id = $fetch_up_row->id;
+
+	$update_query = $this->db->where('id',$last_up_id)->update('req_to_pro',$update_arr);
 
 	$insert_request = $this->db->insert('accept_request_tbl',$insert_arr);
 

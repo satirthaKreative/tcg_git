@@ -88,6 +88,20 @@ class MyDesk extends CI_Controller {
 		echo json_encode($error);
 	}
 
+
+	# Time Checking
+	public function checking_time_available($data_u)
+	{
+		$error['no_error'] = false;
+		$error['err_msg'] = "Requested time is not available in your voult ! Buy some time";
+		if($data_view = $this->mdm->checking_time_available($data_u))
+		{
+			$error['no_error'] = true;
+			$error['err_msg'] = "";
+		}
+		echo  json_encode($error);
+	}
+
 }
 
 /* End of file MyDesk.php */

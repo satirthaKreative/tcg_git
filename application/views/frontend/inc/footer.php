@@ -14,7 +14,7 @@
     <div class="content">
         <div class="contact-profile">
             <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="">
-            <p>Harvey Specter</p>
+            <p><!-- Harvey Specter --></p>
             
         </div>
         <div class="messages">
@@ -84,12 +84,13 @@
 </a>
 
 <!-- Provider Notice -->
-
-<a href="javascript:void(0);" class="provider_notice">
-    <span>20</span>
+<?php if(isset($_SESSION['session_data'])): ?>
+<a href="javascript:void(0);" onclick="show_provider_click();" class="provider_notice">
+    <span class="notice-count">0</span>
     <i class="fa fa-comment-o" aria-hidden="true"></i>
 </a>
-
+<?php endif; ?>
+<!-- end provider section -->
 
 <!-- Chatbox Content // -->
 <section class="footer">
@@ -192,6 +193,7 @@ if(y_state != 1){
 
     function accept_click(data)
     {
+        $(".provider_notice").hide();
         $.ajax({
             url: '<?= base_url("ProvidersViewController/accept_requester/") ?>',
             type: 'post',
@@ -199,7 +201,7 @@ if(y_state != 1){
             dataType:  'json',
             success: function(event)
             {
-                console.log(event);
+                //console.log(event);
                 var val2 = event.request_time; 
                 
                 // convert to provider ajax
@@ -223,7 +225,7 @@ if(y_state != 1){
             secondsInt = seconds.split('"');
             secondsNew = secondsInt[0];
 
-            console.log(secondsNew);
+            //console.log(secondsNew);
 
             var timer = setInterval(function(){ 
                 secondsNew--;
@@ -259,7 +261,7 @@ if(y_state != 1){
 
     // Accept status
     $(function(){
-        setInterval(function(){ request_stopwatch();checkChatBox(); },1000);
+        setInterval(function(){ request_stopwatch();checkChatBox();check_notice(); },1000);
     })
 
     // $(function(){ request_stopwatch(); })
@@ -388,8 +390,8 @@ if(y_state != 1){
                 success:  function(event)
                 {
                     var sess_id = '<?= $_SESSION["session_data"] ?>';
-                    console.log(event);
-                    console.log(sess_id);
+                    // console.log(event);
+                    // console.log(sess_id);
                    if(event.length == 0)
                    {
                     $('.msg-sent').html("<li class='sent'><img src='http://emilcarlsson.se/assets/mikeross.png' alt=''><p>Start Conversation</p></li>");
@@ -441,7 +443,30 @@ if(y_state != 1){
     $(".notification").hide();
     $(".c_btn").hide();
 }
+
+
+
+function check_notice()
+{
+    $.ajax({
+        url: "<?= base_url('Notification_Controller/check_notice/') ?>",
+        type: "post",
+        dataType: "json",
+        success: function(event)
+        {
+            // console.log(event);
+            // alert(event);
+            $(".notice-count").html(event);
+        }
+    })
+}
+
+function show_provider_click()
+{
+    window.location.href="<?= base_url('Home/Provider-Notification'); ?>";
+}
 </script>
+
 
 
 </html>

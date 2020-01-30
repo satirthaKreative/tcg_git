@@ -47,6 +47,21 @@
                                         2 Hr
                                     </span>
                                 </li>
+                                <li>
+                                    <span>
+                                        3 Hr
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        4 Hr
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        5 Hr
+                                    </span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -152,7 +167,7 @@
     $(function(){
         var data = '';
         $.ajax({
-            url: '<?= base_url('MyDesk/show_platform'); ?>',
+            url: '<?= base_url('MyDesk/show_platform/'); ?>',
             data: data,
             type: 'post',
             dataType: 'json',
@@ -222,7 +237,7 @@
             dataType: 'json',
             success:  function(event)
             {
-                 console.log(event);
+                //  console.log(event);
                 var html = '';
                     html +='<option value="">Time Frame</option>';
                     for(var i=0;i<event.length;i++)

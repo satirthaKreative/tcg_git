@@ -44,12 +44,29 @@ class ProvidersViewController extends CI_Controller {
 
 	// request creation
 
-	public function notify_request()
+	public function notify_request($dataValue)
 	{
 		$errmsg['no_error'] = false;
-		$errmsg['main_msg'] = "Something went wrong! Try again later";
-		$dataValue = $_POST['radioValue'];
+		// $errmsg['main_msg'] = "Something went wrong! Try again later";
+		// $dataValue = $_POST['radioValue'];
 		if($data = $this->ptm->notify_request($dataValue))
+		{
+			$errmsg['no_error'] = true;
+			$errmsg['main_msg'] = "Successfully request send to the provider";
+		}
+		echo json_encode($errmsg);
+	}
+
+	// Another request creation
+
+	public function notify_creation($datavalue){
+		$errmsg['no_error'] = false;
+		echo $time_frame_select = $_POST['time_frame_select'];
+		echo $platform_data = $_POST['platform_data'];
+		echo $format_data = $_POST['format_data'];
+		echo $arche_type = $_POST['arche_type'];
+
+		if($data = $this->ptm->notify_creation($datavalue, $time_frame_select, $platform_data, $format_data, $arche_type))
 		{
 			$errmsg['no_error'] = true;
 			$errmsg['main_msg'] = "Successfully request send to the provider";

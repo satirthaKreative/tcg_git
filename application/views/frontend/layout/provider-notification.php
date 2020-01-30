@@ -48,6 +48,21 @@
                                         2 Hr
                                     </span>
                                 </li>
+                                <li>
+                                    <span>
+                                        3 Hr
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        4 Hr
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        5 Hr
+                                    </span>
+                                </li>
                             </ul>
 
                         </div>
@@ -87,7 +102,7 @@
                                     <th scope="col">Platform</th>
                                     <th scope="col">Format</th>
                                     <th scope="col">Archetype</th>
-                                    <th scope="col">Duration</th>
+                                    <!-- <th scope="col">Duration</th> -->
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -180,13 +195,13 @@
                     for(var i = 0;i < event.length; i++)
                     {
 
-                        html += '<tr><td>'+j+'</td><td>'+event[i].user_name+'</td><td>'+event[i].platform_name+'</td><td>'+event[i].format_name+'</td><td>'+event[i].archetype_name+'</td><td>'+event[i].time_slot+'&nbsp;'+event[i].time_type+'</td><td><button type="button" name="approved" class="btn btn-danger" onclick="accept_click('+event[i].mainId+')">Accept</button></td></tr>'; 
+                        html += '<tr><td>'+j+'</td><td>'+event[i].user_name+'</td><td>'+event[i].platform_name+'</td><td>'+event[i].format_name+'</td><td>'+event[i].archetype_name+'</td><td><button type="button" name="approved" class="btn btn-danger" onclick="accept_click('+event[i].mainId+')">Accept</button></td></tr>'; 
                     j++;
                     }
                 }
                 else
                 {
-                    html += '<tr><td colspan="8"><center class="text-warning"><i class="fa fa-times"></i> No Provider Available</center></td></tr>';
+                    html += '<tr><td colspan="6"><center class="text-warning"><i class="fa fa-times"></i> No Provider Available</center></td></tr>';
                 }
                 $("#provider-details-add").html(html);
 
