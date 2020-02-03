@@ -122,6 +122,12 @@ class DeckEditorController extends CI_Controller {
 	}
 
 
+	public function removeDataMainDeck($data_list)
+	{
+		$result = $this->dem->removeDataMainDeck($data_list);
+		echo  json_encode($result);
+	}
+
 
 }
 

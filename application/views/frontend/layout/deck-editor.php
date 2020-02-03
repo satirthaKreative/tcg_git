@@ -12,6 +12,11 @@
     #div-scroll{
         max-height: 400px;
     }
+    .deck-title span.icn i {
+        color: #b31605;
+        font-size: 15px;
+        margin-left: 10px;
+    }
 </style>
 <section class="inner-page">
     <img class="quote_img" src="<?= base_url('assets/front_assets/images/wrapper_img2.jpg') ?>">
@@ -123,7 +128,7 @@
                             
 
 
-                            <h4 class="deck-title">Main Deck</h4>
+                            <h4 class="deck-title">Main Deck <span  class="icn"><a href="javascript:;" class="refresh_thispage"><i class="fa fa-refresh" aria-hidden="true"></i></a></span></h4>
 
 
                             <!-- <div class="table-content maindeck_table">
@@ -206,7 +211,7 @@
 
 
 
-                            <h4 class="deck-title">Sideboard</h4>
+                            <h4 class="deck-title">Sideboard  <span class="icn"><a href="javascript:;" class="refresh_thispage"><i class="fa fa-refresh" aria-hidden="true"></i></a></span></h4>
 
                             <div class="table-responsive">
                                 <table class="table table-hover table-content">
@@ -218,39 +223,10 @@
                                             <th scope="col" colspan="2">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="maindeck-data-sidebar" >
-                                        <tr class="">
-                                            <td colspan=""><a href="javascript:;" class="name" data-toggle="modal" data-target="#card_modal">Aegis Automaton</a></td>
-                                            <td colspan="">
-                                                <ul>
-                                                    <li>
-                                                        <span title="2">2</span>
-                                                    </li>
-                                                    <li>
-                                                        <img src="<?= base_url('assets/front_assets/images/b.png') ?>" alt="" title="{B}">
-                                                    </li>
-                                                    <li>
-                                                        <img src="<?= base_url('assets/front_assets/images/u.png') ?>" alt="" title="{U}">
-                                                    </li>
-                                                    <li>
-                                                        <img src="<?= base_url('assets/front_assets/images/w.png') ?>" alt="" title="{W}">
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                            <td class="action">
-                                                <a href="javascript:;" data-toggle="modal" data-target="#edit_modal">
-                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                </a>
-                                                <a href="javascript: ;"><i class="fa fa-trash" aria-hidden="true"></i></a>
-
-                                                <a href="javascript:void(0);" data-toggle="modal" data-target="#save_modal"> 
-                                                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                                                </a>
-                                            </td>
-                                            <td class="position">
-                                                <a href="javascript:;" class="">
-                                                    <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
-                                                </a>
+                                    <tbody class="maindeck-data-sidebar">
+                                        <tr>
+                                            <td colspan="3" class="text-center"> 
+                                                <strong class="text-danger "><i class="fa fa-times"></i> No Data In Main Deck</strong>
                                             </td>
                                         </tr>
                                         
@@ -429,15 +405,7 @@
             }
         })
     }
-    // window.onbeforeunload = function() {
-    //     var data_alert =  "Are you sure you want to navigate away?";
-    //     if(data_alert == true){
-    //         alert('jai sree ram');
-    //     }else{
-    //         return false;
-    //     }
-
-    // }
+    // Refresh list checking loading .....
     $(function(){
         show_format_details();
         function show_format_details()
@@ -481,6 +449,10 @@
             var page = $(this).data('ci-pagination-page');
             load_page_data(page);
         });
+    //  refresh button 
+        jQuery(".refresh_thispage").on('click',function(){
+            location.reload();
+        })
     });
 
     function show_card_data(key_data){
@@ -559,6 +531,7 @@
                 jQuery('.maindeck-data-show').find("#"+data_rap).hide();
                 jQuery('.maindeck-data-sidebar').html(response.pagination_link);
                 // jQuery('#search_data1').val('');
+                
             }, error:  function(response){
 
             }
@@ -576,7 +549,6 @@
                 var data_rap = data_wrap.replace(" ", "202");
                 $('.maindeck-data-sidebar').find("#"+data_rap).hide();
                 $('.maindeck-data-show').html(response.pagination_link);
-                // jQuery('#search_data1').val('');
             }, error:  function(response){
 
             }
@@ -597,5 +569,29 @@
 
             }
         })
+    }
+
+    // delete data from side-deck
+    function delete_particular_deck(data_check)
+    {
+        var data_rap = data_check.replace(" ", "202");
+        // alert("#"+data_check);
+        $('.maindeck-data-sidebar').find('#'+data_rap).hide();
+        myOnClickShowChange(data_check);
+    }
+
+    // delete data from main-deck
+    function delete_main_data_deck(data_wrap)
+    {
+        var data_rap = data_wrap.replace(" ", "202");
+        $.ajax({
+            url: "<?= base_url('DeckEditorController/removeDataMainDeck/') ?>"+data_wrap,
+            type: "post",
+            dataType: "json",
+            success: function(data_resopnse)
+            {
+                $('.maindeck-data-show').find('#'+data_rap).hide();
+            } 
+        }) 
     }
 </script>

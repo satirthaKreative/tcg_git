@@ -65,27 +65,31 @@ class DeckEditorModel extends CI_Model {
 		$result_data = $this->db->like('card_name',$search_card_data,'after')->get('card_details');
 		$output = '';
 					foreach ($result_data->result() as $key) {
+						#####
+						$card_store = $key->card_name;
+						$actual_card_name = htmlspecialchars('"'.$card_store.'"');
+						# key data
+						$data1 = str_replace(array( '{', '}' ),' ', $key->manacost);
+						$data_new = [];
+						$data_new = explode(' ',$data1);
+						$empty_list  = '';
+						foreach($data_new as $new_data_list)
+						{
+							if(is_numeric($new_data_list)){
+								$empty_list .= '<li> <span title="{'.$new_data_list.'}">'.$new_data_list.'</span></li> &nbsp;';
+							}else if(!is_numeric($new_data_list) && $new_data_list != ''){
+								$empty_list .= '<li> <img src="'.base_url("assets/front_assets/images/".$new_data_list.".png").'" alt="" title="{'.$new_data_list.'}"></li>  &nbsp;';
+							}
+						}
+						# end of key data
 						$output .= '<tr class="">
 			                            <td colspan=""><a href="javascript:;" class="name" onclick="show_card_data('.$key->id.')">'.$key->card_name.'</a>
 			                            </td>
 			                                    <td colspan="">
-			                                    	<ul>
-			                                            <li>
-			                                                <span title="{2}">2</span>
-			                                            </li>
-			                                            <li>
-			                                                <img src="'.base_url("assets/front_assets/images/b.png").'" alt="" title="{B}">
-			                                            </li>
-			                                            <li>
-			                                                <img src="'.base_url("assets/front_assets/images/u.png").'" alt="" title="{U}">
-			                                            </li>
-			                                            <li>
-			                                                <img src="'.base_url("assets/front_assets/images/w.png").'" alt="" title="{W}">
-			                                            </li>
-			                                        </ul>
+			                                    	<ul>'.$empty_list.'</ul>
 			                            		</td>
 			                            <td class="position">
-			                                <a href="javascript: ;" class="">
+			                                <a href="javascript: ;" onclick="myclickDownData('.$actual_card_name.')" class="">
 			                                   	<i class="fa fa-long-arrow-down" aria-hidden="true"></i>
 			                                </a>
 			                            </td>
@@ -176,7 +180,7 @@ class DeckEditorModel extends CI_Model {
                                                 <a href="javascript:;" class="edit" data-toggle="modal" data-target="#edit_modal">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
-                                                <a href="" class="delet">
+                                                <a href="javascript:void(0);" class="delet" onclick="delete_main_data_deck('.$actual_card_name1.')">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </a>
 
@@ -209,7 +213,7 @@ class DeckEditorModel extends CI_Model {
                                                 <a href="javascript:;" class="edit" data-toggle="modal" data-target="#edit_modal">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
-                                                <a href="" class="delet">
+                                                <a href="javascript:void(0)" class="delet" >
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </a>
 
@@ -286,7 +290,7 @@ class DeckEditorModel extends CI_Model {
 		                                                <a href="javascript:;" class="edit" data-toggle="modal" data-target="#edit_modal">
 		                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 		                                                </a>
-		                                                <a href="" class="delet">
+		                                                <a href="javascript:void(0);" class="delet" onclick="delete_particular_deck('.$actual_card_name1.')">
 		                                                    <i class="fa fa-trash" aria-hidden="true"></i>
 		                                                </a>
 
@@ -305,6 +309,19 @@ class DeckEditorModel extends CI_Model {
 	}
 
 	// end of sidebar data
+
+	// remove main data from deck editor
+
+	public function removeDataMainDeck($data_list)
+	{
+		    $key = array_search($data_list,$_SESSION['new_card_session']);
+		    if($key!==false){
+		    	unset($_SESSION['new_card_session'][$key]);
+			}
+			return true;
+	}
+
+	// end remove main deck
 
 	public function checking_card_addition(){
 		$output = '';
