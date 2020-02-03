@@ -383,19 +383,6 @@
         <form action="">
                                     
             <div class="form-group">
-                
-                <!-- <textarea class="form-control" rows="10" id="editor" name="editor" placeholder="
-                1 Ancient Tomb
-                    1 Barren Moor
-                    1 Blast Zone
-                    1 Bojuka Bog
-                    1 Cabal Coffers
-                    1 Phyrexian Tower
-                    25 Snow-Covered Swamp
-                    1 Strip Mine">
-                    
-
-                </textarea> -->
 
                 <textarea class="form-control" rows="10" id="comment" placeholder="1 Ancient Tomb
                     1 Barren Moor
@@ -404,9 +391,8 @@
                     1 Cabal Coffers
                     1 Phyrexian Tower
                     25 Snow-Covered Swamp
-                    1 Strip Mine"></textarea>
-
-               
+                    1 Strip Mine">   
+                </textarea>
 
             </div>
 
@@ -424,40 +410,7 @@
 
 <!-- Card Modal -->
 <div class="modal fade" id="card_modal_checking" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Card Details <?php  print_r($_SESSION['new_card_session']); ?> </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="card_area">
-            <div class="card_title">
-                <h2 id="card-show-details">Aegis Automaton</h2>
-                <ul>
-                    <li>
-                        <span title="{2}">2</span>
-                    </li>
-                    <li>
-                        <img src="https://www.ecollegestreet.in/tcgtester/assets/front_assets/images/b.png" alt="" title="{B}">
-                    </li>
-                    <li>
-                        <img src="https://www.ecollegestreet.in/tcgtester/assets/front_assets/images/u.png" alt="" title="{U}">
-                    </li>
-                    <li>
-                        <img src="https://www.ecollegestreet.in/tcgtester/assets/front_assets/images/w.png" alt="" title="{W}">
-                    </li>
-                </ul>
-            </div>
-
-                <p class="card-ability">Return another target creature you control to its owner's hand.</p>
-        </div>
-      </div>
-      
-    </div>
-  </div>
+  
 </div>
 
 
@@ -538,9 +491,8 @@
             data: {val: val},
             dataType: 'json',
             success: function(event){
-                // console.log(event);
-                jQuery('#card-show-details').html(event[0].card_name);
-                jQuery('.card-ability').html("<b>Ability: </b>"+event[0].ability);
+               console.log(event);
+                jQuery('#card_modal_checking').html(event.pagination_link);
                 $("#card_modal_checking").modal('show');
             }, error: function(event){
 
@@ -593,13 +545,19 @@
 
     function myOnClickChange(data_wrap)
     {
+        // alert(data_wrap);
         $.ajax({
             url: '<?= base_url("DeckEditorController/card_sidebar_addition/") ?>'+data_wrap,
             type: 'post',
             dataType: 'json',
             success: function(response){
-                $('.maindeck-data-show').find("#"+data_wrap).hide();
-                $('.maindeck-data-sidebar').html(response.pagination_link);
+
+                console.log(response);
+                console.log(data_wrap);
+                var data_rap = data_wrap.replace(" ", "202");
+                console.log(data_rap);
+                jQuery('.maindeck-data-show').find("#"+data_rap).hide();
+                jQuery('.maindeck-data-sidebar').html(response.pagination_link);
                 // jQuery('#search_data1').val('');
             }, error:  function(response){
 
@@ -610,6 +568,25 @@
     {
         $.ajax({
             url: '<?= base_url("DeckEditorController/card_addition/") ?>'+data_wrap,
+            type: 'post',
+            dataType: 'json',
+            success: function(response){
+                console.log(response);
+                console.log(data_wrap);
+                var data_rap = data_wrap.replace(" ", "202");
+                $('.maindeck-data-sidebar').find("#"+data_rap).hide();
+                $('.maindeck-data-show').html(response.pagination_link);
+                // jQuery('#search_data1').val('');
+            }, error:  function(response){
+
+            }
+        })
+    }
+
+    function myclickDownData(data_wrap)
+    {
+        $.ajax({
+            url: '<?= base_url("DeckEditorController/onclickDownData/") ?>'+data_wrap,
             type: 'post',
             dataType: 'json',
             success: function(response){

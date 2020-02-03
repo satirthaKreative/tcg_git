@@ -25,27 +25,28 @@ class DeckEditorModel extends CI_Model {
 								->get();
 		$total_rows = $return_rows->num_rows();
 		foreach ($return_rows->result() as $key) {
+			$card_store = $key->card_name;
+			$actual_card_name = htmlspecialchars('"'.$card_store.'"');
+			$data = str_replace(array( '{', '}' ), ' ', $key->manacost);
+			$data_new = [];
+			$data_new = explode(' ',$data);
+			$empty_list  = '';
+			foreach($data_new as $new_data_list)
+			{
+				if(is_numeric($new_data_list)){
+					$empty_list .= '<li> <span title="{'.$new_data_list.'}">'.$new_data_list.'</span></li> &nbsp;';
+				}else if(!is_numeric($new_data_list) && $new_data_list != ''){
+					$empty_list .= '<li> <img src="'.base_url("assets/front_assets/images/".$new_data_list.".png").'" alt="" title="{'.$new_data_list.'}"></li>  &nbsp;';
+				}
+			}
 			$output .= '<tr class="">
                             <td colspan=""><a href="javascript:;" class="name" id="card_data_model" onclick="show_card_data('.$key->id.')">'.$key->card_name.'</a>
                             </td>
                                     <td colspan="">
-                                    	<ul>
-                                            <li>
-                                                <span title="{2}">2</span>
-                                            </li>
-                                            <li>
-                                                <img src="'.base_url("assets/front_assets/images/b.png").'" alt="" title="{B}">
-                                            </li>
-                                            <li>
-                                                <img src="'.base_url("assets/front_assets/images/u.png").'" alt="" title="{U}">
-                                            </li>
-                                            <li>
-                                                <img src="'.base_url("assets/front_assets/images/w.png").'" alt="" title="{W}">
-                                            </li>
-                                        </ul>
+                                    	<ul>'.$empty_list.'</ul>
                             		</td>
                             <td class="position">
-                                <a href="javascript: ;" class="">
+                                <a href="javascript:;" onclick="myclickDownData('.$actual_card_name.')"  class="">
                                    	<i class="fa fa-long-arrow-down" aria-hidden="true"></i>
                                 </a>
                             </td>
@@ -53,6 +54,11 @@ class DeckEditorModel extends CI_Model {
 		}
 		return $output;
 
+	}
+
+	public function onclickDownData($data)
+	{
+		return $this->card_addition($data);
 	}
 
 	public function pagination_search($search_card_data){
@@ -93,11 +99,31 @@ class DeckEditorModel extends CI_Model {
 	public function show_card_data($data)
 	{
 		$data_set = $this->db->where('id',$data)->get('card_details');
-		if($data_set->num_rows() > 0){
-			return $data_set->result();
-		}else{
-			return false;
-		}
+		$output = '';
+		foreach($data_set->result() as $key){
+			$data1 = str_replace(array( '{', '}' ), ' ', $key->manacost);
+			$data_new = [];
+			$data_new = explode(' ',$data1);
+			$empty_list  = '';
+			foreach($data_new as $new_data_list)
+			{
+				if(is_numeric($new_data_list)){
+					$empty_list .= '<li> <span title="{'.$new_data_list.'}">'.$new_data_list.'</span></li> &nbsp;';
+				}else if(!is_numeric($new_data_list) && $new_data_list != ''){
+					$empty_list .= '<li> <img src="'.base_url("assets/front_assets/images/".$new_data_list.".png").'" alt="" title="{'.$new_data_list.'}"></li>  &nbsp;';
+				}
+			}
+			$output .= '<div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">Card Details </h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+      				<div class="modal-body">
+        				<div class="card_area">
+           	 				<div class="card_title">
+                				<h2 id="card-show-details">'.$key->card_name.'</h2>
+                			<ul>'.$empty_list.'</ul>
+            			</div>
+                	<p class="card-ability">'.$key->ability.'.</p>
+        			</div></div></div></div>';
+			}
+		return $output;
 	}
 
 	//
@@ -120,7 +146,21 @@ class DeckEditorModel extends CI_Model {
 			// $_SESSION['new_card_session'] = array();
 			array_push($_SESSION['new_card_session'],$data_list);
 			foreach ($_SESSION['new_card_session'] as $key) {
-				$output .= '<tr class="" id="'.str_replace('%20',' ',$key).'">
+				$random_pass_char = 202;
+				if(strpos($key, " ") == true)
+				{
+					$data_key_id = str_replace(" ",202,$key);
+				}
+				else if(strpos($key, "%20") == true)
+				{
+					$data_key_id = str_replace("%20",202,$key);
+				}
+				else
+				{
+					$data_key_id = $key;
+				}
+				$actual_card_name1 = str_replace('%20',' ',htmlspecialchars('"'.$key.'"'));
+				$output .= '<tr class="" id="'.$data_key_id.'">
                                        <td colspan=""><a href="javascript:;" class="name" data-toggle="modal" data-target="#card_modal">'.str_replace("%20"," ",$key).'</a></td>
                                             <td colspan="">
                                                 <ul>
@@ -145,7 +185,7 @@ class DeckEditorModel extends CI_Model {
                                                 </a>
                                             </td>
                                             <td class="position">
-                                                <a href="javascript:;" class="" onclick=myOnClickChange("'.str_replace('%20',' ',$key).'")>
+                                                <a href="javascript:;" class="" onclick="myOnClickChange('.$actual_card_name1.')">
                                                     <i class="fa fa-long-arrow-down" aria-hidden="true"></i>
                                                 </a>
                                             </td>
@@ -154,8 +194,8 @@ class DeckEditorModel extends CI_Model {
 		}else{
 			array_push($_SESSION['new_card_session'],$data_list);
 			$output .= '<tr class="">
-                                            <td colspan=""><a href="javascript:;" class="name" data-toggle="modal" data-target="#card_modal">'.str_replace("%20"," ",$_SESSION['new_card_session']).'</a></td>
-                                            <td colspan="">
+                            <td colspan=""><a href="javascript:;" class="name" data-toggle="modal" data-target="#card_modal">'.str_replace("%20"," ",$_SESSION['new_card_session']).'</a></td>
+                            				<td colspan="">
                                                 <ul>
                                                     <li>
                                                         <span title="2">2</span>
@@ -217,7 +257,20 @@ class DeckEditorModel extends CI_Model {
 					// $_SESSION['new_card_session'] = array();
 					array_push($_SESSION['new_sidear_card_session'],$data_list);
 					foreach ($_SESSION['new_sidear_card_session'] as $key) {
-						$output .= '<tr class="" id="'.str_replace('%20',' ',$key).'">
+						if(strpos($key, " ") == true)
+						{
+							$data_key_id = str_replace(" ",202,$key);
+						}
+						else if(strpos($key, "%20") == true)
+						{
+							$data_key_id = str_replace("%20",202,$key);
+						}
+						else
+						{
+							$data_key_id = $key;
+						}
+						$actual_card_name1 = str_replace('%20',' ',htmlspecialchars('"'.$key.'"'));
+						$output .= '<tr class="" id="'.$data_key_id.'">
 		                                       <td colspan=""><a href="javascript:;" class="name" data-toggle="modal" data-target="#card_modal">'.str_replace("%20"," ",$key).'</a></td>
 		                                            <td colspan="">
 		                                                <ul>
@@ -242,7 +295,7 @@ class DeckEditorModel extends CI_Model {
 		                                                </a>
 		                                            </td>
 		                                            <td class="position">
-		                                                <a href="javascript:;" class="" onclick=myOnClickShowChange("'.str_replace('%20',' ',$key).'")>
+		                                                <a href="javascript:;" class="" onclick="myOnClickShowChange('.$actual_card_name1.')">
 		                                                    <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
 		                                                </a>
 		                                            </td>

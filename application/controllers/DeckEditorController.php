@@ -70,8 +70,10 @@ class DeckEditorController extends CI_Controller {
 	public function show_card_data()
 	{
 		$result_data = $_POST['val'];
-		$result = $this->dem->show_card_data($result_data);
-		echo  json_encode($result);
+		$output = array(
+			'pagination_link' => $this->dem->show_card_data($result_data),
+		);
+		echo json_encode($output);
 	}
 	//
 	public function formatPage()
@@ -84,6 +86,14 @@ class DeckEditorController extends CI_Controller {
 	{
 		$output = array(
 			'pagination_link' => $this->dem->card_addition($data_list),
+		);
+		echo json_encode($output);
+	}
+	// 
+	public function onclickDownData($data_list)
+	{
+		$output = array(
+			'pagination_link' => $this->dem->onclickDownData($data_list),
 		);
 		echo json_encode($output);
 	}
