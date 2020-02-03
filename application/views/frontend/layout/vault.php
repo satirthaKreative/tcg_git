@@ -10,7 +10,7 @@
 
         <div class="container">
             <div class="row">
-                <div class="page-wrapper col-md-10">
+                <div class="page-wrapper col-md-9">
                     <div class="timer-section">
                         <img src="<?= base_url('assets/front_assets/'); ?>images/clock-icon.png">
 
@@ -51,12 +51,67 @@
                     </div>
 
                     <div class="volte_area">
-                        <h4>
+                        <?php 
+                        # actual slot of time percentage
+                        $percentage_voult_time = $_SESSION['voult_percentage_show'];
+                        # total price
+                        $total_price_of_voult = ''; 
+                        # condition 
+                        if($percentage_voult_time <= 25)
+                        {
+                            $total_price_of_voult = 30;
+                        }
+                        else if(25<$percentage_voult_time && $percentage_voult_time<75)
+                        {
+                            $total_price_of_voult = (-(1/2)*$percentage_voult_time)+42.5;
+                        }
+                        else if($percentage_voult_time >= 75)
+                        {
+                            $total_price_of_voult = 5;
+                        }
+                        $_SESSION['total_price_of_voult_test_new'] = round($total_price_of_voult,1);
+                        ?>
+                        <h3>Current Vault time price <strong>$<span><?= round($total_price_of_voult,1); ?></span></strong></h3>
+
+                        <!-- <ul>
+                            <li>
+                                <span>If vault time</span> <strong> > 75%</strong>  
+                                <h3>$<span>30</span></h3>
+                            </li>
+                            <li>
+                               <span>If vault time</span>   <strong> > 25%</strong>  
+                               <h3>$<span>30</span></h3>
+                            </li>
+                            <li>
+                               <span>If vault time</span>  <strong> < 25% - < 75%</strong>  
+                               <h3>$<span>42.5</span></h3>
+
+                            </li>
+                        </ul> -->
+
+                        
+                        <!-- <figure class="highlight">
+                            <pre>
+                                <code class="language-html" data-lang="html">
+
+
+                                    <span>If vault time > 75%, Price $5</span>
+                                    <span>If x<25, y=$30</span>
+                                    <span>If 25<x<75, Y=(-1/2)x+42.5</span>
+                                </code>
+
+                            </pre>
+
+                        </figure> -->
+
+                        <!-- <h5 class="note">(round up to nearest $0.50 increment)</h5> -->
+
+                        <!-- <h4>
                             The Incentive Vault is <strong><?= $_SESSION['voult_percentage_show']; ?>%</strong> Full
                         </h4>
                         <h4>
                             Additional Time Price: <strong>$86.00</strong>
-                        </h4>
+                        </h4> -->
                         <!-- <a href="javascript:void(0); data-toggle="modal" data-target="#volte-purchase">Purchase</a> -->
 
                         <button type="button" class="purchase_link" data-toggle="modal" data-target="#volte-purchase">
@@ -70,8 +125,8 @@
                     
                 </div>
 
-                <div class="ad-section col-md-2">
-                    <img src="<?= base_url('assets/front_assets/'); ?>images/ad-this.png">
+                <div class="ad-section col-md-3">
+                    <img src="<?= base_url('assets/front_assets/'); ?>images/card_add.png">
                 </div>
             </div>
         </div>
@@ -137,6 +192,7 @@
 
 <script>
     $(function(){
+        var total_time_of_price_voult = parseFloat('<?= $_SESSION["total_price_of_voult_test_new"] ?>');
         $.ajax({
             url : "<?php echo  base_url('Voult_time_controller/index'); ?>",
             type: "POST",
@@ -148,7 +204,9 @@
                     html += "<option value=''>Select Timeframe</option>";
                 for(var i = 0; i<event.length; i++)
                 {
-                    html += "<option value = "+event[i].id+">"+event[i].time_slot+" "+event[i].time_type+" (Price : "+event[i].time_slot_price+" USD)</option>";
+                    var price_new_check = event[i].time_slot_price;
+                    var convert_price_new_check = (parseFloat(price_new_check)+parseFloat(total_time_of_price_voult));
+                    html += "<option value = "+event[i].id+"><b>"+event[i].time_slot+"</b> "+event[i].time_type+" (Price : "+convert_price_new_check+" USD)</option>";
                 }
                 $(".purchase-time").html(html);
             }
@@ -181,6 +239,7 @@
         })
     }
 
+    // payment
     // payment
     function Payment()
     {

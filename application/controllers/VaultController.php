@@ -11,7 +11,7 @@ class VaultController extends CI_Controller {
 	public function index()
 	{
 		$total_time_in_voult = $this->tcm->fetch_parcentage_time();
-		$_SESSION['voult_percentage_show'] = round($total_time_in_voult);
+		$_SESSION['voult_percentage_show'] = round($total_time_in_voult,2);
 		$arr = array();
 		if(isset($_SESSION['status']) && $_SESSION['status'] == 'success')
 		{

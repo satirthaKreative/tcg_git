@@ -23,7 +23,7 @@ class Voult_time_controller extends CI_Controller {
 		{
 			$msg_data = $errmsg['data'][0]['time_slot'];
 			$msg_data1 = $errmsg['data'][0]['convert_seconds'];
-			$msg_data2 = $errmsg['data'][0]['time_slot_price'];
+			$msg_data2 = $errmsg['data'][0]['time_slot_price']+$_SESSION['total_price_of_voult_test_new'];
 			$msg_data3 = $errmsg['data'][0]['time_slot']." ". $errmsg['data'][0]['time_type'];
 			$_SESSION['buy_time_in_sec'] = $msg_data1;
 			$_SESSION['buy_time_view'] = $msg_data3;
@@ -41,7 +41,7 @@ class Voult_time_controller extends CI_Controller {
 		{
 			$msg_data = $errmsg['data'][0]['time_slot'];
 			$msg_data1 = $errmsg['data'][0]['convert_seconds'];
-			$msg_data2 = $errmsg['data'][0]['time_slot_price'];
+			$msg_data2 = $errmsg['data'][0]['time_slot_price']+$_SESSION['total_price_of_voult_test_new'];
 			$msg_data3 = $errmsg['data'][0]['time_slot']." ". $errmsg['data'][0]['time_type'];
 			$_SESSION['buy_time_in_sec'] = $msg_data1;
 			$_SESSION['buy_time_view'] = $msg_data3;
