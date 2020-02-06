@@ -150,31 +150,58 @@ class DeckEditorModel extends CI_Model {
 			// $_SESSION['new_card_session'] = array();
 			array_push($_SESSION['new_card_session'],$data_list);
 			foreach ($_SESSION['new_card_session'] as $key) {
+				
+				# main convert part 
 				$random_pass_char = 202;
 				if(strpos($key, " ") == true)
 				{
 					$data_key_id = str_replace(" ",202,$key);
+					$key_manacost_show = $key;
 				}
 				else if(strpos($key, "%20") == true)
 				{
 					$data_key_id = str_replace("%20",202,$key);
+					$key_manacost_show = str_replace("%20"," ",$key);
 				}
 				else
 				{
 					$data_key_id = $key;
 				}
+				# end of main convert part
+
+				# fetch card from particular card database
+
+				$fetch_full = $this->db->where('card_name',$key_manacost_show)->get("card_details");
+				if($fetch_full->num_rows() > 0)
+				{
+					# card full data
+					$stored_full_data = $fetch_full->row();
+					# end card full data 
+					$data1 = str_replace(array( '{', '}' ), ' ', $stored_full_data->manacost);
+					$data_new = [];
+					$data_new = explode(' ',$data1);
+					$empty_list  = '';
+					foreach($data_new as $new_data_list)
+					{
+						if(is_numeric($new_data_list)){
+							$empty_list .= '<li> <span title="{'.$new_data_list.'}">'.$new_data_list.'</span></li> &nbsp;';
+						}else if(!is_numeric($new_data_list) && $new_data_list != ''){
+							$empty_list .= '<li> <img src="'.base_url("assets/front_assets/images/".$new_data_list.".png").'" alt="" title="{'.$new_data_list.'}"></li>  &nbsp;';
+						}
+					}
+				}else{
+					$empty_list = "<li></li>";
+				}
+
+				# end fetch card database 
+
+				
+
 				$actual_card_name1 = str_replace('%20',' ',htmlspecialchars('"'.$key.'"'));
 				$output .= '<tr class="" id="'.$data_key_id.'">
                                        <td colspan=""><a href="javascript:;" class="name" data-toggle="modal" data-target="#card_modal">'.str_replace("%20"," ",$key).'</a></td>
                                             <td colspan="">
-                                                <ul>
-                                                    <li>
-                                                        <span title="2">2</span>
-                                                    </li>
-                                                    <li>
-                                                        <img src='.base_url("assets/front_assets/images/w.png").' alt="" title="{W}">
-                                                    </li>
-                                                </ul>
+                                                <ul>'.$empty_list.'</ul>
                                             </td>
                                             <td class="action">
                                                 <a href="javascript:;" class="edit" data-toggle="modal" data-target="#edit_modal">
@@ -264,27 +291,49 @@ class DeckEditorModel extends CI_Model {
 						if(strpos($key, " ") == true)
 						{
 							$data_key_id = str_replace(" ",202,$key);
+							$key_manacost_show = $key;
 						}
 						else if(strpos($key, "%20") == true)
 						{
 							$data_key_id = str_replace("%20",202,$key);
+							$key_manacost_show = str_replace("%20"," ",$key);
 						}
 						else
 						{
 							$data_key_id = $key;
 						}
 						$actual_card_name1 = str_replace('%20',' ',htmlspecialchars('"'.$key.'"'));
+						# end of main convert part
+
+						# fetch card from particular card database
+
+						$fetch_full = $this->db->where('card_name',$key_manacost_show)->get("card_details");
+						if($fetch_full->num_rows() > 0)
+						{
+							# card full data
+							$stored_full_data = $fetch_full->row();
+							# end card full data 
+							$data1 = str_replace(array( '{', '}' ), ' ', $stored_full_data->manacost);
+							$data_new = [];
+							$data_new = explode(' ',$data1);
+							$empty_list  = '';
+							foreach($data_new as $new_data_list)
+							{
+								if(is_numeric($new_data_list)){
+									$empty_list .= '<li> <span title="{'.$new_data_list.'}">'.$new_data_list.'</span></li> &nbsp;';
+								}else if(!is_numeric($new_data_list) && $new_data_list != ''){
+									$empty_list .= '<li> <img src="'.base_url("assets/front_assets/images/".$new_data_list.".png").'" alt="" title="{'.$new_data_list.'}"></li>  &nbsp;';
+								}
+							}
+						}else{
+							$empty_list = "<li></li>";
+						}
+
+						# end fetch card database
 						$output .= '<tr class="" id="'.$data_key_id.'">
 		                                       <td colspan=""><a href="javascript:;" class="name" data-toggle="modal" data-target="#card_modal">'.str_replace("%20"," ",$key).'</a></td>
 		                                            <td colspan="">
-		                                                <ul>
-		                                                    <li>
-		                                                        <span title="2">2</span>
-		                                                    </li>
-		                                                    <li>
-		                                                        <img src='.base_url("assets/front_assets/images/w.png").' alt="" title="{W}">
-		                                                    </li>
-		                                                </ul>
+		                                                <ul>'.$empty_list.'</ul>
 		                                            </td>
 		                                            <td class="action">
 		                                                <a href="javascript:;" class="edit" data-toggle="modal" data-target="#edit_modal">

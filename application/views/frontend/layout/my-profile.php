@@ -126,7 +126,7 @@
 
 
 
-                                <input type="search" class="form-control" placeholder="Search">
+                                <input type="search" class="form-control" placeholder="Search" id="search_block_user" onkeyup="search_block_check()">
 
 
 
@@ -154,139 +154,9 @@
 
                                 </thead>
 
-                                <tbody>
+                                <tbody id="block_user_provider">
 
-                                    <tr>
-
-                                        <!-- <td>
-
-                                            <div class="check-group">
-
-                                                <input type="checkbox" id="Johndeo">
-
-                                                <label for="Johndeo"></label>
-
-                                            </div>
-
-                                        </td> -->
-
-                                        <td>John Deo</td>
-
-                                        <td>
-
-                                            <!-- <div class="rating">
-
-
-
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-
-
-
-                                            </div> -->
-
-                                            <a href="javascript:;" class="btn user_ch" >Block</a>
-
-                                        </td>
-
-                                    </tr>
-
-
-
-                                    <tr>
-
-                                        <!-- <td>
-
-                                            <div class="check-group">
-
-                                                <input type="checkbox" id="Annabel">
-
-                                                <label for="Annabel"></label>
-
-                                            </div>
-
-                                        </td> -->
-
-                                        <td>Anna Bell</td>
-
-                                        <td>
-
-                                            <!-- <div class="rating">
-
-
-
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-
-
-
-                                            </div> -->
-                                            <a href="javascript:;" class="btn user_ch">Block</a>
-
-                                        </td>
-
-                                    </tr>
-
-
-
-                                    <tr>
-
-                                       <!--  <td>
-
-                                            <div class="check-group">
-
-                                                <input type="checkbox" id="Mickhussy">
-
-                                                <label for="Mickhussy"></label>
-
-                                            </div>
-
-                                        </td> -->
-
-                                        <td>Mick Hussy</td>
-
-                                        <td>
-
-                                            <!-- <div class="rating">
-
-
-
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-
-
-
-                                            </div> -->
-                                            <a href="javascript:;" class="btn user_ch">Block</a>
-
-
-
-                                        </td>
-
-                                    </tr>
-
-                                    
+                                    <!-- block user data -->
 
                                 </tbody>
 
@@ -1029,6 +899,67 @@
 
 <script>
 
+
+// block function 
+
+function block_users_by_requester(block_gl_data){
+    $.ajax({
+        url: '<?= base_url("Blocked_controller/check_total_providers/") ?>'+block_gl_data,
+        type: 'post',
+        dataType: 'json',
+        success: function(response){
+            $("#block_user_provider").html(response.total_providers_list);
+        }, error:  function(response){
+            // alert('js1');
+        }
+    })
+}
+
+// block active
+
+function block_active(block_id,blocked_by)
+{
+    $.ajax({
+        url: '<?= base_url("Blocked_controller/block_active/") ?>',
+        type: 'post',
+        data: {block_id: block_id,blocked_by: blocked_by},
+        dataType: 'json',
+        success: function(response){
+            var zero_send = 0;
+            block_users_by_requester(zero_send);
+            // $("#block_user_provider").html(response.total_providers_list);
+        }, error:  function(response){
+            // alert('js1');
+        }
+    })
+}
+
+// unblock active
+
+function block_deactive(block_id,blocked_by)
+{
+    $.ajax({
+        url: '<?= base_url("Blocked_controller/block_deactive/") ?>',
+        type: 'post',
+        data: {block_id: block_id,blocked_by: blocked_by},
+        dataType: 'json',
+        success: function(response){
+            var zero_send = 0;
+            block_users_by_requester(zero_send);
+            // $("#block_user_provider").html(response.total_providers_list);
+        }, error:  function(response){
+            // alert('js1');
+        }
+    })
+}
+
+// search block user
+
+function search_block_check()
+{
+    var block_search_data = jQuery("#search_block_user").val();
+    block_users_by_requester(block_search_data);
+}
     
 
 </script>
@@ -1130,6 +1061,10 @@
      // activity details
 
      $(function(){
+        var global_block_search_data = 0;
+        // call block function
+        block_users_by_requester(global_block_search_data);
+        // end call block function
 
         $('#paypal_tab').css('display','none');
 

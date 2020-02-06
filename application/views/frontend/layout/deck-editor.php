@@ -360,7 +360,7 @@
                                     
             <div class="form-group">
 
-                <textarea class="form-control" rows="10" id="comment" placeholder="1 Ancient Tomb
+                <textarea class="form-control" rows="10" name="comment" id="comment" placeholder="1 Ancient Tomb
                     1 Barren Moor
                     1 Blast Zone
                     1 Bojuka Bog
@@ -557,11 +557,13 @@
 
     function myclickDownData(data_wrap)
     {
+        // alert(data_wrap);
         $.ajax({
             url: '<?= base_url("DeckEditorController/onclickDownData/") ?>'+data_wrap,
             type: 'post',
             dataType: 'json',
             success: function(response){
+                console.log(response);
                 $('.maindeck-data-sidebar').find("#"+data_wrap).hide();
                 $('.maindeck-data-show').html(response.pagination_link);
                 // jQuery('#search_data1').val('');
@@ -594,4 +596,20 @@
             } 
         }) 
     }
+
+
+
+</script>
+<!-- // tiny editor -->
+<script type="text/javascript">
+    CKEDITOR.replace( 'comment', {
+   on :
+   {
+      instanceReady : function ( evt )
+      {
+         // Hide the editor top bar.
+         document.getElementById( 'cke_top_' + evt.editor.name ).style.display = 'none';
+      }
+   }
+} );
 </script>
