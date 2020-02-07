@@ -194,8 +194,8 @@ class DeckEditorModel extends CI_Model {
 				}
 
 				# end fetch card database 
-
-				
+				// $deck_val = 'MainDeck';
+				// $deck_name_editor = '"'.$deck_val.'"';
 
 				$actual_card_name1 = str_replace('%20',' ',htmlspecialchars('"'.$key.'"'));
 				$output .= '<tr class="" id="'.$data_key_id.'">
@@ -204,7 +204,7 @@ class DeckEditorModel extends CI_Model {
                                                 <ul>'.$empty_list.'</ul>
                                             </td>
                                             <td class="action">
-                                                <a href="javascript:;" class="edit" data-toggle="modal" data-target="#edit_modal">
+                                                <a href="javascript:;" class="edit" onclick="maindeck_model('.$actual_card_name1.','."'MainDeck'".')">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
                                                 <a href="javascript:void(0);" class="delet" onclick="delete_main_data_deck('.$actual_card_name1.')">
@@ -237,7 +237,7 @@ class DeckEditorModel extends CI_Model {
                                                 </ul>
                                             </td>
                                             <td class="action">
-                                                <a href="javascript:;" class="edit" data-toggle="modal" data-target="#edit_modal">
+                                                <a href="javascript:;" class="edit" onclick="maindeck_model()">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>
                                                 <a href="javascript:void(0)" class="delet" >
@@ -328,7 +328,6 @@ class DeckEditorModel extends CI_Model {
 						}else{
 							$empty_list = "<li></li>";
 						}
-
 						# end fetch card database
 						$output .= '<tr class="" id="'.$data_key_id.'">
 		                                       <td colspan=""><a href="javascript:;" class="name" data-toggle="modal" data-target="#card_modal">'.str_replace("%20"," ",$key).'</a></td>
@@ -336,7 +335,7 @@ class DeckEditorModel extends CI_Model {
 		                                                <ul>'.$empty_list.'</ul>
 		                                            </td>
 		                                            <td class="action">
-		                                                <a href="javascript:;" class="edit" data-toggle="modal" data-target="#edit_modal">
+		                                                <a href="javascript:;" class="edit" onclick="sidedeck_model('.$actual_card_name1.','."'SideDeck'".')">
 		                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 		                                                </a>
 		                                                <a href="javascript:void(0);" class="delet" onclick="delete_particular_deck('.$actual_card_name1.')">
@@ -443,7 +442,58 @@ class DeckEditorModel extends CI_Model {
 		return $output;
 	}
 
+	# edit deck data with details
 
+	public function edit_deck_data($card_name,$decktype,$comment)
+	{
+		// return $comment;
+
+		# manacost fetch
+		$manacost_sql = $this->db->where('card_name',$card_name)->get('card_details');
+		$manacost_return = $manacost_sql->row();
+		$fetch_manacost_data = $manacost_return->manacost; 
+
+
+		# remove html tags from string
+		$string_html = strip_tags($comment);
+		$actual_answer_key = trim(preg_replace('/\s\s+/', '200 ', $string_html));
+		// $act = preg_split('#(?<=\d)(?=[a-z])#i', $actual_answer_key);
+		// return print_r($act);
+		// $replace_str_html = str_replace(array('\n','\t','&nbsp;'), '202', $string_html);
+		$array_data = explode('200 ', $actual_answer_key);
+		$data_val = [];
+		foreach ($array_data as $key) {
+			# code...
+			$data_val[] = $key;
+		}
+		$data_com = implode(',',$data_val);
+		
+		// return $fetch_manacost_data;
+		# user id
+		$user_id = $_SESSION['session_data'];
+
+		# insert array 
+		$insertArr = [
+			'card_name' => $card_name,
+			'manacost' => $fetch_manacost_data,
+			'card_details' => $data_com,
+			'deck_name' => $decktype,
+			'user_id' => $user_id,
+			'insert_date' => date('Y-m-d'),
+			'update_date' => date('Y-m-d')
+		];
+		# insert data
+		$insertQuery = $this->db->insert('deckeditortmpstore',$insertArr);
+		if($this->db->affected_rows())
+		{
+			return true;
+		} 
+		else
+		{
+			return false;
+		}
+
+	}
 }
 
 /* End of file DeckEditorModel.php */

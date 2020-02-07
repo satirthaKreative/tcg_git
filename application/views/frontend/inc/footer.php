@@ -7,6 +7,10 @@
 
 </dv>
 
+<!-- notifing box -->
+<div class="notification_box">
+    <h2>Your Suggestion Successfully Approved</h2>
+</div>
 <!-- Chatbox Content -->
 
 <div id="frame" class="chatbox">

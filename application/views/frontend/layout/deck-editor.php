@@ -17,6 +17,26 @@
         font-size: 15px;
         margin-left: 10px;
     }
+    .cke_top{
+        display: none !important;
+    }
+    .notification_box {
+        position: fixed;
+        bottom: 30%;
+        z-index: 999;
+        background-color: #ffffff;
+        left: 0;
+        width: 210px;
+        text-align: center;
+        padding: 10px 20px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.17);
+        border-radius: 0 50px 50px 0;
+    }
+
+    .notification_box h2 {
+        font-size: 14px;
+        line-height: normal;
+    }
 </style>
 <section class="inner-page">
     <img class="quote_img" src="<?= base_url('assets/front_assets/images/wrapper_img2.jpg') ?>">
@@ -324,15 +344,16 @@
         </button>
       </div>
       <div class="modal-body">
+
         <form action="">
-                                    
+                         
             <div class="form-group">
                 
-                <textarea class="form-control" rows="3" placeholder="4 Elvish Visionary"></textarea>
+                <textarea class="form-control" rows="3"  placeholder="4 Elvish Visionary"></textarea>
             </div>
 
             <div class="btn-section text-right">
-                <button type="submit" class="btn btn-primary">Enter</button>  
+                <button type="button" class="btn btn-primary">Enter</button>  
             </div>
         </form>
       </div>
@@ -346,21 +367,26 @@
 
 
 <!-- Edit Modal -->
-<div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+        <h5 class="modal-title" id="edir_deck_data_id">Edit</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="">
-                                    
+        <form action="" id="edit_card_deck_sec">
+            <!-- Input card_name -->
+            <input type="hidden" name="card_name" id="card_name" value="">
+            <!-- Input manacost -->
+            <input type="hidden" name="manacost" id="manacost" value="">
+            <!-- Input decktype -->
+            <input type="hidden" name="decktype" id="decktype" value="">                          
             <div class="form-group">
 
-                <textarea class="form-control" rows="10" name="comment" id="comment" placeholder="1 Ancient Tomb
+                <textarea class="form-control" rows="10" name="comment" id="user_comment" placeholder="1 Ancient Tomb
                     1 Barren Moor
                     1 Blast Zone
                     1 Bojuka Bog
@@ -373,7 +399,7 @@
             </div>
 
             <div class="btn-section text-right">
-                <button type="submit" class="btn btn-primary">Enter</button>  
+                <button type="button" class="btn btn-primary" onclick="edit_deck_data()">Enter</button>  
             </div>
         </form>
       </div>
@@ -388,8 +414,62 @@
 <div class="modal fade" id="card_modal_checking" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLabel" aria-hidden="true">
   
 </div>
+<!-- // tiny editor -->
+<script type="text/javascript">
+    CKEDITOR.replace( 'comment', { removePlugins: 'toolbar' }  );
+</script>
+<script>
+    
+    function maindeck_model(data,deck)
+    {
+        jQuery("#card_name").val(data);
+        jQuery("#decktype").val(deck);
 
+        jQuery("#edit_modal").modal('show');
+        jQuery("#edir_deck_data_id").html(data+" - "+deck);
+    }
 
+    function sidedeck_model(data,deck)
+    {
+        jQuery("#card_name").val(data);
+        jQuery("#decktype").val(deck);
+        jQuery("#edit_modal").modal('show');
+        jQuery("#edir_deck_data_id").html(data+" - "+deck);
+    }
+
+    // update div
+    // function updateDiv(){
+    //     var editorText = CKEDITOR.instances.comment.getData();
+    //     $('#user_comment').html(editorText);
+    // }
+    // edit deck data
+    function edit_deck_data()
+    {
+        for (instance in CKEDITOR.instances) {
+            CKEDITOR.instances[instance].updateElement();
+        }
+
+        var card_name = jQuery("#card_name").val();
+        var decktype = jQuery("#decktype").val();
+        var comment = jQuery("#user_comment").val();
+        // alert(comment);
+        $.ajax({
+            url: '<?= base_url("DeckEditorController/edit_deck_data/") ?>',
+            type: 'POST',
+            data: {card_name: card_name,decktype: decktype,comment: comment},
+            dataType: 'text',
+            success: function(event)
+            {
+                // console.log(event);
+                // alert(event);
+                jQuery("#user_comment").val();
+            }, error:  function(event)
+            {
+
+            }
+        })
+    }
+</script>
 <script>
     window.onload = unloadPage;
     function unloadPage()
@@ -599,17 +679,4 @@
 
 
 
-</script>
-<!-- // tiny editor -->
-<script type="text/javascript">
-    CKEDITOR.replace( 'comment', {
-   on :
-   {
-      instanceReady : function ( evt )
-      {
-         // Hide the editor top bar.
-         document.getElementById( 'cke_top_' + evt.editor.name ).style.display = 'none';
-      }
-   }
-} );
 </script>

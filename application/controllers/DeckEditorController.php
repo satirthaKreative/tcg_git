@@ -128,6 +128,32 @@ class DeckEditorController extends CI_Controller {
 		echo  json_encode($result);
 	}
 
+	# edit deck data with details
+
+	public function edit_deck_data()
+	{
+		# card name
+		$card_name = $_POST['card_name'];
+		
+		# deck type
+		$decktype = $_POST['decktype'];
+		
+		# comment
+		$comment =  $_POST['comment'];
+		// echo json_encode($comment);
+		#condition
+		if($result = $this->dem->edit_deck_data($card_name,$decktype,$comment))
+		{
+			// echo json_encode($result);
+			$errors['no_error'] = true;
+		}
+		else
+		{
+			$errors['no_error'] = false;
+		}
+		echo  json_encode($errors);
+	}
+
 
 }
 

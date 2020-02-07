@@ -40,7 +40,8 @@
 		<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,900|Orbitron:400,700&display=swap" rel="stylesheet">
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script src="<?= base_url('assets/ckeditor/ckeditor.js') ?>"></script>
+		<!-- <script src="<?= base_url('assets/ckeditor/ckeditor.js') ?>"></script> -->
+		<script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
 	</head>
 <body>
 
