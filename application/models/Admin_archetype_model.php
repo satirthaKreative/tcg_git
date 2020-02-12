@@ -12,9 +12,9 @@ class Admin_archetype_model extends CI_Model {
 	public function count_total_rows()
 	{
 		$return_rows = $this->db->select('*')
-								->from('archetype_name a')
-								->join('archetype_category b','b.id = a.a_id')
-								->join('format_tbl c','c.id = b.f_id')
+								->from('deckeditortmpstore a')
+								->join('format_tbl b','a.format_name = b.id','INNER')
+								->join('reg_font c','a.user_id = c.id','INNER')
 								->get();
 		$total_rows = $return_rows->num_rows();
 		return $total_rows;
@@ -22,10 +22,10 @@ class Admin_archetype_model extends CI_Model {
 
 	public function articlelist($limit,$offset)
 	{
-		$return_rows = $this->db->select('*, a.id as mainId')
-								->from('archetype_name a')
-								->join('archetype_category b','b.id = a.a_id')
-								->join('format_tbl c','c.id = b.f_id')
+		$return_rows = $this->db->select('*, a.id as mainId, b.format_name as main_format_name')
+								->from('deckeditortmpstore a')
+								->join('format_tbl b','a.format_name = b.id','INNER')
+								->join('reg_font c','a.user_id = c.id','INNER')
 								->limit($limit,$offset)
 								->get();
 		$total_rows = $return_rows->num_rows();
@@ -55,9 +55,41 @@ class Admin_archetype_model extends CI_Model {
 		}
 	}
 
+	public function arche_name_check()
+	{
+		$result_arr = $this->db->get('archetype_name');
+		if($result_arr->num_rows() > 0)
+		{
+			return $result_arr->result();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	public function popup($data){
-		$result_arr = $this->db->where('id',$data)->get('archetype_name');
+		$result_arr = $this->db->where('id',$data)->get('deckeditortmpstore');
 		return $result_arr->result();
+	}
+
+	public function checking_arche_name($data_val){
+		$result_arr = $this->db->get('archetype_name');
+
+
+		if($result_arr->num_rows() > 0)
+		{
+			$html_view = "";
+			foreach($result_arr->result() as $res_data){
+				if($res_data->id == $data_val){
+					$select_state = "selected";
+				}else{
+					$select_state = "";
+				}
+				$html_view .= "<option value='".$res_data->id."' ".$select_state.">".$res_data->archetype_name."</option>";
+			}
+			return $html_view;
+		}
 	}
 
 }

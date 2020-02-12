@@ -48,10 +48,24 @@ class Archetype_admin_controller extends CI_Controller {
 		echo json_encode($result_array);
 	}
 
+	public function arche_name_check(){
+		$result_array = $this->aam->arche_name_check();
+		echo json_encode($result_array);
+	}
+
 	public function popup($data)
 	{
 		$result_array = $this->aam->popup($data);
 		echo json_encode($result_array);
+	}
+
+	public function checking_arche_name()
+	{
+		$data_val = $_POST['dataTA'];
+		$result_array = array(
+			'pagination_data' => $this->aam->checking_arche_name($data_val)
+		);
+		echo  json_encode($result_array);
 	}
 
 }

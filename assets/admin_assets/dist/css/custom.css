@@ -63,3 +63,27 @@
     content: "\f068";
 }
 .accordion-content {display: none;}
+
+/* ----- pagination hover effect (12.02.2020) Satirtha Das----- */
+li.page-item.active a:hover {
+    color: #007bff;
+    background: #e9ecef;
+    border: 1px solid;
+    border-color: #dee2e6;
+}
+
+
+
+.archetypr_data table.table-bordered.dataTable th, .archetypr_data table.table-bordered.dataTable td {
+    border-left-width: 0;
+    white-space: nowrap;
+}
+a.refresh_link {
+    display: inline-block;
+    background: #ffffff;
+    padding: 6px 14px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    vertical-align: middle;
+    margin: 4px 0;
+}
