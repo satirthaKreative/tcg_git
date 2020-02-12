@@ -1,0 +1,720 @@
+@media screen and (min-width: 1920px) {
+    .inner-page {
+        height: 100vh;
+    }
+    .inner-page.profile-section, section.register-sec {
+        height: 100vh;
+    }
+}
+
+/******* 768px ********/
+
+@media (max-width:768px) {
+
+    body {
+        height: 100vh;
+    }
+    
+    header.tg_header.wh_bg {
+        height: 60px;
+    }
+    header.tg_header img {
+        max-width: 40px;
+    }
+    header.tg_header.wh_bg img.d-none {
+        max-width: 40px;
+    }
+    .menu-part .menu-sec ul li a {
+
+        font-size: 12px;
+
+    }
+    .blog_content img {
+
+        width: 100%;
+
+    }
+    header .menu-part {
+
+        background: none;
+
+        margin-top: 0;
+
+        position: relative !important;
+
+        background: #272731 !important;
+
+        top: 0;
+
+        right: 0;
+
+        width: 100%;
+
+        padding: 0;
+
+    }
+
+    header ul li a {
+
+        font-size: 13px;
+
+        font-weight: 400;
+
+        line-height: 25px
+
+    }
+    .slim-container .slim-bar {
+
+        background: none !important;
+
+    }
+    .slim-container a.slimNav_sk78-reveal span {
+
+        background: #121723 !important;
+
+    }
+    .slim-container a.slimNav_sk78-reveal {
+
+        padding: 14px 13px 11px 13px !important;
+
+    }
+
+    a.slimNav_sk78-reveal.slimclose {
+
+        color: #121723 !important;
+
+    }
+    .slim-container .slim-nav {
+
+        background: #272731 !important;
+
+        overflow: hidden;
+
+        margin-top: 40px !important;
+
+    }
+    .slim-container .slim-nav ul li a.slim-expand {
+
+        height: 27px !important;
+
+        font-size: 29px !important;
+
+        font-weight: 500 !important;
+
+        line-height: 29px;
+
+        z-index: 99999999 !important;
+
+    }
+    .logo-sec {
+
+        z-index: 999999999;
+
+    }
+    .logo-part a {
+
+        display: table;
+
+        position: relative;
+
+        z-index: 999999999;
+
+    }
+    .menu-sec {
+
+        position: unset;
+
+    }
+    div#navigation {
+        position: absolute;
+        top: 8px;
+        right: 0;
+        width: 100%;
+    }
+    .logo-sec a {
+
+        position: relative;
+
+        z-index: 99999999;
+
+    }
+    .container {
+
+        max-width: 100% !important;
+
+    }
+
+    header.tg_header #navigation ul.dropdown_menu {
+        position: static;
+        box-shadow: none;
+        border-radius: 0;
+        border-top: transparent;
+        transition: inherit;
+        margin-top: 0;
+        visibility: visible;
+        background-color: #272731;
+        opacity: 1;
+    }
+    header.wh_bg #navigation li.user-pro a.slim-expand {
+        position: absolute;
+        right: 0px;
+        width: 40px;
+        text-indent: -80px;
+        overflow: hidden;
+        padding: 13px !important;
+        background-color: #353540;
+        border: transparent !important;
+    }
+
+    header.wh_bg #navigation li.user-pro > a::after {
+        display: none;
+    }
+    header.wh_bg #navigation li.user-pro a.slim-expand::after {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 10px;
+        height: 10px;
+        margin: auto;
+        display: block;
+    }
+    header.wh_bg #navigation li a, header.tg_header #navigation ul.dropdown_menu li a {
+        padding: 15px;
+        border-top: 1px solid #3c3c48;
+        border-bottom: 1px solid #0a0a0c;
+        width: 100%;
+        color: #ffffff;
+    }
+    header.tg_header #navigation ul.dropdown_menu li a {
+        padding-left: 30px;
+        background-color: #1f1f23 !important;
+        color: #ffffff !important;
+    }
+    
+
+
+
+    .checkbox-section {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 0; 
+    }
+    .checkbox-section .checkbox-content .form-check {
+        display: inline-block;
+        width: 50%;
+    }
+    .inner-page, .inner-page.profile-section {
+        height: 100%;
+    }
+
+
+    /*** Contact Page ***/
+    section.contact-sec ul {
+        width: 100%;
+    }
+    section.banner_section2 .banner_text h2 {
+        font-size: 30px;
+    }
+
+    section.register-sec .registration-content {
+        width: 97%;
+        display: block;
+        margin: auto;
+    }
+    section.register-sec .left-sec, section.register-sec .right-sec {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 20px;
+    }
+    section.register-sec .registration-content form .form-group {
+        width: 50%;
+        float: left;
+        padding: 0 10px;
+    }
+    section.register-sec form button.btn {
+        width: 97%;
+        margin: auto;
+        float: none;
+        display: block;
+    }
+    section.register-sec .registration-content .left-sec h3 {
+       padding-left: 10px;
+        margin-bottom: 13px;
+        font-size: 20px;
+        padding-top: 10px;
+    }
+    section.register-sec .embed-responsive-16by9 iframe {
+        border-radius: 0;
+    }
+
+    .timer-section .progress {
+	    height: 9px;
+	}
+	
+	
+    .login_content {
+        position: relative;
+        top: -4rem;
+    }
+    
+    section.login_section {
+        height: 100vh;
+    }
+    
+    /**** Account Information *****/
+    
+    .inner-page.profile-section .page-wrapper {
+        padding: 15px;
+    }
+    .inner-page.profile-section .sidebar ul a {
+        padding: 12px;
+        font-size: 13px;
+    }
+
+
+    .progress-area ul li span {
+        font-size: 12px;
+    }
+
+    section.contact-sec ul li {
+        padding: 15px 10px;
+    }
+
+}
+
+
+@media only screen and (min-device-width:769px) and (max-device-width:1024px) and (orientation:landscape) { 
+    header.wh_bg #navigation li a {
+        font-size: 13px;
+        padding: 23px 9px;
+    }
+    
+}
+
+
+
+@media (max-width: 767px) {
+    
+    section.register-sec .registration-content .credit_card form > .form-group {
+        padding: 0 5px;
+    }
+    section.register-sec .pay_pal form > .form-group {
+        padding: 0 5px;
+    }
+
+    section.register-sec .registration-content form#reg_form .form-group {
+        width: 100%;
+    }
+
+    .page-wrapper .cab_main .table-content tbody td {
+        padding: 3px 4px;
+        font-size: 13px;
+    }
+}
+
+
+
+@media (max-width: 568px) {
+
+    body {
+        height: 100%;
+    }
+
+   .login_content .button-group a.btn {
+        font-size: 11px;
+        margin: 3px;
+        padding: 10px;
+    }
+    .login_content input.form-control {
+        font-size: 15px !important;
+    }
+    .login_content button.btn.btn-primary {
+        font-size: 15px;
+        padding: 10px;
+        margin: 0 0 10px;
+    }
+
+    .page-wrapper h5 {
+        line-height: 26px;
+        font-size: 15px;
+    }
+    .filter.form-row {
+        display: block;
+    }
+    .filter .form-group {
+        width: 100%;
+        max-width: 100%;
+    }
+    .checkbox-section .checkbox-content .form-check {
+        width: 100%;
+    }
+
+    .ad-section.col-md-2 {
+        display: none;
+    }
+    
+    /*** Contact Page ***/
+    section.contact-sec ul li {
+        padding: 15px 20px;
+        text-align: center;
+    }
+    section.contact-sec ul li .c-img {
+        float: none;
+        width: 50px;
+        height: 50px;
+        margin-right: 0;
+        margin: auto;
+    }
+    section.contact-sec ul li h3 {
+        font-size: 15px;
+    }
+    section.contact-sec2 form button.btn {
+        max-width: 100%;
+	}
+
+
+	section.contact-sec ul {
+        display: block;
+    }
+    section.contact-sec ul li {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+
+	.timer-section {
+	    width: 100%;
+	}
+	.progress-area ul li {
+	    width: 29%;
+	}
+	.progress-area ul li span {
+	    font-size: 13px;
+	}
+	.tab_section {
+	    display: block;
+	    margin: 40px 0 10px;
+	}
+	.tab_section ul.nav-tab {
+	    overflow: hidden;
+	    margin-bottom: 20px;
+	}
+	.tab_section .switch {
+	    overflow: hidden;
+	    text-align: center;
+	}
+
+	.form-content {
+	    padding: 10px;
+	    margin-left: -15px;
+    	margin-right: -15px;
+	}
+	.tab_section .nav-tab li {
+	    width: 50%;
+	}
+	.form-content .form-group {
+	    width: 100%;
+	    padding: 0 0;
+	}
+	.form-content form button.btn {
+	    padding: 10px;
+	    font-size: 13px;
+	}
+	.timer-section img {
+	    max-width: 60px;
+	    margin: 20px auto;
+	}
+
+    /**** Account Information *****/
+    .tab_section2 .switch {
+        display: block;
+        width: 100%;
+        text-align: right;
+    }
+    .tab_section2 .form-group {
+        float: none;
+        width: 100%;
+    }
+    .page-wrapper .account-information form label {
+        text-align: left;
+    }
+
+    .inner-page.profile-section .page-wrapper h3 {
+        margin: 20px 0 15px;
+    }
+    .inner-page.profile-section .sidebar {
+        border-right: transparent;
+        border-bottom: 1px solid #ebebeb;
+    }
+
+    section.register-sec .left-sec, section.register-sec .right-sec {
+        padding: 10px;
+    }
+    section.banner_section2 .banner_text h2 {
+        font-size: 18px;
+        padding: 0 10px;
+        text-align: center;
+        line-height: normal;
+    }
+
+    .volte-image img {
+        max-width: 240px;
+    }
+
+    .volte_area h4 {
+        font-size: 14px;
+        margin: 0 0 25px;
+    }
+
+
+    #volte-purchase .payment-method {
+        text-align: center;
+    }
+    #volte-purchase .payment-method label {
+        width: 47%;
+        margin: 0 3px;
+    }
+
+    .volte_area ul li {
+        width: 100%;
+        margin-bottom: 10px;
+    } 
+    
+
+
+    .search_reasults ul {
+        max-height: 315px;
+    }
+    .search_reasults ul li {
+        margin-top: 15px;
+    }
+    .search_reasults ul .count_sec {
+        float: none;
+        width: 100%;
+        border-top: 1px solid #eeeeee;
+        text-align: center;
+        margin-top: 15px;
+    }
+    .search_reasults ul .count_sec span {
+        padding: 10px 20px;
+        border-left: transparent;
+    }
+    .search_reasults ul .count_sec a {
+        width: 40%;
+    }
+    .search_reasults ul li > span {
+        padding: 0 10px 5px;
+        border: transparent;
+    }
+
+
+    .addition_modal .modal-dialog .modal-body {
+        max-height: 230px;
+        overflow-y: auto;
+    }
+
+    /*** Registration Secton ***/
+    section.register-sec .left-sec .price-sec {
+        margin-left: -10px;
+        margin-right: -10px;
+        padding: 20px 30px 10px;
+    }
+    ul.step_section li {
+        padding: 0 7px;
+    }
+    .registration-content .step2 .payment-method label {
+        max-width: 130px;
+        margin: 0 5px;
+    }
+    section.register-sec .registration-content .credit_card form .form-group {
+        width: 100%;
+    }
+    section.register-sec .registration-content .credit_card form .form-group.col-md-8 {
+        width: 70%;
+    }
+    section.register-sec .registration-content .credit_card form .form-group.col-md-4 {
+        width: 30%;
+    }
+    .registration-content .step2 .cr_date .input-group {
+        width: 45%;
+        margin: 0 4px;
+    }
+
+    section.register-sec .pay_pal form > .form-group {
+        width: 100%;
+        float: none;
+    }
+    section.register-sec .pay_pal form .local .form-group:first-child {
+        width: 100%;
+    }
+    section.register-sec .pay_pal form .currency .form-group {
+        width: 33.333%;
+    }
+
+    section.register-sec .pay_pal form .date .form-group {
+        float: none;
+        flex: 0 0 35%;
+        max-width: 35%;
+    }
+    section.register-sec .pay_pal form .date .form-group:last-child {
+        flex: 0 0 30%;
+        max-width: 30%;
+    }
+
+    /*** Registration Secton ***/
+
+
+    /*** Deck Editor Secton ***/
+
+    .top-section .right_sec a.upload_btn {
+        margin: 0 auto auto 10px;
+    }
+    .page-wrapper .cab_main .table-content tbody td.position {
+        width: auto;
+    }
+}
+
+
+
+
+
+@media only screen and (min-device-width:569px) and (max-device-width:667px) and (orientation:landscape) {
+
+    .ad-section {
+        display: none;
+    }
+
+    body {
+	    height: 100%;
+	}
+
+    .progress-area ul li {
+	    width: 31%;
+	}
+
+    section.register-sec .left-sec, section.register-sec .right-sec {
+        padding: 10px;
+    }
+    section.banner_section2 .banner_text h2 {
+        font-size: 18px;
+    }
+    
+    section.login_section {
+        height: auto;
+    }
+    #volte-purchase form .payment select {
+
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+
+@media only screen and (min-device-width:668px) and (max-device-width:736px) and (orientation:landscape) {
+
+    .ad-section {
+        display: none;
+    }
+    body {
+	    height: 100%;
+	}
+    .progress-area ul li {
+	    width: 31%;
+	}
+
+    section.register-sec .left-sec, section.register-sec .right-sec {
+        padding: 10px;
+    }
+    section.banner_section2 .banner_text h2 {
+        font-size: 18px;
+    }
+    
+    section.login_section {
+        height: auto;
+    }
+
+}
+
+
+
+
+
+@media only screen and (min-device-width:737px) and (max-device-width:812px) and (orientation:landscape){
+
+    .ad-section {
+        display: none;
+    }
+    body {
+	    height: 100%;
+	}
+
+    .progress-area ul li {
+	    width: 31%;
+	}
+
+    .checkbox-section {
+	    margin-top: 30px;
+	    flex: 0 0 100%;
+	    max-width: 100%;
+	}
+	.page-wrapper {
+	    flex: 0 0 100%;
+	    max-width: 100%;
+	}
+
+    .inner-page.profile-section .page-wrapper {
+        flex: 0 0 75%;
+        max-width: 75%;
+    }
+    .inner-page.profile-section .sidebar ul a {
+        padding: 12px;
+        font-size: 12px;
+    }
+
+    section.register-sec .left-sec, section.register-sec .right-sec {
+        padding: 10px;
+    }
+    section.banner_section2 .banner_text h2 {
+        font-size: 18px;
+    }
+    
+    section.contact-sec ul li {
+        padding: 20px;
+        text-align: center;
+    }
+    section.contact-sec ul li .c-img {
+        float: none;    
+        width: 50px;
+        height: 50px;
+        margin: auto;
+    }
+    section.contact-sec ul li h3 {
+        font-size: 14px;
+    }
+    
+    
+    section.login_section {
+        height: auto;
+    }
+
+}
+
+
+
+@media only screen and (min-device-width:569px) and (max-device-width:768px) and (orientation:portrait){
+
+
+}
+
+
+@media screen and (max-width: 320px) {
+    section.register-sec .step2 form label, section.register-sec .step2 form .form-control {
+        font-size: 13px;
+    }
+}
