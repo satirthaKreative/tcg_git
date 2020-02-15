@@ -1,7 +1,3 @@
-
-
-
-
 <div class="content-wrapper">
 
 
@@ -45,7 +41,7 @@
 
 			                <th scope="col">Format</th>
 
-			                <th scope="col">Archetype Filter</th>
+			                <!-- <th scope="col">Archetype Filter</th> -->
 
 			                <th scope="col">Archetype Name</th>
 
@@ -74,9 +70,9 @@
 
 			                <td><?= $key_art->main_format_name; ?></td>
 
-			                <td>
+			                <!-- <td>
 
-			                    <select class="form-control arche-filter-class" name="Archetype_Filter">
+			                    <select class="form-control arche-filter-class" id="arche-filter-cid<?= $key_art->mainId; ?>" name="Archetype_Filter">
 
 			                    	<option value="">Archetype 1</option>
 
@@ -86,10 +82,10 @@
 
 			                    </select>
 
-			               	</td>
+			               	</td> -->
 
 			                <td>
-			                	<select class="form-control archl_class" name="Archetype" id="archl_class1" onchange="change_arche_type(<?= $key_art->mainId; ?>)">
+			                	<select class="form-control archl_class main_contain" name="Archetype" id="archl_class1<?= $key_art->mainId; ?>" onchange="change_arche_type(<?= $key_art->mainId; ?>)">
 
 			                		<option value="">Archetype 1</option>
 
@@ -108,13 +104,13 @@
 
 			                <td>
 
-			                	<a href="javascript:void(0);" class="btn btn-success" data-toggle="modal" data-target="#ac_modal">Accept</a>
+			                	<a href="javascript:void(0);" class="btn btn-success" onclick="click_act_model(<?= $key_art->mainId; ?>)">Accept</a>
 
 			                </td>
 
 			                <td>
 
-			                	<select class="form-control archl_class" name="Archetype" id="archl_class2" onchange="change_arche_type1(<?= $key_art->mainId; ?>)">
+			                	<select class="form-control archl_class" name="Archetype" id="archl_class2<?= $key_art->mainId; ?>" onchange="change_arche_type(<?= $key_art->mainId; ?>)">
 
 			                		<option value="">Archetype 1</option>
 
@@ -130,7 +126,7 @@
 
 			                	<a href="javascript:void(0);" class="btn btn-primary" data-toggle="modal" data-target="#modal2">Denial (T)</a>
 
-			                	<a href="javascript: ;" class="refresh_link" title="Refresh"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+			                	<!-- <a href="javascript: ;" class="refresh_link" title="Refresh"><i class="fa fa-refresh" aria-hidden="true"></i></a> -->
 
 			                </td>
 
@@ -142,7 +138,7 @@
 
 						<tr>
 
-							<td colspan="7"><span class="text-center text-warning"><i class="fa fa-times"> No Data Available</i></span></td>
+							<td colspan="8"><span class="text-center text-warning"><i class="fa fa-times"> No Data Available</i></span></td>
 
 						</tr>
 
@@ -291,7 +287,7 @@
       	<form>
 			<div class="form-row mb-2">
 				<div class="col-6">
-					<select class="form-control">
+					<select class="form-control data_acModal_select">
 				      <option value="">Select Option</option>
 				      <option value="">Select Option2</option>
 				    </select>
@@ -323,6 +319,32 @@
 </div>
 
 <!-- pagination anchor class add -->
+
+
+
+
+<!-- Cross Arch Modal -->
+
+<div class="modal fade" id="cross_arche_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog" role="document">
+
+    <div class="modal-content">
+
+      <div class="modal-body">
+      	<span class="cross"><i class="fa fa-times" aria-hidden="true"></i></span>
+      	<h2>You must select a archetype from denial response</h2>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
 
 <script>
 
@@ -396,24 +418,40 @@
 	// change archetype
 	function change_arche_type(response_data)
 	{
-		var dataT1 = $("#archl_class2").val();
-		var dataT2 = $("#archl_class1").val();
-
+		
+		var dataT1 = $("#archl_class2"+response_data).val();
+		var dataT2 = $("#archl_class1"+response_data).val();
+		console.log(dataT1+"  "+dataT2);
 		if(dataT1 != ''){
-			dataTA = dataT1;
+			var dataTA = dataT1;
 		}else if(dataT2 != ''){
-			dataTA = dataT2;
+			var dataTA = dataT2;
 		}
-
+		// console.log(dataTA);
 		$.ajax({
 			url: '<?= base_url("Archetype_admin_controller/checking_arche_name/") ?>',
 			type: 'post',
 			data: {dataTA: dataTA},
 			dataType: 'json',
 			success: function(event){
-				$("#deckTblId"+response_data).find("#archl_class1").html(event.pagination_data);
-				$("#deckTblId"+response_data).find("#archl_class2").html(event.pagination_data);
+				// console.log(event.pagination_data);
+				// alert(dataTA);
+				$("#deckTblId"+response_data).find("#archl_class1"+response_data).html(event.pagination_data);
+				$("#deckTblId"+response_data).find("#archl_class2"+response_data).html(event.pagination_data);
 				// success data
+				// alert(dataTA);
+				$.ajax({
+					url: "<?= base_url('Archetype_admin_controller/checking_archetype_wish/') ?>",
+					type: "post",
+					data: {dataTA: dataTA},
+					dataType: "json",
+					success: function(response){
+						console.log(response);
+						$('#arche-filter-cid'+response_data).html(response.pagination_data1);
+					}, error: function(response){
+
+					}
+				})
 			}
 		})
 	}
@@ -421,8 +459,8 @@
 	// change archetype1
 	function change_arche_type1(response_data)
 	{
-		var dataT1 = $("#archl_class2").val();
-		var dataT2 = $("#archl_class1").val();
+		var dataT1 = $("#archl_class2"+response_data).val();
+		var dataT2 = $("#archl_class1"+response_data).val();
 
 		if(dataT1 != ''){
 			dataTA = dataT1;
@@ -436,8 +474,8 @@
 			data: {dataTA: dataTA},
 			dataType: 'json',
 			success: function(event){
-				$("#deckTblId"+response_data).find("#archl_class2").html(event.pagination_data);
-				$("#deckTblId"+response_data).find("#archl_class1").html(event.pagination_data);
+				$("#deckTblId"+response_data).find("#archl_class2"+response_data).html(event.pagination_data);
+				$("#deckTblId"+response_data).find("#archl_class1"+response_data).html(event.pagination_data);
 			}
 		})
 	}
@@ -502,40 +540,29 @@
 
 	}
 
+	function click_act_model(data){
+		var main_data = $("#archl_class1"+data).val();
+		if(main_data == ''){
+		$('#cross_arche_modal').modal('show');
+		setTimeout(function(){ $("#cross_arche_modal").modal('hide'); },3000)
+		}else{
+			
+
+			$.ajax({
+				url: '<?= base_url("Archetype_admin_controller/checking_arche_name/") ?>',
+				type: 'post',
+				data: {dataTA: main_data},
+				dataType: 'json',
+				success: function(response){
+					$(".data_acModal_select").html(response.pagination_data);
+					$("#ac_modal").modal('show');
+				}, error: function(response){
+
+				}
+			})
+		}
+	}
+
 </script>
 
 <!-- /Popup -->
-
-<style>
-
-	div#popup_field .modal-body {
-
-	    max-height: 300px;
-
-	    min-height: auto;
-
-	    overflow-y: auto;
-
-	}
-
-
-
-	div#popup_field .modal-body ul {
-
-	    padding: 20px;
-
-	}
-
-
-
-	div#popup_field .modal-body ul li {
-
-	    display: inline-block;
-
-	    width: 50%;
-
-	    margin-bottom: 6px;
-
-	}
-
-</style>

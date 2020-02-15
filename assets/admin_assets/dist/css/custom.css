@@ -1,15 +1,28 @@
 
+
+
+div#popup_field .modal-body {
+
+        max-height: 300px;
+
+        min-height: auto;
+
+        overflow-y: auto;
+
+    }
 #popup_field .modal-body ul li {
     list-style: none;
-    padding: 8px;
-    font-size: 17px;
+    padding: 5px 12px;
+    font-size: 14px;
     border-bottom: 1px solid #eeeeee;
+    display: inline-block;
+    width: 50%; 
 }
 
 #popup_field .modal-body ul {
     margin: 0;
     border: 1px solid #eeeeee;
-    padding: 10px;
+    padding: 0;
 }
 
 #popup_field .modal-title, #modal2 .modal-title {
@@ -87,3 +100,28 @@ a.refresh_link {
     vertical-align: middle;
     margin: 4px 0;
 }
+
+
+/********** 14 FEB 2020  ***************/
+
+#cross_arche_modal .modal-body span.cross {
+    font-size: 27px;
+    width: 50px;
+    margin: 20px auto 10px;
+    display: block;
+    text-align: center;
+    background-color: #ffd1d1;
+    border-radius: 50%;
+    height: 50px;
+    padding: 4px;
+    color: #e04444;
+}
+
+#cross_arche_modal .modal-body  h2 {
+    font-size: 22px;
+    text-align: center;
+    padding: 0 10px;
+    margin: 25px 0 20px;
+}
+
+/********** 14 FEB 2020  ***************/

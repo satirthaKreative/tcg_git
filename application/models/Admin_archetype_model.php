@@ -92,6 +92,30 @@ class Admin_archetype_model extends CI_Model {
 		}
 	}
 
+	public function checking_archetype_wish($data_val){
+		$result_arr1 = $this->db->where('id',$data_val)->get('archetype_name');
+		$fetch_arr1 = $result_arr1->row();
+		$data_a_id = $fetch_arr1->a_id;
+		$result_arr = $this->db->group_by('archetype_filter')->get('archetype_category');
+
+
+		if($result_arr->num_rows() > 0)
+		{
+			$html_view = "";
+			foreach($result_arr->result() as $res_data){
+				if($res_data->id == $data_a_id){
+					$select_state = "selected";
+				}else{
+					$select_state = "";
+				}
+				$html_view .= "<option value='".$res_data->id."' ".$select_state.">".$res_data->archetype_filter."</option>";
+			}
+			return $html_view;
+		}
+	}
+
+	
+
 }
 
 /* End of file Admin_archetype_model.php */

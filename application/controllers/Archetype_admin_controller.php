@@ -68,6 +68,15 @@ class Archetype_admin_controller extends CI_Controller {
 		echo  json_encode($result_array);
 	}
 
+	public function checking_archetype_wish()
+	{
+		$data_val = $_POST['dataTA'];
+		$result_array = array(
+			'pagination_data1' => $this->aam->checking_archetype_wish($data_val)
+		);
+		echo  json_encode($result_array);
+	}
+
 }
 
 /* End of file Archetype_admin_controller.php */
