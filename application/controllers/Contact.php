@@ -42,7 +42,7 @@ class Contact extends CI_Controller {
         {
         	$from = 'info@ecollegestreet.in';
         	//  $user_email
-        	$to = 'santu.kreative@gmail.com'; 
+        	$to = 'satirtha.kreative@gmail.com'; 
             $contact_no = $this->input->post('usernumber');
             $message_data = $this->input->post('usermsg');
             // 	sinfo.support@tcg.com

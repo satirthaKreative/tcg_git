@@ -124,7 +124,7 @@
 
 			                <td>
 
-			                	<a href="javascript:void(0);" class="btn btn-primary" data-toggle="modal" data-target="#modal2">Denial (T)</a>
+			                	<a href="javascript:void(0);" class="btn btn-primary" onclick="denialPopup(<?= $key_art->mainId; ?>)">Denial (T)</a>
 
 			                	<!-- <a href="javascript: ;" class="refresh_link" title="Refresh"><i class="fa fa-refresh" aria-hidden="true"></i></a> -->
 
@@ -241,15 +241,15 @@
       <div class="modal-body">
 
       	<form>
-			<select class="form-control mb-2">
+			<select class="form-control mb-2" id="selective_arche_name">
 		      <option value="">Archetype Filter</option>
 		      <option value="">Aggro</option>
 		    </select>
-	        <textarea class="form-control" rows="3" placeholder="Type Denial Response Here…"></textarea>
+	        <textarea class="form-control" id="selective_denial_response" rows="3" placeholder="Type Denial Response Here…"></textarea>
 
 	        <div class="btn-sec text-right mt-2">
-
-	        	<button type="button" class="btn btn-primary">Send</button>
+	        	<span class="msg-section"></span>
+	        	<button type="button" class="btn btn-primary" id="denial_sending_datas">Send</button>
 
 	    	</div>
 
@@ -287,7 +287,7 @@
       	<form>
 			<div class="form-row mb-2">
 				<div class="col-6">
-					<select class="form-control data_acModal_select">
+					<select class="form-control data_acModal_select" id="ac_name_id">
 				      <option value="">Select Option</option>
 				      <option value="">Select Option2</option>
 				    </select>
@@ -295,16 +295,16 @@
 			    </div>
 
 				<div class="col-6">
-					<input type="email" class="form-control" placeholder="name@example.com">
+					<input type="email" id="email-exp-com" class="form-control" placeholder="name@example.com">
 			    </div>
 			</div>
 	        
 
-	        <textarea class="form-control" placeholder="Your response" rows="3"></textarea>
+	        <textarea class="form-control" id="selective_denial_response1" placeholder="Your response" rows="3"></textarea>
 
 	        <div class="btn-sec text-right mt-2">
 
-	        	<button type="button" class="btn btn-primary">Send</button>
+	        	<button type="button" id="my_act_sand_btn" class="btn btn-primary" onclick="send_mail_data()">Send</button>
 
 	    	</div>
 
@@ -446,7 +446,7 @@
 					data: {dataTA: dataTA},
 					dataType: "json",
 					success: function(response){
-						console.log(response);
+						// console.log(response);
 						$('#arche-filter-cid'+response_data).html(response.pagination_data1);
 					}, error: function(response){
 
@@ -541,6 +541,7 @@
 	}
 
 	function click_act_model(data){
+		var response_data =  data;
 		var main_data = $("#archl_class1"+data).val();
 		if(main_data == ''){
 		$('#cross_arche_modal').modal('show');
@@ -556,6 +557,37 @@
 				success: function(response){
 					$(".data_acModal_select").html(response.pagination_data);
 					$("#ac_modal").modal('show');
+					$("#my_act_sand_btn").attr('onclick','send_mail_data('+response_data+')');
+					// user data fetch
+					$.ajax({
+						url: "<?= base_url('Archetype_admin_controller/checking_for_users/') ?>",
+						type: "post",
+						data: {data: data},
+						dataType: "json",
+						success:  function(res){
+							// console.log(res);
+							$("#email-exp-com").val(res);
+							// denial msg
+							$.ajax({
+								url: '<?= base_url("Archetype_admin_controller/checking_denial_msg/") ?>',
+								type: 'post',
+								data:  {response_data: response_data},
+								dataType: 'json',
+								success: function(rez){
+									if(rez.denial_response != ' ' || rez.denial_response != null){
+										$(".data_acModal_select").attr('id','ac_name_id'+response_data);
+										$("#selective_denial_response1").val(rez.denial_response);
+									}else{
+										$("#selective_denial_response1").val('');
+									}
+								}, error:  function(rez){
+
+								}
+							})
+						}, error: function(res){
+
+						}
+					})
 				}, error: function(response){
 
 				}
@@ -563,6 +595,91 @@
 		}
 	}
 
+	// danial response model
+	function denialPopup(response_data)
+	{
+		var dataT1 = $("#archl_class2"+response_data).val();
+		var dataT2 = $("#archl_class1"+response_data).val();
+
+		if(dataT1 != ''){
+			dataTA = dataT1;
+		}else if(dataT2 != ''){
+			dataTA = dataT2;
+		}
+
+		$.ajax({
+			url: "<?= base_url('Archetype_admin_controller/checking_arche_name/') ?>",
+			type: "POST",
+			data: {dataTA:  dataTA},
+			dataType: "json",
+			success: function(event){
+				$("#modal2").modal('show');
+				$("#denial_sending_datas").attr('onclick','denial_send_data('+response_data+')');
+				$("#selective_arche_name").html(event.pagination_data);
+
+				// for denail response data checking
+
+				$.ajax({
+					url: '<?= base_url("Archetype_admin_controller/checking_denial_msg/") ?>',
+					type: 'post',
+					data:  {response_data: response_data},
+					dataType: 'json',
+					success: function(rez){
+						if(rez.denial_response != ' ' || rez.denial_response != null){
+							$("#selective_denial_response").val(rez.denial_response);
+						}else{
+							$("#selective_denial_response").val('');
+						}
+					}, error:  function(rez){
+
+					}
+				})
+				
+			}, error:  function(event){
+
+			}
+		})
+	}
+	// denial send data
+	function denial_send_data(res_data)
+	{
+		var d_res = $("#selective_denial_response").val();
+		$.ajax({
+			url: "<?= base_url('Archetype_admin_controller/denial_send_data/') ?>",
+			type: "POST",
+			data: {res_data:  res_data,d_res:  d_res},
+			dataType: "json",
+			success: function(event){
+				// console.log(event);
+				if(event.err_msg == true){
+					$(".msg-section").html("<b class='text-success'><i class='fa fa-check'></i>"+event.data_values+"</b>").fadeIn().delay(2900).fadeOut('slow');
+					setTimeout(function(){ $("#modal2").modal('hide'); },3000);
+				}else if(event.err_msg == false){
+					$(".msg-section").html("<b class='text-danger'><i class='fa fa-times'></i>"+event.data_values+"</b>");
+				}
+			}, error:  function(event){
+
+			}
+		})
+	}
+
+	// send email for response acceptance
+	function send_mail_data(rez_data)
+	{	
+		var main_arche_id = $("#ac_name_id"+rez_data).val();
+		alert(main_arche_id);
+		$.ajax({
+			url: "<?= base_url('Archetype_admin_controller/send_mail_data/') ?>",
+			type: "post",
+			data: {rez_data: rez_data,main_arche_id: main_arche_id,},
+			dataType: "text",
+			success: function(resp){
+				console.log(resp);
+			}, error: function(resp){
+
+			}
+		})
+	}
 </script>
 
 <!-- /Popup -->

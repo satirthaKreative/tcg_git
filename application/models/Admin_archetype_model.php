@@ -114,6 +114,63 @@ class Admin_archetype_model extends CI_Model {
 		}
 	}
 
+
+	public function checking_for_users($data_val){
+		$result_arr = $this->db->where('id',$data_val)->get('deckeditortmpstore');
+		$fetch_arr = $result_arr->row();
+		$main_data_id = $fetch_arr->user_id;
+		$fetch_data = $this->db->where('id',$main_data_id)->get('reg_font');
+		$fetch_data_reg = $fetch_data->row();
+
+		if($fetch_data->num_rows()>0)
+		{
+			return $fetch_data_reg->user_email;
+		}
+	} 
+
+	public function denial_send_data($data_val,$res_val)
+	{	
+		$arr_err = [
+			'denial_response' => $res_val,
+		];
+		$result_arr = $this->db->where('id',$data_val)->update('deckeditortmpstore',$arr_err);
+		if($this->db->affected_rows()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function checking_denial_msg($data_show)
+	{
+		$result_arr = $this->db->where('id',$data_show)->get('deckeditortmpstore');
+		if($result_arr->num_rows() > 0){
+			return $result_arr->row();
+		}else{
+			return false;
+		}
+	}
+
+	public function send_mail_data($resp_data){
+		$result_arr = $this->db->where('id',$resp_data)->get('deckeditortmpstore');
+		if($result_arr->num_rows() > 0){
+			$fetch_data_res = $result_arr->row();
+			$my_user_id = $fetch_data_res->user_id;
+
+			# user_id checking for email data
+			$fetch_checking = $this->db->where('id',$my_user_id)->get('reg_font');
+			if($fetch_checking->num_rows() > 0){
+				$main_data_set = $fetch_checking->row();
+				$main_user_mail = $main_data_set->user_email;
+				return $main_user_mail;
+			}else{
+				return false;
+			}
+		}
+	}
+
+	
+
 	
 
 }

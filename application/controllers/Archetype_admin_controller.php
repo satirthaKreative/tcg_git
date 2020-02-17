@@ -77,6 +77,42 @@ class Archetype_admin_controller extends CI_Controller {
 		echo  json_encode($result_array);
 	}
 
+	public function checking_for_users()
+	{
+		$data_val = $_POST['data'];
+		$result_array = $this->aam->checking_for_users($data_val);
+		echo  json_encode($result_array);
+	}
+
+	public function denial_send_data()
+	{
+		$data_val = $_POST['res_data'];
+		$res_val = $_POST['d_res'];
+		$res_event['err_msg'] = false;
+		$res_event['data_values'] = "Error data";
+		if($result_array = $this->aam->denial_send_data($data_val,$res_val)){
+			$res_event['err_msg'] = true;
+			$res_event['data_values'] = "Successfully added the response";
+		}
+		echo  json_encode($res_event);
+	}
+
+	public function checking_denial_msg()
+	{
+		$data_show = $_POST['response_data'];
+		$result_array = $this->aam->checking_denial_msg($data_show);
+		echo  json_encode($result_array);
+	}
+
+	public function send_mail_data(){
+		$resp_data = $_POST['rez_data'];
+		$result_array = $this->aam->send_mail_data($resp_data);
+		$main_user_email = $result_array;
+
+		
+
+	}
+
 }
 
 /* End of file Archetype_admin_controller.php */
