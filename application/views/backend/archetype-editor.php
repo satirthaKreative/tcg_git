@@ -344,6 +344,26 @@
 </div>
 
 
+<!-- success model open -->
+
+<div class="modal fade" id="cross_send_mail_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog" role="document">
+
+    <div class="modal-content">
+
+      <div class="modal-body">
+      	<span class="cross"><i class="fa fa-check" aria-hidden="true"></i></span>
+      	<h2>Mail send successfully</h2>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
 
 
 <script>
@@ -576,6 +596,7 @@
 								success: function(rez){
 									if(rez.denial_response != ' ' || rez.denial_response != null){
 										$(".data_acModal_select").attr('id','ac_name_id'+response_data);
+										$("#selective_denial_response1").attr('class','form-control checking_id'+response_data);
 										$("#selective_denial_response1").val(rez.denial_response);
 									}else{
 										$("#selective_denial_response1").val('');
@@ -667,14 +688,20 @@
 	function send_mail_data(rez_data)
 	{	
 		var main_arche_id = $("#ac_name_id"+rez_data).val();
-		alert(main_arche_id);
+		var main_descrip = $(".checking_id"+rez_data).val();
 		$.ajax({
 			url: "<?= base_url('Archetype_admin_controller/send_mail_data/') ?>",
 			type: "post",
-			data: {rez_data: rez_data,main_arche_id: main_arche_id,},
-			dataType: "text",
+			data: {rez_data: rez_data,main_arche_id: main_arche_id,main_descrip:  main_descrip},
+			dataType: "json",
 			success: function(resp){
 				console.log(resp);
+				if(resp.no_error == true){
+					$("#cross_send_mail_modal").modal('show');
+					setTimeout(function(){ $("#cross_send_mail_modal").modal('hide'); $("#ac_modal").modal('hide'); },3000);
+				}else if(resp.no_error == false){
+
+				}
 			}, error: function(resp){
 
 			}

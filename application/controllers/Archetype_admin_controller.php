@@ -109,8 +109,52 @@ class Archetype_admin_controller extends CI_Controller {
 		$result_array = $this->aam->send_mail_data($resp_data);
 		$main_user_email = $result_array;
 
-		
+		$main_id = $_POST['main_arche_id'];
+		$main_archetype = $this->aam->show_arche_type($main_id);
+		$main_arche_name = $main_archetype;
 
+		$main_descrip = $_POST['main_descrip'];
+		$data_send_to_server = $this->aam->update_data_type($resp_data,$main_descrip);
+
+		if($main_id == '')
+		{
+			$err_msg['main_error'] = "Select archetype";
+		}
+		else if($main_user_email == '')
+		{
+			$err_msg['main_error'] = "Enter email address";
+		}
+		else if(filter_var($main_user_email, FILTER_VALIDATE_EMAIL) == false)
+		{
+			$err_msg['main_error'] = 'Enter valid email address';
+		}
+		else
+		{
+			$from = 'info@ecollegestreet.in';
+			//  $user_email
+			$to = $main_user_email; 
+		    $contact_no = $this->input->post('usernumber');
+		    $message_data = $this->input->post('usermsg');
+		    // 	sinfo.support@tcg.com
+			$subject = 'Enquiry Form';
+			$message = '<html lang="en"><head><meta charset="UTF-8"><title>Document</title></head><body style="margin: 0; padding: 15px !important; mso-line-height-rule: exactly; background-color: #f1f1f1;"><div style="max-width: 600px; margin: 0 auto;background-color: #ffffff;" class="email-container"><table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;"><thead><tr><td colspan="2" style="background: #b31605;border-bottom: 3px solid #941f1c;padding: 10px 15px;text-align:center;"><h3 style="padding: 10px 0; text-decoration: none;font-size:22px;font-weight:700;color:#ffffff; margin: 0;">Response Mail</h3></td></tr></thead><tbody style="padding: 10px;display: block;"><tr><td colspan="2" style="border-collapse: collapse;text-align: left;padding: 6px;"></td></tr><tr><td colspan="2" style="text-align: center;font-size: 22px;color: #84bb2b;padding: 10px 60px 20px;
+"><p>Your suggestion was successfully approved by Admin For "'.$main_arche_name.'" Archetype</p></td></tr><tr><td colspan="2" style="border-collapse: collapse;text-align: left;padding: 6px;"></td></tr><tr><td style="border-collapse: collapse;text-align: left;padding: 15px;width: 20%;"><strong style="width: 130px;display: inline-block;text-align: left;">Archetype Name:</strong></td><td style="border-collapse: collapse;text-align: left;padding: 15px;background-color: #fff;border: 2px solid #f3f3f3;">'.$main_arche_name.'</td></tr><tr><td colspan="2" style="border-collapse: collapse;text-align: left;padding: 6px;"></td></tr><tr><td colspan="2" style="border-collapse: collapse;text-align: left;padding: 6px;"></td></tr><tr><td colspan="2" style="border-collapse: collapse;text-align: left;padding: 6px;"></td></tr><tr><td style="border-collapse: collapse;text-align: left;padding: 15px;width: 20%;"><strong style="width: 130px;display: inline-block;text-align: left;">Denial Response:</strong></td><td style="border-collapse: collapse;text-align: left;padding: 15px;background-color: #fff;border: 2px solid #f3f3f3;">'.$main_descrip.'</td></tr><tr><td colspan="2" style="border-collapse: collapse;text-align: left;padding: 15px; height: 90px;"></td></tr><tr><td colspan="2" style="border-collapse: collapse;text-align: center;padding: 15px;background-color: #1b1919;font-size: 14px;color: #989696;">© All rights reserved is a copyright formality indicating</td></tr></tbody></table></div></body></html>';
+
+			$this->email->from($from);
+			$this->email->to($to);
+			$this->email->subject($subject);
+			$this->email->message($message);
+			$this->email->set_mailtype('html');
+
+			if ($this->email->send()) {
+				$err_msg['no_error'] = true;
+			    $err_msg['main_error'] = 'Your email has successfully been sent.';
+			} else {
+			    $err_msg['main_error'] = 'Server Not Responding ! Try Again';
+			}
+		}
+
+		echo json_encode($err_msg);
 	}
 
 }

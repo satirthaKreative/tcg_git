@@ -166,10 +166,34 @@ class Admin_archetype_model extends CI_Model {
 			}else{
 				return false;
 			}
+		}else{
+			return false;
 		}
 	}
 
-	
+	public function show_arche_type($main_id){
+		$result_arr = $this->db->where('id',$main_id)->get('archetype_name');
+		if($result_arr->num_rows() > 0){
+			$main_data_set = $result_arr->row();
+			$main_user_mail = $main_data_set->archetype_name;
+			return $main_user_mail;
+		}else{
+			return false;
+		}
+	}
+
+	public function update_data_type($resp_data,$main_descrip)
+	{
+		$arr_err = [
+			'denial_response' => $main_descrip,
+		];
+		$result_arr = $this->db->where('id',$resp_data)->update('deckeditortmpstore',$arr_err);
+		if($this->db->affected_rows()){
+			return true;
+		}else{
+			return false;
+		}
+	}
 
 	
 

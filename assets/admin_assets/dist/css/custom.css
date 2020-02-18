@@ -125,3 +125,39 @@ a.refresh_link {
 }
 
 /********** 14 FEB 2020  ***************/
+
+
+/********** Cross Sent mail 18 feb,2020 ***************/
+
+
+div#cross_send_mail_modal {
+    background: rgba(0, 0, 0, 0.50);
+}
+
+div#cross_send_mail_modal .modal-dialog {
+    max-width: 330px;
+    top: 40px;
+}
+
+div#cross_send_mail_modal .modal-dialog .modal-content {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.26);
+    text-align: center;
+}
+
+div#cross_send_mail_modal .modal-dialog .modal-content span.cross {
+    font-size: 20px;
+    color: #75ca60;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+div#cross_send_mail_modal .modal-dialog .modal-content  h2 {
+    font-size: 22px;
+}
+
+/********** Cross Sent mail  ***************/
