@@ -465,6 +465,12 @@ function show_provider_click()
 {
     window.location.href="<?= base_url('Home/Provider-Notification'); ?>";
 }
+
+// function jakicy(data){
+//     console.log(data);
+//     return true;
+// }
+
 </script>
 
 
