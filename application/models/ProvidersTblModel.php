@@ -16,6 +16,15 @@ public function providers_total_details()
 	#session user id
 	$session_data= $_SESSION['session_data'];
 
+	#session data
+	$selectQuery = $this->db->where('block_id',$_SESSION['session_data'])->where('block_status',1)->get('block_users_tbl');
+	$fetchQ_data = $selectQuery->row();
+	if($selectQuery->num_rows() > 0){
+		$num_data = $fetchQ_data->blocked_by;
+	}else{
+		$num_data = 0;
+	}
+
 	#all providers
 	$selectQueryData = $this->db->select('*, a.id as mainId, b.id as platId, c.id as formatId, e.id as archeId')
 				->from('provider_data_tbl a') 
@@ -25,6 +34,7 @@ public function providers_total_details()
     			->join('reg_font g', 'g.id=a.user_id')
 				// ->where('g.active_state',1)
 				->where('a.user_id !=',$_SESSION['session_data'])
+				->where('a.user_id !=',$num_data)
 						// ->where('cur_time',date('Y-m-d'))
 				->get();
 
