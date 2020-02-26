@@ -105,6 +105,11 @@ class Archetype_admin_controller extends CI_Controller {
 	}
 
 	public function send_mail_data(){
+		# update archetype data
+		$need_update_fetch = $this->aam->query_updateFetch($_POST['rez_data'],$_POST['main_arche_id']);
+
+		# end of update archetype data
+
 		$resp_data = $_POST['rez_data'];
 		$result_array = $this->aam->send_mail_data($resp_data);
 		$main_user_email = $result_array;

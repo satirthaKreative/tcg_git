@@ -175,7 +175,7 @@
                                 </table>
                             </div> -->
 
-                            <div class="table-responsive">
+                            <div id="div-scroll" class="table-responsive scrl_gbl">
                                 <table class="table table-hover table-content">
                                     <thead>
                                         <tr>
@@ -237,7 +237,7 @@
 
                             <h4 class="deck-title">Sideboard</h4>
 
-                            <div class="table-responsive">
+                            <div id="div-scroll" class="table-responsive scrl_gbl">
                                 <table class="table table-hover table-content">
                                     <thead>
                                         <tr>
@@ -410,8 +410,8 @@
             </div>
 
             <div class="btn-section text-right">
-                <div class="suc"></div>
-                <button type="button" class="btn btn-primary" onclick="edit_deck_data()">Enter</button>  
+                <button type="button" class="btn btn-primary" onclick="edit_deck_data()">Enter</button> 
+                <div class="suc"></div> 
             </div>
         </form>
       </div>

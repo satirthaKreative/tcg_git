@@ -26,6 +26,7 @@ class Admin_archetype_model extends CI_Model {
 								->from('deckeditortmpstore a')
 								->join('format_tbl b','a.format_name = b.id','INNER')
 								->join('reg_font c','a.user_id = c.id','INNER')
+								->where('approved_status !=', 1)
 								->limit($limit,$offset)
 								->get();
 		$total_rows = $return_rows->num_rows();
@@ -191,6 +192,49 @@ class Admin_archetype_model extends CI_Model {
 		if($this->db->affected_rows()){
 			return true;
 		}else{
+			return false;
+		}
+	}
+
+	// update new archetype datas na dfetch all of those data
+
+	public function query_updateFetch($main_data_id, $arche_id)
+	{
+		# update
+		$updataQueryOn = $this->db->where('id',$main_data_id)->update('deckeditortmpstore',['choose_arche_id'=>$arche_id]);
+		# select 
+		$selectQueryOn = $this->db->where('id',$main_data_id)->get('deckeditortmpstore');
+		$fetchQueryOn = $selectQueryOn->row();
+
+		# select archetype
+		$selectArche = $this->db->where('id',$fetchQueryOn->id)->get('archetype_name');
+		$fetchArche = $selectArche->row();
+		$get_arche_cate_id = $fetchArche->a_id;
+
+		# format name
+		$get_format_id = $fetchQueryOn->format_name;
+
+		# card details
+		$get_card_details = $fetchQueryOn->card_details;
+
+		# new archetype name (use the card name)
+		$get_new_arche_name = $fetchQueryOn->card_name;
+
+		#insert  array  for archetype
+		$insert_array = [
+			'archetype_name' => $get_new_arche_name,
+			'a_id' => $get_arche_cate_id,
+			'a_details' => $get_card_details,
+		];
+		# insert query
+		$insertQuery =  $this->db->insert('archetype_name',$insert_array);
+		if($this->db->affected_rows() > 0 )
+		{
+			$update_main_deckBox = $this->db->where('id',$main_data_id)->update('deckeditortmpstore',['approved_status' => 1]);
+			return true;
+		}
+		else
+		{
 			return false;
 		}
 	}

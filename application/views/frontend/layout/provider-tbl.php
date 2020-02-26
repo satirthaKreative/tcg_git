@@ -93,7 +93,7 @@
 
 
                     
-                    <div class="table-content">
+                    <div id="provider_available" class="table-content scrl_gbl">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -202,7 +202,7 @@
                 }
                 else
                 {
-                    html += '<tr><td colspan="7"><center class="text-warning"><i class="fa fa-times"></i> No Provider Available</center></td></tr>';
+                    html += '<tr><td colspan="7"><center class="text-warning"><i class="fa fa-file-text-o" aria-hidden="true"></i> No Provider Available</center></td></tr>';
                 }
                 $("#provider-details-add").html(html);
 

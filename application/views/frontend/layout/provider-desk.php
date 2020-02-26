@@ -100,7 +100,7 @@
                     
                     <!-- providers tbl -->
 
-                        <div class="table-content">
+                        <div id="provider-details-tbl" class="table-content scrl_gbl">
                             <table class="table">
                                 <thead>
                                     <tr>

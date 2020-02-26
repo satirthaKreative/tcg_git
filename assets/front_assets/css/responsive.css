@@ -250,10 +250,10 @@
     }
 
     .timer-section .progress {
-	    height: 9px;
-	}
-	
-	
+        height: 9px;
+    }
+    
+    
     .login_content {
         position: relative;
         top: -4rem;
@@ -372,10 +372,10 @@
     }
     section.contact-sec2 form button.btn {
         max-width: 100%;
-	}
+    }
 
 
-	section.contact-sec ul {
+    section.contact-sec ul {
         display: block;
     }
     section.contact-sec ul li {
@@ -384,48 +384,48 @@
     }
 
 
-	.timer-section {
-	    width: 100%;
-	}
-	.progress-area ul li {
-	    width: 29%;
-	}
-	.progress-area ul li span {
-	    font-size: 13px;
-	}
-	.tab_section {
-	    display: block;
-	    margin: 40px 0 10px;
-	}
-	.tab_section ul.nav-tab {
-	    overflow: hidden;
-	    margin-bottom: 20px;
-	}
-	.tab_section .switch {
-	    overflow: hidden;
-	    text-align: center;
-	}
+    .timer-section {
+        width: 100%;
+    }
+    .progress-area ul li {
+        width: 29%;
+    }
+    .progress-area ul li span {
+        font-size: 13px;
+    }
+    .tab_section {
+        display: block;
+        margin: 40px 0 10px;
+    }
+    .tab_section ul.nav-tab {
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+    .tab_section .switch {
+        overflow: hidden;
+        text-align: center;
+    }
 
-	.form-content {
-	    padding: 10px;
-	    margin-left: -15px;
-    	margin-right: -15px;
-	}
-	.tab_section .nav-tab li {
-	    width: 50%;
-	}
-	.form-content .form-group {
-	    width: 100%;
-	    padding: 0 0;
-	}
-	.form-content form button.btn {
-	    padding: 10px;
-	    font-size: 13px;
-	}
-	.timer-section img {
-	    max-width: 60px;
-	    margin: 20px auto;
-	}
+    .form-content {
+        padding: 10px;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    .tab_section .nav-tab li {
+        width: 50%;
+    }
+    .form-content .form-group {
+        width: 100%;
+        padding: 0 0;
+    }
+    .form-content form button.btn {
+        padding: 10px;
+        font-size: 13px;
+    }
+    .timer-section img {
+        max-width: 60px;
+        margin: 20px auto;
+    }
 
     /**** Account Information *****/
     .tab_section2 .switch {
@@ -574,6 +574,9 @@
     .page-wrapper .cab_main .table-content tbody td.position {
         width: auto;
     }
+    .page-wrapper .cab_main .table-content tbody td.action a, .page-wrapper .cab_main .table-content tbody td.position a {
+        margin: 0 1px 2px;
+    }
 }
 
 
@@ -587,12 +590,12 @@
     }
 
     body {
-	    height: 100%;
-	}
+        height: 100%;
+    }
 
     .progress-area ul li {
-	    width: 31%;
-	}
+        width: 31%;
+    }
 
     section.register-sec .left-sec, section.register-sec .right-sec {
         padding: 10px;
@@ -622,11 +625,11 @@
         display: none;
     }
     body {
-	    height: 100%;
-	}
+        height: 100%;
+    }
     .progress-area ul li {
-	    width: 31%;
-	}
+        width: 31%;
+    }
 
     section.register-sec .left-sec, section.register-sec .right-sec {
         padding: 10px;
@@ -651,22 +654,22 @@
         display: none;
     }
     body {
-	    height: 100%;
-	}
+        height: 100%;
+    }
 
     .progress-area ul li {
-	    width: 31%;
-	}
+        width: 31%;
+    }
 
     .checkbox-section {
-	    margin-top: 30px;
-	    flex: 0 0 100%;
-	    max-width: 100%;
-	}
-	.page-wrapper {
-	    flex: 0 0 100%;
-	    max-width: 100%;
-	}
+        margin-top: 30px;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .page-wrapper {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 
     .inner-page.profile-section .page-wrapper {
         flex: 0 0 75%;

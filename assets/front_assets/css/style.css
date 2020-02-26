@@ -90,6 +90,25 @@ body {
   border-radius: 50px;
 } */
 
+.scrl_gbl::-webkit-scrollbar-track {
+    background-color: #fff;
+    box-shadow: inset 0 0 6px rgba(121, 116, 116, 0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(121, 116, 116, 0.3);
+    border-radius: 50px;
+}
+
+.scrl_gbl::-webkit-scrollbar-thumb {
+    background-color: #b9b9b9;
+}
+
+.scrl_gbl::-webkit-scrollbar {
+    background-color: #fff;
+}
+
+.scrl_gbl::-webkit-scrollbar {
+    width: 5px;
+}
+
 
 
 /*****========= END GLOBAL CSS ===========******/
@@ -1543,6 +1562,41 @@ form#provider-my-desk button.text-white {
     color: #222222;
     margin: 0;
 }
+
+
+
+
+/*****======== PROVIDER PAGE 22 FEB 2020 ========******/
+
+#provider-details-tbl, #provider_available {
+    min-height: auto;
+    max-height: 324px;
+    overflow-y: auto;
+}
+
+#provider-details-tbl {
+    margin-bottom: 30px;
+}
+#provider-details-tbl .table {
+    margin-bottom: 0;
+}
+
+
+#provider_available table.table {
+    min-height: 150px;
+}
+#provider_available .text-warning .fa-file-text-o {
+    color: #e89546;
+    font-size: 22px;
+    display: block;
+    margin: 15px 0 10px;
+}
+#edit_modal .suc {
+    float: left;
+    margin-top: 10px;
+}
+
+/*****======== PROVIDER PAGE ========******/
 
 
 
