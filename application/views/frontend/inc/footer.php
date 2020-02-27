@@ -261,9 +261,24 @@ if(y_state != 1){
 
     // Accept status
     $(function(){
-        setInterval(function(){ request_stopwatch();checkChatBox();check_notice(); },1000);
+        setInterval(function(){ request_stopwatch();checking_data();check_notice(); },1000);
     })
-
+    // how to checking 
+    function checking_data()
+    {
+        var sess_id = '<?= $_SESSION["session_data"] ?>';
+        $.ajax({
+            url: "<?= base_url('Checking_new_msg_controller/checking_new_msg_come/') ?>";
+            type: "post",
+            data: {sess_id:  sess_id},
+            dataType: "json",
+            success: function(event){
+                
+            }, error: function(event){
+                
+            }
+        })
+    }
     // $(function(){ request_stopwatch(); })
     function request_stopwatch()
     {
