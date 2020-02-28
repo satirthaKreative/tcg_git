@@ -13,10 +13,34 @@ class Checking_new_msg_controller extends CI_Controller {
 		
 	}
 
+	public function new_msg_session_set()
+	{
+		$my_id = $_SESSION['session_data'];
+		$fetchQuery = $this->cnmm->new_msg_session_set($my_id);
+		if($fetchQuery)
+		{
+			$no_error['no_error'] = true;
+		}
+		else
+		{
+			$no_error['no_error'] = false;
+		}
+		echo  json_encode($no_error);
+	}
+
 	public function checking_new_msg_come()
 	{
 		$new_session_msg = $_POST['sess_id'];	
-		$fetchQuery = $this->cnmm->checking_new_msg_come($new_session_msg);
+		if($fetchQuery = $this->cnmm->checking_new_msg_come($new_session_msg))
+		{
+			$no_error['main_content'] = true;
+		}
+		else
+		{
+			$no_error['main_content'] = false;	
+		}
+		echo json_encode($no_error);
+
 	}
 
 }

@@ -115,7 +115,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 
-
+<script>var downlink_links = "<?= base_url('upload_audio_Controller/audio_file_upload/') ?>";</script>
 <!-- Chatbox js -->
 <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
 <script src="<?= base_url('assets/front_assets/js/app.js'); ?>"></script>
@@ -193,6 +193,7 @@ if(y_state != 1){
 
     function accept_click(data)
     {
+        alert(data);
         $(".provider_notice").hide();
         $.ajax({
             url: '<?= base_url("ProvidersViewController/accept_requester/") ?>',
@@ -201,6 +202,17 @@ if(y_state != 1){
             dataType:  'json',
             success: function(event)
             {
+
+               $.ajax({
+                   url: "<?= base_url('Checking_new_msg_controller/new_msg_session_set/') ?>",
+                   type: "post",
+                   dataType: "json",
+                   success: function(event){
+                       console.log(event);
+                   }, error: function(event){
+                       console.log("Error getting!!!");
+                   }
+                });
                 //console.log(event);
                 var val2 = event.request_time; 
                 
@@ -268,12 +280,20 @@ if(y_state != 1){
     {
         var sess_id = '<?= $_SESSION["session_data"] ?>';
         $.ajax({
-            url: "<?= base_url('Checking_new_msg_controller/checking_new_msg_come/') ?>";
+            url: "<?= base_url('Checking_new_msg_controller/checking_new_msg_come/') ?>",
             type: "post",
             data: {sess_id:  sess_id},
             dataType: "json",
             success: function(event){
-                
+                console.log(event.main_content);
+                if(event.main_content == true)
+                {
+                    checkChatBox();
+                }
+                else
+                {
+                    console.log('checking...');
+                }
             }, error: function(event){
                 
             }
@@ -396,6 +416,7 @@ if(y_state != 1){
 
     function checkChatBox()
     {
+        var main_url_checking = "<?= base_url('/'); ?>";
         if($(".c_btn").is(":visible"))
         {
             $.ajax({
@@ -425,7 +446,17 @@ if(y_state != 1){
                         {
                             select_one = "replies";
                         }
-                        html += '<li class="'+select_one+'"><img src="http://emilcarlsson.se/assets/mikeross.png" alt=""><p>'+event[i].msg+'</p></li>';
+
+
+                        if(event[i].archetype_id == 1)
+                        {
+                            html += '<li class="'+select_one+'"><img src="http://emilcarlsson.se/assets/mikeross.png" alt=""><audio controls="" src="'+main_url_checking+'uploads/audio_save/'+event[i].msg+'"></audio></li>';
+                        }
+                        else
+                        {
+                            html += '<li class="'+select_one+'"><img src="http://emilcarlsson.se/assets/mikeross.png" alt=""><p>'+event[i].msg+'</p></li>';
+                        }
+                        
                     }
                     html +='<li class="sent"><div id="formats"></div><ol id="recordingsList"></ol></li>';
                     $('.msg-sent').html(html);
@@ -481,10 +512,20 @@ function show_provider_click()
     window.location.href="<?= base_url('Home/Provider-Notification'); ?>";
 }
 
-// function jakicy(data){
-//     console.log(data);
-//     return true;
-// }
+function myFuncty(data){
+    // console.log(data);
+    $.ajax({
+        url: "<?= base_url('ChatController/insertChatVideo/') ?>",
+        type:  "post",
+        data: {data:  data},
+        dataType: "json",
+        success:  function(event){
+            console.log(event);
+        }, error: function(event){
+
+        }
+    })
+}
 
 </script>
 

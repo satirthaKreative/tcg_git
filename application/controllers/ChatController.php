@@ -27,6 +27,16 @@ class ChatController extends CI_Controller {
 		}
 		echo json_encode($errmsg);
 	}
+	public function insertChatVideo()
+	{
+		$errmsg['no_error'] = false;
+		$msg_data = $_POST['data'];
+		if($data = $this->cm->insertChatVideo($msg_data))
+		{
+			$errmsg['no_error'] = true;
+		}
+		echo json_encode($errmsg);
+	}
 	public function audio_insert($data)
 	{
 		$errmsg['no_error'] = false;

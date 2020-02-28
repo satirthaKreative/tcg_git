@@ -1,10 +1,10 @@
 //webkitURL is deprecated but nevertheless
 URL = window.URL || window.webkitURL;
-var js1 = '';
+
 var gumStream; 						//stream from getUserMedia()
 var rec; 							//Recorder.js object
 var input; 							//MediaStreamAudioSourceNode we'll be recording
-var flag_stop = 0;
+
 // shim for AudioContext when it's not avb. 
 var AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioContext //audio context to help us record
@@ -19,7 +19,6 @@ stopButton.addEventListener("click", stopRecording);
 pauseButton.addEventListener("click", pauseRecording);
 
 function startRecording() {
-	flag_stop = 1;
 	console.log("recordButton clicked");
 
 	/*
@@ -95,6 +94,29 @@ function pauseRecording(){
 	}
 }
 
+function stopRecording() {
+	console.log("stopButton clicked");
+
+	//disable the stop button, enable the record too allow for new recordings
+	stopButton.disabled = true;
+	recordButton.disabled = false;
+	pauseButton.disabled = true;
+
+	//reset button just in case the recording is stopped while paused
+	pauseButton.innerHTML="Pause";
+	
+	//tell the recorder to stop the recording
+	rec.stop();
+
+	//stop microphone access
+	gumStream.getAudioTracks()[0].stop();
+
+	//create the wav blob and pass it on to createDownloadLink
+	rec.exportWAV(createDownloadLink);
+
+	
+}
+
 function createDownloadLink(blob) {
 	
 	var url = URL.createObjectURL(blob);
@@ -103,7 +125,14 @@ function createDownloadLink(blob) {
 	var link = document.createElement('a');
 
 	//name of .wav file to use during upload and download (without extendion)
-	var filename = new Date().toISOString();
+	var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+	var string_length = 8;
+	var randomstring = '';
+	for (var i=0; i<string_length; i++) {
+		var rnum = Math.floor(Math.random() * chars.length);
+		randomstring += chars.substring(rnum,rnum+1);
+	}
+	var filename = randomstring;
 
 	//add controls to the <audio> element
 	au.controls = true;
@@ -124,11 +153,7 @@ function createDownloadLink(blob) {
 	li.appendChild(link);
 	
 	//upload link
-	var upload = document.createElement('a');
-	upload.href="#";
-	upload.innerHTML = "Upload";
-	upload.addEventListener("click", function(event){
-		  var xhr=new XMLHttpRequest();
+	var xhr=new XMLHttpRequest();
 		  xhr.onload=function(e) {
 		      if(this.readyState === 4) {
 		          console.log("Server returned: ",e.target.responseText);
@@ -136,39 +161,14 @@ function createDownloadLink(blob) {
 		  };
 		  var fd=new FormData();
 		  fd.append("audio_data",blob, filename);
-		  xhr.open("POST","upload.php",true);
+		  xhr.open("POST",downlink_links,true);
 		  xhr.send(fd);
-	})
+
+
 	li.appendChild(document.createTextNode (" "))//add a space in between
-	li.appendChild(upload)//add the upload link to li
+	// li.appendChild(upload)//add the upload link to li
 
 	//add the li element to the ol
-	js1 = recordingsList.appendChild(li);
-	jakicy(js1);
-	// flag_stop = 0;
+	recordingsList.appendChild(li);
+	myFuncty(filename);
 }
-
-function stopRecording() {
-	console.log("stopButton clicked");
-
-	//disable the stop button, enable the record too allow for new recordings
-	stopButton.disabled = true;
-	recordButton.disabled = false;
-	pauseButton.disabled = true;
-
-	//reset button just in case the recording is stopped while paused
-	pauseButton.innerHTML="Pause";
-	
-	//tell the recorder to stop the recording
-	rec.stop();
-
-	//stop microphone access
-	gumStream.getAudioTracks()[0].stop();
-
-	//create the wav blob and pass it on to createDownloadLink
-	js1 = rec.exportWAV(createDownloadLink);
-	//console.log(js1);
-	
-}
-
-   

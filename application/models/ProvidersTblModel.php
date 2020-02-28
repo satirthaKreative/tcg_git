@@ -256,6 +256,9 @@ public function accept_requester($request_id)
 		'user_id' => $_SESSION['session_data']
 	];
 
+	// echo $request_id;
+	// die();
+
 	$select_provider_time = $this->db->where($where_condition)->order_by('id','DESC')->limit(1)->get('provider_data_tbl');
 	$fetch_provider_time = $select_provider_time->row();
 	
