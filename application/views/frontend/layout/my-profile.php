@@ -134,6 +134,8 @@
 
                         </div>
 
+                        <!-- <a href="test.txt" download>Click here</a> -->
+
 
 
                         <div class="table-content">
@@ -192,80 +194,8 @@
 
                                 </thead>
 
-                                <tbody>
-
-
-
-                                    <tr>
-
-                                       <!--  <td>
-
-                                            <div class="check-group">
-
-                                                <input type="checkbox" id="Audio">
-
-                                                <label for="Audio"></label>
-
-                                            </div>
-
-                                        </td> -->
-
-                                        <td>John Deo</td>
-
-                                        <td>Audio</td>
-
-                                        <td>.WAV <a href="" class="d_load"><i class="fa fa-download" aria-hidden="true"></i></a></td>
-
-                                    </tr>
-
-
-
-                                    <tr>
-
-                                        <!-- <td>
-
-                                            <div class="check-group">
-
-                                                <input type="checkbox" id="Docx">
-
-                                                <label for="Docx"></label>
-
-                                            </div>
-
-                                        </td> -->
-
-                                        <td>Mick Hussy</td>
-
-                                        <td>Audio</td>
-
-                                        <td>.TXT <a href="" class="d_load"><i class="fa fa-download" aria-hidden="true"></i></a></td>
-
-                                    </tr>
-
-
-
-                                    <tr>
-
-                                        <!-- <td>
-
-                                            <div class="check-group">
-
-                                                <input type="checkbox" id="Audio2">
-
-                                                <label for="Audio2"></label>
-
-                                            </div>
-
-                                        </td> -->
-
-                                        <td>Anna Bell</td>
-
-                                        <td>Audio</td>
-
-                                        <td>.WAV <a href="" class="d_load"><i class="fa fa-download" aria-hidden="true"></i></a></td>
-
-                                    </tr>
-
+                                <tbody id="recent-save-data">
+                                    
                                     
 
                                 </tbody>
@@ -899,6 +829,63 @@
 
 <script>
 
+$(function(){
+    // checking saved file data
+
+    $.ajax({
+        url: "<?= base_url('Save_file_controller/index/') ?>",
+        type: "post",
+        dataType: "json",
+        success: function(event_save)
+        {
+            console.log(event_save);
+            if(event_save.length > 0)
+            {
+                var html = "";
+                for(var i = 0; i < event_save.length; i++)
+                {
+                    if(event_save[i].archetype_id == 0 )
+                    {
+                        var type = 'Text';
+                        var z = '.TXT';
+                    }
+                    else
+                    {
+                        var type = 'Audio';
+                        var z = '.WAV';
+                    }
+                   
+                    html += '<tr><td>'+event_save[i].user_name+'</td><td>'+type+'</td><td>'+z+' <form action="<?= base_url('Save_file_controller/save_file_chat/') ?>" method="post"><input type="hidden" name="id1" value="'+event_save[i].s_id+'"><input type="hidden" name="id2" value="'+event_save[i].r_id+'"><input type="hidden" name="a_id" value="'+event_save[i].archetype_id+'"><button type="submit" name="mySaveDataChat" class="d_load"><i class="fa fa-download" aria-hidden="true"></i></button></form></td></tr>';
+                }
+                $("#recent-save-data").html(html);
+            }
+            else
+            {
+                $("#recent-save-data").html("<tr><td colspan='3' class='text-danger'><i class='fa fa-times'></i> No chat history available</td></tr>");
+            }
+        },
+        error: function(event_save)
+        {
+
+        }
+
+    })
+})
+
+function mySaveAudio(id1, id2, a_id)
+{
+    $.ajax({
+        url: '<?= base_url("Save_file_controller/save_file_chat/") ?>',
+        type: 'post',
+        data: {id1: id1, id2: id2, a_id: a_id},
+        dataType: 'json',
+        success: function(response){
+            console.log(response);
+        }, error:  function(response){
+            // alert('js1');
+        }
+    })
+}
 
 // block function 
 
@@ -1265,6 +1252,8 @@ function search_block_check()
             }
 
         })
+
+
 
     })
 

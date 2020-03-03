@@ -127,6 +127,18 @@ class ProvidersViewController extends CI_Controller {
 		echo json_encode($data_time);
 	}
 
+	// accepter having enough time or not
+	public function checking_voult_havev_enough_time()
+	{
+		$id_req = $_POST['id_req'];
+		$data_time['state'] = 0;
+		if($data_time1 = $this->ptm->checking_voult_havev_enough_time($id_req))
+		{
+			$data_time['state'] = 1;
+		}
+		echo json_encode($data_time);
+	}
+
 }
 
 /* End of file ProvidersViewController.php */

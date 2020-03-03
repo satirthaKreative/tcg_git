@@ -33,7 +33,7 @@ class Checking_new_msg_controller extends CI_Controller {
 		$new_session_msg = $_POST['sess_id'];	
 		if($fetchQuery = $this->cnmm->checking_new_msg_come($new_session_msg))
 		{
-			$no_error['main_content'] = true;
+			$no_error['main_content'] = $fetchQuery;
 		}
 		else
 		{

@@ -462,6 +462,40 @@ public function stop_timer_id($stopage_time)
 	}
 }
 
+
+public function checking_voult_havev_enough_time($id_req)
+{
+	$getting_request_time = $this->db->from('requester_tbl')
+									->join('voult_time_slot','requester_tbl.timeframe=voult_time_slot.id','inner')
+									->where('requester_tbl.id',$id_req)
+									->get();
+	$fetch_row_time =  $getting_request_time->row();
+	$req_time = $fetch_row_time->convert_seconds;
+
+	# checking the provider voult left time
+
+	$getting_provider_voult = $this->db->where('user_id',$_SESSION['session_data'])->get('timezone_tbl');
+	if($getting_provider_voult->num_rows() > 0 )
+	{
+		$fetch_provider_time = $getting_provider_voult->row();
+		$my_time = $fetch_provider_time->total_time;
+
+		if($my_time >= $req_time)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	{
+		return false;
+	}
+
+}
+
 	
 
 }

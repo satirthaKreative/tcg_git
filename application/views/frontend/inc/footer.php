@@ -87,7 +87,7 @@
 <?php if(isset($_SESSION['session_data'])): ?>
 <a href="javascript:void(0);" onclick="show_provider_click();" class="provider_notice">
     <span class="notice-count">0</span>
-    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+    <i class="fa fa-bell-o" aria-hidden="true"></i>
 </a>
 <?php endif; ?>
 <!-- end provider section -->
@@ -193,33 +193,54 @@ if(y_state != 1){
 
     function accept_click(data)
     {
-        alert(data);
-        $(".provider_notice").hide();
-        $.ajax({
-            url: '<?= base_url("ProvidersViewController/accept_requester/") ?>',
-            type: 'post',
-            data: {data:  data},
-            dataType:  'json',
-            success: function(event)
-            {
+        // checking time availibity returns true or not
 
-               $.ajax({
-                   url: "<?= base_url('Checking_new_msg_controller/new_msg_session_set/') ?>",
-                   type: "post",
-                   dataType: "json",
-                   success: function(event){
-                       console.log(event);
-                   }, error: function(event){
-                       console.log("Error getting!!!");
-                   }
-                });
-                //console.log(event);
-                var val2 = event.request_time; 
-                
-                // convert to provider ajax
-                $.post('<?= base_url("ProvidersViewController/return_time_format/") ?>',{val2: val2}).done(function(event1){ var val3 = event1; console.log(val3); time_check(val3); });  
+        $.ajax({
+            url: "<?= base_url('ProvidersViewController/checking_voult_havev_enough_time/') ?>",
+            type: "post",
+            data: {id_req: data},
+            dataType: "json",
+            success:  function(response){
+                if(response.state == 1)
+                {
+                    // Accept field true
+                    $(".provider_notice").hide();
+                    $.ajax({
+                        url: '<?= base_url("ProvidersViewController/accept_requester/") ?>',
+                        type: 'post',
+                        data: {data:  data},
+                        dataType:  'json',
+                        success: function(event)
+                        {
+
+                           $.ajax({
+                               url: "<?= base_url('Checking_new_msg_controller/new_msg_session_set/') ?>",
+                               type: "post",
+                               dataType: "json",
+                               success: function(resp){
+
+                               }, error: function(resp){
+                                   console.log("Error getting!!!");
+                               }
+                            });
+                            //console.log(event);
+                            var val2 = event.request_time; 
+                            
+                            // convert to provider ajax
+                            $.post('<?= base_url("ProvidersViewController/return_time_format/") ?>',{val2: val2}).done(function(event1){ var val3 = event1; console.log(val3); time_check(val3); });  
+                        }
+                    })
+
+                }
+                else
+                {
+                    alert("You don't have enough time in your voult!!! Buy some more time!!!");
+                }
+            }, error: function(response){
+
             }
         })
+
     }
 
     function time_check(val2){
@@ -252,7 +273,8 @@ if(y_state != 1){
                         if(hourNew == -1)
                         {
                             clearInterval(timer);
-
+                            stop_watch();
+                            stop_count_btn();
                             return "00:00:00";
                         }
                     }
@@ -285,9 +307,10 @@ if(y_state != 1){
             data: {sess_id:  sess_id},
             dataType: "json",
             success: function(event){
-                console.log(event.main_content);
-                if(event.main_content == true)
+                
+                if(event.main_content)
                 {
+                    console.log(event);
                     checkChatBox();
                 }
                 else
@@ -375,6 +398,7 @@ if(y_state != 1){
                 console.log(event);
                 $(".notification").hide();
                 $(".c_btn").hide();
+                $(".chatbox").hide();
             }
         })
         
